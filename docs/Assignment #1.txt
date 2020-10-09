@@ -1,0 +1,14 @@
+Campus Movie Finder
+
+With social distancing rules in place, many students have resorted to tv shows and movies as
+their main sources of entertainment. This has led students to the same conundrum that we 
+all dread, which is what movie or tv show should I watch for the next 2 hours? We want address 
+this issue by creating a webapp that would allow BU students to see what other students
+are watching and recommending on campus. We are also hoping to implement a feature that  would allow you to see what Movies and Shows are trending on different parts of campus. Each part of campus (East , West, South , Central, Fenway) can have their own trends based on student votes and recommendations. The webapp could also give a personalized feed based on a survey given when registering for an account. In addition, the web app could scrape through popular movie review websites and forums and come up with trending movies in specific movie watching communities. This would look like recommending movies that are popular among industry screenwriters, or a critic’s choice recommendation for the people that have more of a critical eye when it comes to watching movies and shows. 
+
+
+This web app would utilize the massive movie-related datasets via API online which keep track of trending movies or new movies, an example being (https://developers.themoviedb.org/3/trending/get-trending). We can use an RDS instance and S3 instance in AWS to keep track of what movies people on campus are watching. Our web application can be written with a React framework or just simple HTML/CSS javascript for the front end, which will send all survey results to our AWS instance. 
+
+Spotify-Iphone Health app
+
+The idea is to utilize Spotify’s APIs and Iphone’s health API to switch what song you are listening to based on how intense the workout is. This can utilize a central database to see what songs people switch to based on their workout if they don’t like the chosen song, which can then improve future song changes. This app would use what Spotify would use for authentication (i.e. email, facebook…)  since it would need the user to have a Spotify account. We could use an RDS instance in AWS and maybe S3 in the backend, which our frontend would make query calls to. We would also need to have some type of Python codebase which makes the song change decisions. The frontend for the app can be written with either Swift or React Native, or maybe consider making an iPhone widget instead of an app around this idea. 
