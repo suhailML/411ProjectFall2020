@@ -1,0 +1,86 @@
+﻿User Stories
+
+
+
+
+1: Movie Melissa
+
+
+Movie Melissa, a BU student, always watches anime movies but her friends on campus always talk about movies that she has never seen before— she wants to get more in touch with the movies that her peers watch so she can join the conversations. She’s heard of one or two titles but she really doesn’t know what them other peeps tend to watch
+
+
+Problem: Wants to know what movies her peers are watching
+	App Feature: Movie Survey + Recommendation System
+	
+
+Process for Melissa:
+1. App gives her survey to gauge when she first joins 
+   1. About movie titles she has heard about 
+   2. BU specific information (location)
+2. Based on the movies she provides she’ll get movies that are similar
+   1. Also give movies that BU students tend to watch (with some filters)
+3. Movie Melissa can retake the survey at any time for updated results
+
+
+
+
+
+
+2: Friendless Frank
+
+
+Friendless Frank is a BU student and an Introvert. He is a movie buff who loves watching films and spends much of his free time doing so. He’s been using this movie recommendation app to decide what he’ll watch each night as he winds down at the end of his long days. Frank is a nice guy and interesting too, but just hasn’t put much effort into finding and making friends.During class he hears his two classmates, Jane and Jack, talking about a movie he hasn’t heard of. He wants to enter the conversation but his last binge of Quentin Tarantino films hasn’t prepared him for his first social interaction in weeks. He is about to decide what to watch for the night, but can’t shake the curiosity of what movie Jane and Jack were discussing. He reluctantly clicks on the ‘Find Friends’ section of the app and types his classmates’ names and voilà they happen to have accounts on the same app as him. After some carefully planned pacing, he sends a pair of friend requests...
+
+
+Problem: Wants to connect to people and talk about movies. Things that friends do you know.
+	App feature: Friend requests, Friend watch history
+	 
+Process for Frank:
+1. Navigate to friends list section of app
+   1. Search and add friends
+2. Can select a friend and view their activity on the app
+   1. Watching history
+   2. Watchlists
+   3. Currently watching
+   4. Reviews and ratings 
+3. Can select multiple friends and see common titles
+   1. What shows and movies are communal between the user and the friends
+   2. Recommends what to watch based on similar titles that are in common or what the user hasn’t watched but friends have.
+
+
+After some even more carefully planned pacing, Frank’s friend list has infinitely grown. No longer is he friendless, well at least not one app. He sees that Jane and Jack are both on episode 5 of some Netflix series Sex Education. He makes some hot cocoa and a notebook, he has some catching up to do and research.
+
+
+3: Party Pete
+
+
+Party Pete is a BU student and the secretary of the Ultimate Frisbee team. Since the team isn’t able to host practices or events, the group has decided to host a campus viewing party for the 1985 movie Back to the Future on Friday or Saturday in order to stay relevant, help attract possible new members who don’t have the chance to try out, and retain returners by keeping the community alive. As secretary, Pete goes on to the application and creates the event, setting it to public for all users to find, and checking the schedule of when other clubs are hosting movie nights. After seeing that the Running Club is hosting a movie night for the 1993 film Cool Runnings on Friday, Pete decides that the Saturday night would be better and puts it on a public calendar, a link on the groups social media, and sends it out in an email to members. Knowing it is on Netflix, Pete selects that the viewing party will be hosted over “NetflixParty”, the group viewing tool. When the time rolls around on Saturday night, Pete starts up the event and sends a join-link to everyone who pre registered. 
+
+
+
+
+Problem: Organizing a virtual viewing party in a secure and public environment
+	App Feature: Movie event planning and club visibility 
+	
+
+Process for Pete:
+1. App displays a calendar functionality to set, create, and view events
+2. Checks times and selects optimal window
+3. Able to maintain list of registered attendees
+4. Contacts attendees when event starts
+
+
+4: Local Larry
+
+
+Local Larry is just your average post midterm-szn BU student who wants to find a good TV show to watch and unwind. Everyone in his south campus apartment building has been talking up a few Netflix shows that recently got released this October, but his brain is a bit fried from the countless hours of procrastination and studying so he can’t remember the names. So he navigates to the “Trending Locally” section of the app and sees that the top trending show in South campus is The Haunting of Bly Manor - just the type of show he needs to de-stress. He clicks on the title and it takes him to the Netflix page and he starts to watch. 
+
+
+Problem: Wants to see what shows are trending in his area on campus 
+	App Feature: Locally Trending visibility
+	
+
+Process for Larry:
+1. Logs in to app
+2. Navigates to Locally Trending section in app to see what shows are trending in South campus
+3. Finds the show he is looking for clicks on the title which takes him to the Netflix page
