@@ -96,7 +96,6 @@ function display_trending(object)
     
 }
 
-
 function trending(){
     fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4');
 }
@@ -107,6 +106,10 @@ function trending(){
 
 /*function wrapper(){
     fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
+=======
+function wrapper(){
+    fetchTrendingMovies(config.apiKey).then(function(result) {
+>>>>>>> 880d48c0b5d44aecd35e5f3228ecb6e65b6d7d57
     console.log(result);
     var trendingMovies = result;
     makeCarousel(trendingMovies);
