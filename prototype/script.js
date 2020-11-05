@@ -61,20 +61,6 @@ function makeCarousel(movieNamesList)
     document.body.appendChild(carousel);
 }
 
-function fetchMoviePosters(id){
-    let data = await fetch(`https://api.themoviedb.org/t/p/api_key=${id}`).then(response => response.json()).catch(handleErr);
-    if (data.code && data.code == 400) 
-    {
-        console.log(data);
-        return [];
-    }
-    else
-    {
-        console.log(data);
-        return parseMovieNamesFromObject(data);
-    }    
-}
-
 function wrapper(){
     fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
     console.log(result);
