@@ -97,7 +97,7 @@ function display_trending(object)
 }
 
 function trending(){
-    fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4');
+    fetchTrendingMovies(config.apiKey);
 }
 
 /*var movieNames = fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
