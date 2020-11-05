@@ -1,0 +1,18 @@
+body {
+    background-color: black;
+}
+
+#trending-results {
+    position: relative;
+    width: 100%;
+    height: 200px;
+    overflow: visible;
+    white-space:nowrap;
+}
+
+#trending-results .trending{
+    display: inline-block;
+    padding-right: 10px;
+    color: white;
+    text-align: center;
+}

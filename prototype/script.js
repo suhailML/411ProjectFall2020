@@ -1,4 +1,4 @@
-function parseMovieNamesFromObject(object)
+/*function parseMovieNamesFromObject(object)
 {
     var movieNames = [];
     console.log(object);
@@ -15,6 +15,7 @@ function parseMovieNamesFromObject(object)
     }
     return movieNames;
 }
+*/
 
 async function fetchTrendingMovies(id) 
 {
@@ -28,7 +29,7 @@ async function fetchTrendingMovies(id)
     else
     {
         console.log(data);
-        return parseMovieNamesFromObject(data);
+        return display_trending(data);
     }    
 }
 
@@ -43,34 +44,72 @@ function handleErr(err) {
     return resp;
   }
 
+function display_trending(object)
+{
+    var trending_results = document.getElementById("trending-results");
+
+    if (trending_results === null) {
+        var movieTitles = [];
+        var moviePosterUrls = [];
+    
+        console.log(object);
+    
+        for (const property in object.results) {
+            if (object.results[property].original_name != null)
+            {
+                movieTitles.push(object.results[property].original_name);
+                moviePosterUrls.push(object.results[property].poster_path);
+            }
+            else
+            {
+                movieTitles.push(object.results[property].title);
+                moviePosterUrls.push(object.results[property].poster_path);
+            }
+        }
+    
+        trending_results = document.createElement('div');
+        trending_results.setAttribute("id", "trending-results");
+    
+        console.log(movieTitles);
+        console.log(moviePosterUrls);
+    
+        for (var i = 0; i < movieTitles.length; i++){
+            
+            var trending_movie = document.createElement("div");
+            trending_movie.setAttribute('class', 'trending');
+    
+            var poster = document.createElement("img");
+            poster.src = "https://image.tmdb.org/t/p/w200" + moviePosterUrls[i];
+            trending_movie.appendChild(poster);
+    
+            var title = document.createElement("h4");
+            title.textContent = movieTitles[i];
+            trending_movie.appendChild(title);
+    
+            trending_results.appendChild(trending_movie);
+        }
+        document.body.appendChild(trending_results);
+
+    } else {
+        console.log("already grabbed");
+    }
+    
+}
+
+
+function trending(){
+    fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4');
+}
+
 /*var movieNames = fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
       console.log(result);
 });*/
 
-function makeCarousel(movieNamesList)
-{
-    var carousel = document.getElementById("carousel");
-    if (carousel === null ) {
-    carousel = document.createElement('ul');
-    carousel.setAttribute("id", "carousel");
-    console.log(movieNamesList);
-    for (var i = 0; i < movieNamesList.length; i++){
-        var trending_movie = document.createElement("li");
-        trending_movie.textContent = movieNamesList[i];
-        carousel.appendChild(trending_movie);
-    }
-    document.body.appendChild(carousel);
-    } else {
-        console.log("already grabbed")
-    }
-
-    
-}
-
-function wrapper(){
+/*function wrapper(){
     fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
     console.log(result);
     var trendingMovies = result;
     makeCarousel(trendingMovies);
     });
 }
+*/
