@@ -1,15 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
     <head>
         <meta charset="utf-8">
+        <title>BU TV and Movies</title>
+        <link rel="stylesheet" type="text/css" href="style.css">
         <title>BU Movies Page</title>
-        <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+        <link rel="stylesheet" type="text/css" href="style.css">
         <script src="config.js"></script>
         <script src="script.js"></script>
     </head>
 
     <body>
         <h2>prototyping</h2>
-        <button type="button" onclick="wrapper()">Get tha latest movies from MovieAPI</button>
+        <div class="nav">
+            <div class="buttons">
+                <button type="button" id="showtrending" onclick="trending()">Get tha latest trending movies from The Movie Database API</button>
+            </div>
+        </div>
     </body>
 </html>
