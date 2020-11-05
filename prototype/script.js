@@ -2,7 +2,7 @@ function parseMovieNamesFromObject(object)
 {
     var movieNames = [];
     console.log(object);
-    var returnList;
+
     for (const property in object.results) {
         if (object.results[property].original_name != null)
         {
@@ -43,22 +43,42 @@ function handleErr(err) {
     return resp;
   }
 
-var movieNames = fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
-    console.log(result);
-});
+/*var movieNames = fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
+      console.log(result);
+});*/
 
-function makeCarousel(movieNames)
+function makeCarousel(movieNamesList)
 {
-    var carousel = document.createElement('div');
+    var carousel = document.createElement('ul');
     carousel.setAttribute("id", "carousel");
 
-    for (var i = 0; i < movieNames.length; i++){
-        var trending_movie = document.createElement('div');
-        trending_movie.setAttribute("class", "trending ${i}");
-        var movieName = document.createElement("h3");
-        movieName.textContent = movieNames[i];
+    console.log(movieNamesList);
+    for (var i = 0; i < movieNamesList.length; i++){
+        var trending_movie = document.createElement("li");
+        trending_movie.textContent = movieNamesList[i];
         carousel.appendChild(trending_movie);
     }
+    document.body.appendChild(carousel);
 }
 
+function fetchMoviePosters(id){
+    let data = await fetch(`https://api.themoviedb.org/t/p/api_key=${id}`).then(response => response.json()).catch(handleErr);
+    if (data.code && data.code == 400) 
+    {
+        console.log(data);
+        return [];
+    }
+    else
+    {
+        console.log(data);
+        return parseMovieNamesFromObject(data);
+    }    
+}
 
+function wrapper(){
+    fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
+    console.log(result);
+    var trendingMovies = result;
+    makeCarousel(trendingMovies);
+    });
+}
