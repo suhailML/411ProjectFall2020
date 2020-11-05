@@ -7,12 +7,10 @@ function parseMovieNamesFromObject(object)
         if (object.results[property].original_name != null)
         {
             movieNames.push(object.results[property].original_name);
-            // console.log(`${property}: ${object.results[property].original_name}`);
         }
         else
         {
             movieNames.push(object.results[property].title);
-            // console.log(`${property}: ${object.results[property].title}`);
         }
     }
     return movieNames;
