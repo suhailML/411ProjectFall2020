@@ -100,19 +100,4 @@ function trending(){
     fetchTrendingMovies(config.apiKey);
 }
 
-/*var movieNames = fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
-      console.log(result);
-});*/
 
-/*function wrapper(){
-    fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
-=======
-function wrapper(){
-    fetchTrendingMovies(config.apiKey).then(function(result) {
->>>>>>> 2955c4ca0e4aa000289571215eb55bf05fe290d5
-    console.log(result);
-    var trendingMovies = result;
-    makeCarousel(trendingMovies);
-    });
-}
-*/
