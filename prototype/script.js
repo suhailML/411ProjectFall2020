@@ -49,9 +49,10 @@ function handleErr(err) {
 
 function makeCarousel(movieNamesList)
 {
-    var carousel = document.createElement('ul');
+    var carousel = document.getElementById("carousel");
+    if (carousel === null ) {
+    carousel = document.createElement('ul');
     carousel.setAttribute("id", "carousel");
-
     console.log(movieNamesList);
     for (var i = 0; i < movieNamesList.length; i++){
         var trending_movie = document.createElement("li");
@@ -59,6 +60,11 @@ function makeCarousel(movieNamesList)
         carousel.appendChild(trending_movie);
     }
     document.body.appendChild(carousel);
+    } else {
+        console.log("already grabbed")
+    }
+
+    
 }
 
 function wrapper(){
