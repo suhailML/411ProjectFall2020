@@ -68,7 +68,7 @@ function makeCarousel(movieNamesList)
 }
 
 function wrapper(){
-    fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
+    fetchTrendingMovies(config.apiKey).then(function(result) {
     console.log(result);
     var trendingMovies = result;
     makeCarousel(trendingMovies);
