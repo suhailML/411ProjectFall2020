@@ -2,17 +2,15 @@ function parseMovieNamesFromObject(object)
 {
     var movieNames = [];
     console.log(object);
-    var returnList;
+
     for (const property in object.results) {
         if (object.results[property].original_name != null)
         {
             movieNames.push(object.results[property].original_name);
-            // console.log(`${property}: ${object.results[property].original_name}`);
         }
         else
         {
             movieNames.push(object.results[property].title);
-            // console.log(`${property}: ${object.results[property].title}`);
         }
     }
     return movieNames;
@@ -45,10 +43,34 @@ function handleErr(err) {
     return resp;
   }
 
-var movieNames = fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
+/*var movieNames = fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(function(result) {
+      console.log(result);
+});*/
+
+function makeCarousel(movieNamesList)
+{
+    var carousel = document.getElementById("carousel");
+    if (carousel === null ) {
+    carousel = document.createElement('ul');
+    carousel.setAttribute("id", "carousel");
+    console.log(movieNamesList);
+    for (var i = 0; i < movieNamesList.length; i++){
+        var trending_movie = document.createElement("li");
+        trending_movie.textContent = movieNamesList[i];
+        carousel.appendChild(trending_movie);
+    }
+    document.body.appendChild(carousel);
+    } else {
+        console.log("already grabbed")
+    }
+
+    
+}
+
+function wrapper(){
+    fetchTrendingMovies(config.apiKey).then(function(result) {
     console.log(result);
-});
-
-
-
-
+    var trendingMovies = result;
+    makeCarousel(trendingMovies);
+    });
+}
