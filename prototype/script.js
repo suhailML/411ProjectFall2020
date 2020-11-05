@@ -47,6 +47,18 @@ var movieNames = fetchTrendingMovies('47322dcc9d879f3ee5918387a549f5c4').then(fu
     console.log(result);
 });
 
+function makeCarousel(movieNames)
+{
+    var carousel = document.createElement('div');
+    carousel.setAttribute("id", "carousel");
 
+    for (var i = 0; i < movieNames.length; i++){
+        var trending_movie = document.createElement('div');
+        trending_movie.setAttribute("class", "trending ${i}");
+        var movieName = document.createElement("h3");
+        movieName.textContent = movieNames[i];
+        carousel.appendChild(trending_movie);
+    }
+}
 
 
