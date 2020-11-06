@@ -1,22 +1,3 @@
-/*function parseMovieNamesFromObject(object)
-{
-    var movieNames = [];
-    console.log(object);
-
-    for (const property in object.results) {
-        if (object.results[property].original_name != null)
-        {
-            movieNames.push(object.results[property].original_name);
-        }
-        else
-        {
-            movieNames.push(object.results[property].title);
-        }
-    }
-    return movieNames;
-}
-*/
-
 async function fetchTrendingMovies(id) 
 {
     
