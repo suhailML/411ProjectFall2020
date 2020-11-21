@@ -6,13 +6,9 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <p>
         <LatestMovies />
           Edit <code>src/App.js</code> and save to reload.
           <Link to="/login"> Login button</Link>
-        </p>
-        
-
       </header>
     </div>
   );

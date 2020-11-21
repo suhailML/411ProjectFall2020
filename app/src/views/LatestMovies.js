@@ -16,7 +16,6 @@ class LatestMovies extends React.Component {
     }
 
     render() {
-        console.log(this.state.trnd_movies);
         return (
             <div>
             {/* once you get the trend movies as an array from compDidMount
