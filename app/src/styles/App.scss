@@ -1,0 +1,74 @@
+//https://coolors.co/fbfef9-141314-2e282a-cc0000-f9aa41-b285f9
+$grey: #1e1b1c; //background color
+$black: #141314; //elements atop background
+$white: #fbf3f9;
+$purple: #b285f9;
+$orange: #f9aa41;
+$red: #cc0000;
+
+//the opaque versions
+$rosso-corsa: hsla(0, 100%, 40%, 0.4); //red
+$yellow-orange: hsla(34, 94%, 62%, 0.4); //orange
+$lavender-floral: hsla(263, 91%, 75%, 0.4); //purple
+
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&display=swap');
+$typeface: 'Chivo';
+
+body {
+  background-color: $grey;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 80% 1fr;
+  font-family: $typeface;
+}
+
+
+//background boxes that hold movies
+.feature {
+  background-color: $black;
+  display: flex;
+  flex-direction: row;
+  width: 85%;
+  padding: 30px;
+  overflow-x: scroll;
+  margin: 0 auto;
+}
+
+
+@mixin moviebox ($color) {
+  background-color: $color;
+  padding: 10px;
+  margin: 10px;
+  color: $white;
+}
+
+.trend-moviebox { @include moviebox($lavender-floral);}
+
+.sidebar {
+  background-color: $black;
+  height: 100vh;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media only screen and (max-width: 300px) {
+  .App {
+    grid-template-columns: 1fr;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}

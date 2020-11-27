@@ -1,15 +1,19 @@
-import './styles/App.css';
+import './styles/App.scss';
 import { Link } from 'react-router-dom'
 import LatestMovies from './views/LatestMovies';
+import Sidebar from './Sidebar';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
+        <div>
         <LatestMovies />
           Edit <code>src/App.js</code> and save to reload.
           <Link to="/login"> Login button</Link>
-      </header>
+        </div>
+        <Sidebar />
+        
+       
     </div>
   );
 }
