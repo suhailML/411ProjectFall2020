@@ -21,7 +21,7 @@ class LatestMovies extends React.Component {
             {/* once you get the trend movies as an array from compDidMount
             create a Movie Component */}
             {this.state.trnd_movies.map(title => (
-                <Movie items={title}/>
+                <Movie items={title} type="trending"/>
             ))}
             
                 <p>trending movies</p>
