@@ -16,6 +16,7 @@ $typeface: 'Chivo';
 
 body {
   background-color: $grey;
+  color: $white;
 }
 
 .App {
@@ -25,22 +26,25 @@ body {
 }
 
 
+.featurebox{
+  width: 85%;
+  margin: 0 auto;
+}
 //background boxes that hold movies
 .feature {
   background-color: $black;
   display: flex;
   flex-direction: row;
-  width: 85%;
   padding: 30px;
   overflow-x: scroll;
-  margin: 0 auto;
 }
 
 
 @mixin moviebox ($color) {
   background-color: $color;
-  padding: 10px;
-  margin: 10px;
+  max-height: 90%;
+  padding: 30px 17px 0 17px;
+  margin-right: 30px;
   color: $white;
 }
 

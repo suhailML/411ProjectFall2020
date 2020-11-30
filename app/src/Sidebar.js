@@ -1,9 +1,12 @@
 import React from 'react';
+import { useParams } from 'react-router-dom'
+import { withRouter } from 'react-router'
 
-class App2 extends React.Component {
+class Sidebar extends React.Component {
+
 
     render() {
-        //inline styles can dynamically change styles
+        //inline styles can dynamically change styles, bothced example
         const date = new Date (2020, 12, 3, 12)
         const hour = date.getHours();
         const style = {
@@ -18,6 +21,7 @@ class App2 extends React.Component {
         }
         return (
             <div className="sidebar">
+                <h2> hi {this.props.name} </h2>
                 {/*style prop takes an object for inline styles in JSX*/}
                 <h1 style={{color: 'yellow', backgroundColor: 'blue'}}> hello worlds</h1>
                 <h2 style={style}> bye worlds</h2>
@@ -26,4 +30,4 @@ class App2 extends React.Component {
     }
 }
 
-export default App2
+export default Sidebar

@@ -5,17 +5,25 @@ import {
     Switch,
     Route,
     Link,
-    useRouteMatch,
-    useParams
+    useRouteMatch
   } from "react-router-dom";
 
 import App from './App'
 import Login from './views/Login'
+import Navbar from './views/Navbar';
+import Home from './views/Home';
+
+
 
 export default(
     <Router>
-        <Route path="/" component={App}/>
-        <Route path="/login" component={Login} />
+        {/* <Navbar/> */}
+        <Switch>
+            <Route exact path="/"> <Home/> </Route>
+            <Route path="/login" component={Login} />
+            {/* protected route */}
+            <Route path="/home/:userid"> <App/> </Route>
+        </Switch>
     </Router>
     
 )

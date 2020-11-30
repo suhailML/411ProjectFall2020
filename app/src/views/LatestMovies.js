@@ -51,25 +51,38 @@ class LatestMovies extends React.Component {
 
     }
 
+    getHeader(movielist_type) {
+        switch(movielist_type){
+            case "trending":
+                return "World's Top Trending Movies";
+            default:
+                return "Chickens"
+        }
+    }
+
     render() {
         var { isLoaded, trnd_movies } = this.state;
 
         if( !isLoaded ) {
             return (
-                <div>
+                <div className="feature">
                     loading...
                 </div>
             )
             
         } else {
             return (
-                <div className="feature">
-                {/* once you get the trend movies as an array from compDidMount
-                create a Movie Component */}
-                {trnd_movies.map(movie => (
-                    <Movie name={movie.title} poster={movie.poster} type="trending" />
-                ))}
+                <div className="featurebox">
+                    <p>{this.getHeader(this.props.type)}</p>
+                    <div className="feature">
+                    {/* once you get the trend movies as an array from compDidMount
+                    create a Movie Component */}
+                    {trnd_movies.map(movie => (
+                        <Movie name={movie.title} poster={movie.poster} />
+                    ))}
+                    </div>
                 </div>
+                
             )
         }
         
