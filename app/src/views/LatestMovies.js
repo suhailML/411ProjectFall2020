@@ -52,14 +52,15 @@ class LatestMovies extends React.Component {
 
         console.log(this.state)
 
-        fetch(`https://api.themoviedb.org/3/movie/635780/recommendations?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
+        var reccNum = 635780;
+
+        fetch(`https://api.themoviedb.org/3/movie/${reccNum}/recommendations?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
             .then(response => response.json())
             .then(json => {
                 this.setState({
                     isLoaded: true,
                     location_suggestion: this.displaytrending(json.results)
                 })
-
             })
             .catch(this.handleErr);
 
