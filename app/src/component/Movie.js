@@ -8,7 +8,7 @@ const Movie = (props) => {
             <div className="trend-moviebox">
                 <img src={props.poster} alt=""/>
                 {props.name}
-                <p>movie genre here</p>
+                <p> {props.genre} </p>
             </div>
     );
 }
