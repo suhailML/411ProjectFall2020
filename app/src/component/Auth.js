@@ -7,10 +7,26 @@ what the problem is but it can only either return a func or string*/
 const Auth = (InnerComponent) => {
     const authComponent = () => {
         /* change auth to really check login status*/
-        const auth = false;
+        const auth = true;
         return (auth ? <InnerComponent/> : <Redirect to="/login"/>)
     }
     return authComponent
 }
+
+// class Auth extends React.Component {
+//     constructor() {
+//         super()
+//         this.state= {
+//             auth: false
+//         }
+//     }
+
+//     render() {
+//         return(
+
+//         )
+//     }
+// }
+
 
 export default Auth

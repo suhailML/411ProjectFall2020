@@ -2,6 +2,7 @@ import React from 'react';
 import Movie from '../component/Movie';
 
 //TODO: modularize this
+//state is for data that can change
 class LatestMovies extends React.Component {
     constructor(props) {
         super(props);
@@ -14,11 +15,12 @@ class LatestMovies extends React.Component {
 
     displaytrending(movie_list) {
         //returning object in js = wrap in parenthesis
-        console.log(movie_list)
         return movie_list.map(e => 
             ({
                 title: e.original_name || e.original_title,
                 poster: 'https://image.tmdb.org/t/p/w200' + e.poster_path,
+                id: e.id,
+                genres: e.genre_ids
             })
         )
     }
@@ -62,7 +64,9 @@ class LatestMovies extends React.Component {
 
     render() {
         var { isLoaded, trnd_movies } = this.state;
-
+        const movies = trnd_movies.map(movie => 
+            <Movie key={movie.id} name={movie.title} poster={movie.poster} />
+        );
         if( !isLoaded ) {
             return (
                 <div className="feature">
@@ -77,9 +81,9 @@ class LatestMovies extends React.Component {
                     <div className="feature">
                     {/* once you get the trend movies as an array from compDidMount
                     create a Movie Component */}
-                    {trnd_movies.map(movie => (
-                        <Movie name={movie.title} poster={movie.poster} />
-                    ))}
+                    {trnd_movies.map(movie => 
+                        <Movie key={movie.id} name={movie.title} poster={movie.poster} />
+                    )}
                     </div>
                 </div>
                 

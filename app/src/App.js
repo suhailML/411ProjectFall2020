@@ -1,10 +1,10 @@
 import './styles/App.scss';
 import { Link } from 'react-router-dom'
 import LatestMovies from './views/LatestMovies';
-import Sidebar from './Sidebar';
+import Sidebar from './component/Sidebar';
 import Auth from './component/Auth'
 import {useParams} from 'react-router-dom';
-
+import friends from './fakedata/friends';
 function App() {
   const { userid } = useParams();
   return (
@@ -16,7 +16,7 @@ function App() {
         <LatestMovies type="trending"/>
         <LatestMovies type="south"/>
         </div>
-        <Sidebar name={userid}/>
+        <Sidebar name={userid} friends={friends}/>
     </div>
   );
 }
