@@ -31,20 +31,20 @@ body {
   margin: 0 auto;
 }
 //background boxes that hold movies
+$inner-space: 57px;
 .feature {
   background-color: $black;
   display: flex;
   flex-direction: row;
-  padding: 30px;
+  padding: $inner-space $inner-space/2 $inner-space $inner-space;
   overflow-x: scroll;
 }
 
-
 @mixin moviebox ($color) {
   background-color: $color;
-  max-height: 90%;
-  padding: 30px 17px 0 17px;
-  margin-right: 30px;
+  padding: 12px 17px 12px;
+  margin-right: $inner-space;
+  border-radius: 3%;
   color: $white;
 }
 
@@ -52,7 +52,23 @@ body {
 
 .sidebar {
   background-color: $black;
-  height: 100vh;
+  padding: 30px;
+  overflow: hidden;
+}
+
+.friends {
+  transition: height 333ms ease-in-out;
+  overflow: auto;  
+}
+
+.friends.collapse {
+  overflow: hidden;
+}
+
+/*icon for a user*/
+.user {
+  display: flex;
+  align-items: center;
 }
 
 .App-logo {
