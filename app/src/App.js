@@ -17,7 +17,7 @@ function App() {
         <Search type="search"/>
         <LatestMovies type="trending"/>
         <LatestMovies type="west"/>
-        <LatestMovies type="trending"/>
+        <LatestMovies type="east"/>
         <LatestMovies type="south"/>
         </div>
         <Sidebar name={userid} friends={friends}/>
