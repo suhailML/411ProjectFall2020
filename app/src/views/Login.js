@@ -1,4 +1,3 @@
-import React from 'react';
 
 const Login = () => {
     return (
@@ -7,4 +6,5 @@ const Login = () => {
         </div>
     )
 }
+
 export default Login

@@ -6,6 +6,9 @@ import Sidebar from './component/Sidebar';
 import Auth from './component/Auth'
 import {useParams} from 'react-router-dom';
 import friends from './fakedata/friends';
+import Login from './component/Login';
+import Logout from './component/Logout';
+
 
 
 function App() {
@@ -19,6 +22,8 @@ function App() {
         <LatestMovies type="west"/>
         <LatestMovies type="trending"/>
         <LatestMovies type="south"/>
+        <Login />
+        <Logout />
         </div>
         <Sidebar name={userid} friends={friends}/>
     </div>
