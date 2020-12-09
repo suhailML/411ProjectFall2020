@@ -1,21 +1,19 @@
 import React from 'react';
 import Movie from '../component/Movie';
 
-//TODO: modularize this
-//state is for data that can change
-class LatestMovies extends React.Component {
+class BulletinBoard extends React.Component {
     constructor(props) {
         super(props);
-        
+
         this.state = {
             isLoaded: false,
-            trnd_movies: [],
+            events: [],
         }
     }
 
-    displaytrending(movie_list) {
+    displayboard(event_list) {
         //returning object in js = wrap in parenthesis
-        return movie_list.map(e => 
+        return event_list.map(e => 
             ({
                 title: e.original_name || e.original_title,
                 poster: 'https://image.tmdb.org/t/p/w200' + e.poster_path,
@@ -53,31 +51,9 @@ class LatestMovies extends React.Component {
 
     }
 
-    getHeader(movielist_type) {
-        switch(movielist_type){
-            case "east":
-                return "Trending in East";
-
-            case "central":
-                return "Trending in Central";
-
-            case "west":
-                return "Trending in West";
-
-            case "south":
-                return "Trending in South";
-
-            case "global":
-                return "World's Top Trending Movies";
-
-            default:
-                return "World's Top Trending Movies";
-        }
-    }
-
     render() {
         var { isLoaded, trnd_movies } = this.state;
-        
+
         if( !isLoaded ) {
             return (
                 <div className="feature">
@@ -88,7 +64,7 @@ class LatestMovies extends React.Component {
         } else {
             return (
                 <div className="featurebox">
-                    <p>{this.getHeader(this.props.type)}</p>
+                    <p>Events</p>
                     <div className="feature">
                     {/* once you get the trend movies as an array from compDidMount
                     create a Movie Component */}
@@ -103,6 +79,12 @@ class LatestMovies extends React.Component {
         
     }
 
+
+
+
+
+
+
 }
 
-export default LatestMovies
+export default BulletinBoard

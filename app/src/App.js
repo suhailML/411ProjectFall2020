@@ -14,11 +14,11 @@ function App() {
     <div className="App">
         {/*todo: hide scroll bar*/}
         <div style={{overflowY: 'scroll', height: "100vh"}}>
-        <Search type="search"/>
-        <LatestMovies type="trending"/>
-        <LatestMovies type="west"/>
-        <LatestMovies type="trending"/>
-        <LatestMovies type="south"/>
+          <LatestMovies type="trending"/>
+          <LatestMovies type="east"/>
+          <LatestMovies type="central"/>
+          <LatestMovies type="west"/>
+          <LatestMovies type="south"/>
         </div>
         <Sidebar name={userid} friends={friends}/>
     </div>
