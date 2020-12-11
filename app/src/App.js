@@ -14,13 +14,13 @@ import BulletinBoard from './views/BulletinBoard';
 function App() {
   const { userid } = useParams();
   let match = useRouteMatch();
-  console.log(match)
+  console.log(userid)
   return (
     <div className="App">
       <Navbar/>
 
         {/*todo: hide scroll bar*/}
-        <div style={{overflowY: 'scroll', height: "100vh"}}>
+        <div style={{overflowY: 'scroll'}}>
         
         <Switch>
           <Route exact path={match.path}>
@@ -31,9 +31,8 @@ function App() {
             <LatestMovies type="south"/>
           </Route>
 
-          <Route path={`${match.path}/search/:query`}>
-            <Search/>
-          </Route>
+          <Route path={match.path + "/search/:query"} component={Search}/>
+      
 
         </Switch>
         

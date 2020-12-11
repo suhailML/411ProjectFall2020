@@ -59,14 +59,16 @@ class Search extends React.Component {
     }
   
     componentDidMount() {
+        console.log(this.props.match.params.query)
         /*THIS IS NOT PRODUCTION SAFE CODE -- THE ONLY SAFE WAY TO HIDE API KEY IS 
         TO CALL IT FROM A BACKEND SERVER; but since this local, it'll do*/
-        fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&query=${this.state.query}`)
+        fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&query=${this.props.match.params.query}`)
         .then(response => response.json())
         .then(json => {
             this.setState({
                 isLoaded: true,
                 search_results: json.results
+
             });
             this.parseSearchResults(json.results);
         })
@@ -74,6 +76,7 @@ class Search extends React.Component {
     }
 
     render() {
+        console.log(this.props);
         var { isLoaded, search_results, user_results, tv_results, movie_results, people_results} = this.state;
         
         if( !isLoaded ) {

@@ -1,11 +1,14 @@
 import React, { useState } from 'react'
-import { Link, NavLink, useParams, useRouteMatch } from 'react-router-dom'
+import { Link, NavLink, useLocation, useParams, useRouteMatch } from 'react-router-dom'
 
 
 const Navbar = () => {
   let match = useRouteMatch();
-  const { id } = useParams();
+  const { userid } = useParams();
+  const location = useLocation();
+
     const [ isOpen, setOpen ] = useState(false)
+    const [ query, setQuery ] = useState('')
     return(
         <nav className="nav" role="navigation">
             <div className="container">
@@ -26,11 +29,10 @@ const Navbar = () => {
           <div className="navbar-start">
 
           
-            <input id="inputbox" type="text" placeholder="Search.." name="search"> 
+            <input id="inputbox" type="text" placeholder="Search.." name="search" onChange={e => setQuery(e.target.value)}> 
             </input>
-            <Link to={`${match.path}`+ "/search" + "/chicken"}>
+            <Link to={location => ({...location, pathname: "/home/" + userid + "/search/" + query })} >
             <button id="searchbutton">Search</button>
-
             </Link>
           </div>
             </div>
