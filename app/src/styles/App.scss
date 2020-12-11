@@ -50,6 +50,10 @@ $inner-space: 57px;
 
 .trend-moviebox { @include moviebox($lavender-floral);}
 
+.showbox {@include moviebox($lavender-floral);}
+
+.eventbox {@include moviebox($lavender-floral);}
+
 .sidebar {
   background-color: $black;
   padding: 30px;
