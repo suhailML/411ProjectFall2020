@@ -1,30 +1,33 @@
 import React from 'react';
 import Movie from '../component/Movie';
+import Show from '../component/Show';
 
 //TODO: modularize this
 //state is for data that can change
 class LatestMovies extends React.Component {
+    
     constructor(props) {
         super(props);
         
         this.state = {
             isLoaded: false,
-            trnd_movies: [],
-        }
+            trending_list: [],
+        };
     }
 
-    displaytrending(movie_list) {
-        //returning object in js = wrap in parenthesis
-        return movie_list.map(e => 
-            ({
-                title: e.original_name || e.original_title,
-                poster: 'https://image.tmdb.org/t/p/w200' + e.poster_path,
-                id: e.id,
-                genres: e.genre_ids,
-                desc: e.overview
-            })
-        )
-    }
+    // parseTrending(movie_list) {
+    //     //returning object in js = wrap in parenthesis
+    //     return movie_list.map(e => 
+    //         ({
+    //             title: e.original_name || e.original_title,
+    //             poster: 'https://image.tmdb.org/t/p/w200' + e.poster_path,
+    //             id: e.id,
+    //             genres: e.genre_ids,
+    //             desc: e.overview
+            
+    //         })
+    //     )
+    // }
 
     handleErr(err) {
         console.warn(err);
@@ -41,36 +44,43 @@ class LatestMovies extends React.Component {
 
         /*THIS IS NOT PRODUCTION SAFE CODE -- THE ONLY SAFE WAY TO HIDE API KEY IS 
         TO CALL IT FROM A BACKEND SERVER; but since this local, it'll do*/
-        
-         fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
+        fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
             .then(response => response.json())
             .then(json => {
                 this.setState({
                     isLoaded: true,
-                    trnd_movies: this.displaytrending(json.results)
-                })
-                console.log(this.state.trnd_movies)
-                
+                    trending_list: json.results
+                });
+                // this.parseTrending(json.results);
             })
             .catch(this.handleErr);
-
-
     }
 
     getHeader(movielist_type) {
         switch(movielist_type){
-            case "trending":
+            case "east":
+                return "Trending in East";
+
+            case "central":
+                return "Trending in Central";
+
+            case "west":
+                return "Trending in West";
+
+            case "south":
+                return "Trending in South";
+
+            case "global":
                 return "World's Top Trending Movies";
+
             default:
-                return "Chickens"
+                return "World's Top Trending Movies";
         }
     }
 
     render() {
-        var { isLoaded, trnd_movies } = this.state;
-        const movies = trnd_movies.map(movie => 
-            <Movie key={movie.id} name={movie.title} poster={movie.poster} />
-        );
+        var { isLoaded, trending_list } = this.state;
+
         if( !isLoaded ) {
             return (
                 <div className="feature">
@@ -83,19 +93,19 @@ class LatestMovies extends React.Component {
                 <div className="featurebox">
                     <p>{this.getHeader(this.props.type)}</p>
                     <div className="feature">
-                    {/* once you get the trend movies as an array from compDidMount
-                    create a Movie Component */}
-                    {trnd_movies.map(movie => 
-                        <Movie key={movie.id} 
-                        id={movie.id} 
-                        name={movie.title} 
-                        poster={movie.poster} 
-                        desc={movie.desc}
-                        genres={movie.genres} />
-                    )}
+                        {/* once you get the trend movies as an array from compDidMount
+                        create a Movie Component */}
+                        {trending_list.map(trending => 
+                            {
+                                if (trending.media_type === "tv") {
+                                    return(<Show key={trending.id} show={trending}/>);
+                                } else {
+                                    return(<Movie key={trending.id} name={trending.title} movie={trending}/>);
+                                }
+                            }
+                        )}
                     </div>
                 </div>
-                
             )
         }
         

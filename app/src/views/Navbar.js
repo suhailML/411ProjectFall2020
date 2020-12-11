@@ -1,10 +1,10 @@
 import React, { useState } from 'react'
-import { Link, NavLink, useParams } from 'react-router-dom'
+import { Link, NavLink, useParams, useRouteMatch } from 'react-router-dom'
 
 
 const Navbar = () => {
+  let match = useRouteMatch();
   const { id } = useParams();
-const search = () => <Link to={"/home/" + `${id}` + "/search"}/>
     const [ isOpen, setOpen ] = useState(false)
     return(
         <nav className="nav" role="navigation">
@@ -24,28 +24,14 @@ const search = () => <Link to={"/home/" + `${id}` + "/search"}/>
                 </div>
                 <div className={`navbar-menu ${isOpen && "is-active"}`}>
           <div className="navbar-start">
+
+          
             <input id="inputbox" type="text" placeholder="Search.." name="search"> 
             </input>
-            <button id="searchbutton" onClick={search}>Search</button>
-            <NavLink className="navbar-item" activeClassName="is-active" to="/home">
-              Search button
-            </NavLink>
+            <Link to={`${match.path}`+ "/search" + "/chicken"}>
+            <button id="searchbutton">Search</button>
 
-            <NavLink
-              className="navbar-item"
-              activeClassName="is-active"
-              to="/about"
-            >
-              About
-            </NavLink>
-
-            <NavLink
-              className="navbar-item"
-              activeClassName="is-active"
-              to="/profile"
-            >
-              Profile
-            </NavLink>
+            </Link>
           </div>
             </div>
             </div>
