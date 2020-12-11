@@ -1,6 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+// TODO: make width of text the same as trendbox
+// TODO: style for onclick changes on function return, not let
+
+
 class Movie extends React.Component {
     constructor(props) {
         super(props);

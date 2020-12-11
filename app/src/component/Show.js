@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+// TODO: make width of text the same as trendbox
 
 class Show extends React.Component {
     constructor(props) {

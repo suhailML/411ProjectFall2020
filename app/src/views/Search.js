@@ -7,7 +7,7 @@ class Search extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          query: this.props.query,
+          query: this.props.match.params.query,
           search_results: [], 
           user_results: [],
           tv_results: [],
@@ -78,6 +78,7 @@ class Search extends React.Component {
     render() {
         console.log(this.props);
         var { isLoaded, search_results, user_results, tv_results, movie_results, people_results} = this.state;
+
         
         if( !isLoaded ) {
             return (
@@ -104,17 +105,20 @@ class Search extends React.Component {
                         <div className="feature">
                         {/* once you get the trend movies as an array from compDidMount
                         create a Movie Component */}
-                            {movie_results.map(movie => 
+                            { movie_results.length > 0 ? 
+                            movie_results.map(movie => 
                                 <Movie key={movie.id} name={movie.title} movie={movie} />
-                            )}
+                            ) : 
+                            <p>No movies :(</p>}
                         </div>
                         <p>TV Shows</p>
                         <div className="feature">
                         {/* once you get the trend movies as an array from compDidMount
                         create a Movie Component */}
-                            {tv_results.map(show => 
+                        {tv_results.length > 0 ? 
+                            tv_results.map(show => 
                                 <Show key={show.id} show={show}/>
-                            )}
+                            ) : <p>No TV Shows :(</p>}
                         </div>
                     </div>
                 </div>

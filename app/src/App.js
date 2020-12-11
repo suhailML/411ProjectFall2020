@@ -31,6 +31,8 @@ function App() {
             <LatestMovies type="south"/>
           </Route>
 
+          {/* the reason why you put component={component} is so that you can
+          pass the param info and stuff as part of the props for the search component */}
           <Route path={match.path + "/search/:query"} component={Search}/>
       
 
