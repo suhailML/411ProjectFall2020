@@ -13,8 +13,7 @@ import Login from './views/Login'
 import Navbar from './views/Navbar';
 import Home from './views/Home';
 import Quiz from './views/Quiz';
-
-
+import UserPage from './UserPage';
 
 export default(
     <Router>
@@ -24,7 +23,8 @@ export default(
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Quiz}></Route>
             {/* protected route */}
-            <Route path="/home/:userid"> <App/> </Route>
+            <Route path="/home/:userid"> <UserPage/> </Route>
+            <Route path="/userPage/:userid/userpage"> <UserPage/> </Route>
         </Switch>
     </Router>
     

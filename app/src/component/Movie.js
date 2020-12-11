@@ -4,7 +4,6 @@ import React from 'react';
 they take props in a param and then you can access the keys*/
 function expand() {
     console.log("chicken");
-
 }
 
 const Movie = (props) => {
@@ -15,7 +14,7 @@ const Movie = (props) => {
                 <img src={props.poster} alt=""/>
             </div>
             {props.name}
-                <p>movie genre here</p>
+                <p>{props.genre}</p>
         </div>
             
     );

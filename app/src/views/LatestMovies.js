@@ -21,7 +21,7 @@ class LatestMovies extends React.Component {
                 title: e.original_name || e.original_title,
                 poster: 'https://image.tmdb.org/t/p/w200' + e.poster_path,
                 id: e.id,
-                genres: e.genre_ids
+                genre: e.genre_ids
             })
         );
     }
@@ -41,7 +41,8 @@ class LatestMovies extends React.Component {
         /*THIS IS NOT PRODUCTION SAFE CODE -- THE ONLY SAFE WAY TO HIDE API KEY IS 
         TO CALL IT FROM A BACKEND SERVER; but since this local, it'll do*/
         console.log(this.props.type);
-        if (this.props.type === "trending") {
+
+        if (this.props.type === "trending worldwide") {
 
             fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
                 .then(response => response.json())
@@ -52,20 +53,15 @@ class LatestMovies extends React.Component {
                     })
 
                 })
-                .catch(this.handleErr);
+                .catch(this.handleErr)
 
-        } else {
+        } else if ((this.props.type === "popular in west")) {
 
-            var reccNum = 0;
+            //some kind of database call to grab popular in some are
 
-            if ("west" === (this.props.type)) {
-                reccNum = 732670;
-            } else if ("east" === (this.props.type)) {
-                reccNum = 557642;
-            } else {
-                reccNum = 577922
-            }
-            fetch(`https://api.themoviedb.org/3/movie/${reccNum}/recommendations?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
+            var idksomemovie = 732670;
+
+            fetch(`https://api.themoviedb.org/3/movie/${idksomemovie}/recommendations?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
                 .then(response => response.json())
                 .then(json => {
                     this.setState({
@@ -75,7 +71,38 @@ class LatestMovies extends React.Component {
                 })
                 .catch(this.handleErr);
 
+        } else {
+
+            var reccNum = 0;
+            var arrayRecc = [];
+
+            if ("west" === (this.props.type)) {
+                reccNum = 732670;
+            } else if ("east" === (this.props.type)) {
+                reccNum = 557642;
+            } else {
+                reccNum = 577922
+            }
+
+            var iterat = [732670, 557642, 577922];
+            var x;
+            var z;
+
+            for (x in iterat) {
+                fetch(`https://api.themoviedb.org/3/movie/${iterat[x]}/recommendations?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
+                    .then(response => response.json())
+                    .then(json => {
+                        this.setState({
+                            isLoaded: true,
+                            trnd_movies: this.displaytrending(json.results)
+                        })
+                    })
+                    .catch(this.handleErr);
+            }
+            console.log(this.trnd_movies)
+
         }
+        console.log(this.trnd_movies)
     }
 
     getHeader(movielist_type) {
@@ -108,7 +135,7 @@ class LatestMovies extends React.Component {
                         {/* once you get the trend movies as an array from compDidMount
                     create a Movie Component */}
                         {trnd_movies.map(movie =>
-                            <Movie key={movie.id} name={movie.title} poster={movie.poster} />
+                            <Movie key={movie.id} name={movie.title} poster={movie.poster} genre={movie.genre} />
                         )}
                     </div>
                 </div>
