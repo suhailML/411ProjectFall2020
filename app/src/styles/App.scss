@@ -22,7 +22,15 @@ body {
 .App {
   display: grid;
   grid-template-columns: 80% 1fr;
+  grid-template-areas:
+               "navbar  sidebar"
+               "app sidebar";
+  background-color: $grey;
   font-family: $typeface;
+}
+
+.nav {
+  grid-area: navbar;
 }
 
 
@@ -51,6 +59,7 @@ $inner-space: 57px;
 .trend-moviebox { @include moviebox($lavender-floral);}
 
 .sidebar {
+  grid-area: sidebar;
   background-color: $black;
   padding: 30px;
   overflow: hidden;

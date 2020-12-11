@@ -1,7 +1,10 @@
 import React, { useState } from 'react'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink, useParams } from 'react-router-dom'
+
 
 const Navbar = () => {
+  const { id } = useParams();
+const search = () => <Link to={"/home/" + `${id}` + "/search"}/>
     const [ isOpen, setOpen ] = useState(false)
     return(
         <nav className="nav" role="navigation">
@@ -13,18 +16,19 @@ const Navbar = () => {
                     aria-label="menu"
                     aria-expanded="false"
                     onClick={() => setOpen(!isOpen)}
-                >
-                    hi
-                    
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
-                    <span aria-hidden="true"></span>
+                >                    
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
+                  <span aria-hidden="true"></span>
                 </a>
                 </div>
                 <div className={`navbar-menu ${isOpen && "is-active"}`}>
           <div className="navbar-start">
-            <NavLink className="navbar-item" activeClassName="is-active" to="/">
-              Home
+            <input id="inputbox" type="text" placeholder="Search.." name="search"> 
+            </input>
+            <button id="searchbutton" onClick={search}>Search</button>
+            <NavLink className="navbar-item" activeClassName="is-active" to="/home">
+              Search button
             </NavLink>
 
             <NavLink

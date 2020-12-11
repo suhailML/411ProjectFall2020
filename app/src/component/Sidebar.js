@@ -16,9 +16,6 @@ class Sidebar extends React.Component {
                 friendExpand: !prev.friendExpand,
             })
         )
-
-
-        console.log(this.state.friendExpand)
     }
 
 

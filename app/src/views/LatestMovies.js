@@ -20,7 +20,8 @@ class LatestMovies extends React.Component {
                 title: e.original_name || e.original_title,
                 poster: 'https://image.tmdb.org/t/p/w200' + e.poster_path,
                 id: e.id,
-                genres: e.genre_ids
+                genres: e.genre_ids,
+                desc: e.overview
             })
         )
     }
@@ -37,8 +38,10 @@ class LatestMovies extends React.Component {
     }
 
     componentDidMount() {
+
         /*THIS IS NOT PRODUCTION SAFE CODE -- THE ONLY SAFE WAY TO HIDE API KEY IS 
         TO CALL IT FROM A BACKEND SERVER; but since this local, it'll do*/
+        
          fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
             .then(response => response.json())
             .then(json => {
@@ -46,6 +49,7 @@ class LatestMovies extends React.Component {
                     isLoaded: true,
                     trnd_movies: this.displaytrending(json.results)
                 })
+                console.log(this.state.trnd_movies)
                 
             })
             .catch(this.handleErr);
@@ -82,7 +86,12 @@ class LatestMovies extends React.Component {
                     {/* once you get the trend movies as an array from compDidMount
                     create a Movie Component */}
                     {trnd_movies.map(movie => 
-                        <Movie key={movie.id} name={movie.title} poster={movie.poster} />
+                        <Movie key={movie.id} 
+                        id={movie.id} 
+                        name={movie.title} 
+                        poster={movie.poster} 
+                        desc={movie.desc}
+                        genres={movie.genres} />
                     )}
                     </div>
                 </div>

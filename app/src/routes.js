@@ -10,14 +10,12 @@ import {
 
 import App from './App'
 import Login from './views/Login'
-import Navbar from './views/Navbar';
 import Home from './views/Home';
 
 
 
 export default(
     <Router>
-        {/* <Navbar/> */}
         <Switch>
             <Route exact path="/"> <Home/> </Route>
             <Route path="/login" component={Login} />

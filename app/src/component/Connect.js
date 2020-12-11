@@ -1,6 +1,6 @@
 const sqlite3 = require('sqlite3').verbose();
 
-let db = new sqlite3.Database('./db/movieapp.db', (err) => {
+let db= new sqlite3.Database('./db/movieapp.db', (err) => {
     if (err) {
       console.error(err.message);
     }
@@ -20,3 +20,4 @@ db.all(sql, [], (err, rows) => {
 
 // close the database connection
 db.close();
+
