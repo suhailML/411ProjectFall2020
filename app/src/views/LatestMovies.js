@@ -1,28 +1,39 @@
 import React from 'react';
 import Movie from '../component/Movie';
+import Show from '../component/Show';
 
 //TODO: modularize this
 //state is for data that can change
 class LatestMovies extends React.Component {
+    
     constructor(props) {
         super(props);
         
         this.state = {
             isLoaded: false,
-            trnd_movies: [],
-        }
+            trending_list: [],
+            trending_shows: [],
+            trending_movies: []
+        };
     }
 
-    displaytrending(movie_list) {
+    parseTrending(movie_list) {
         //returning object in js = wrap in parenthesis
-        return movie_list.map(e => 
-            ({
-                title: e.original_name || e.original_title,
-                poster: 'https://image.tmdb.org/t/p/w200' + e.poster_path,
-                id: e.id,
-                genres: e.genre_ids
-            })
-        )
+        console.log(movie_list);
+        // Search results can be one of: tv, movie, or person
+        movie_list.forEach(result => {
+            if (result.media_type === 'tv') {
+                // call get_tv_info function to return an object with more info about the show
+                this.setState({
+                    trending_shows: this.state.trending_shows.concat([result]),
+                });
+
+            } else if (result.media_type === 'movie') {
+                this.setState({
+                    trending_movies: this.state.trending_movies.concat([result])
+                });
+            } 
+        });
     }
 
     handleErr(err) {
@@ -39,18 +50,16 @@ class LatestMovies extends React.Component {
     componentDidMount() {
         /*THIS IS NOT PRODUCTION SAFE CODE -- THE ONLY SAFE WAY TO HIDE API KEY IS 
         TO CALL IT FROM A BACKEND SERVER; but since this local, it'll do*/
-         fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
+        fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
             .then(response => response.json())
             .then(json => {
                 this.setState({
                     isLoaded: true,
-                    trnd_movies: this.displaytrending(json.results)
-                })
-                
+                    trending_list: json.results
+                });
+                this.parseTrending(json.results);
             })
             .catch(this.handleErr);
-
-
     }
 
     getHeader(movielist_type) {
@@ -76,8 +85,8 @@ class LatestMovies extends React.Component {
     }
 
     render() {
-        var { isLoaded, trnd_movies } = this.state;
-        
+        var { isLoaded, trending_list } = this.state;
+
         if( !isLoaded ) {
             return (
                 <div className="feature">
@@ -90,14 +99,19 @@ class LatestMovies extends React.Component {
                 <div className="featurebox">
                     <p>{this.getHeader(this.props.type)}</p>
                     <div className="feature">
-                    {/* once you get the trend movies as an array from compDidMount
-                    create a Movie Component */}
-                    {trnd_movies.map(movie => 
-                        <Movie key={movie.id} name={movie.title} poster={movie.poster} />
-                    )}
+                        {/* once you get the trend movies as an array from compDidMount
+                        create a Movie Component */}
+                        {trending_list.map(trending => 
+                            {
+                                if (trending.media_type === "tv") {
+                                    return(<Show key={trending.id} show={trending}/>);
+                                } else {
+                                    return(<Movie key={trending.id} name={trending.title} movie={trending}/>);
+                                }
+                            }
+                        )}
                     </div>
                 </div>
-                
             )
         }
         

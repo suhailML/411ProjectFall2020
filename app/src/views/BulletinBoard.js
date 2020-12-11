@@ -8,7 +8,7 @@ class BulletinBoard extends React.Component {
 
         this.state = {
             events: Events,
-        }
+        };
     }
 
     
@@ -29,8 +29,6 @@ class BulletinBoard extends React.Component {
     render() {
         var { events } = this.state;
 
-        console.log(events);
-
         return (
             <div className="featurebox">
                 <p>Club Events</p>
@@ -42,10 +40,8 @@ class BulletinBoard extends React.Component {
                 )}
                 </div>
             </div>
-            
         );
     }
-        
 }
 
 export default BulletinBoard

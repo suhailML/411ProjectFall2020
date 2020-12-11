@@ -3,11 +3,11 @@ import User from './User'
 
 class Sidebar extends React.Component {
     constructor(){
-        super()
+        super();
         this.state={
             friendExpand: false
-        }
-        this.expandlist = this.expandlist.bind(this)
+        };
+        this.expandlist = this.expandlist.bind(this);
     }
 
     expandlist() {
@@ -15,22 +15,22 @@ class Sidebar extends React.Component {
             ({
                 friendExpand: !prev.friendExpand,
             })
-        )
+        );
 
 
-        console.log(this.state.friendExpand)
+        console.log(this.state.friendExpand);
     }
 
 
     render() {
         //inline styles can dynamically change styles, bothced example
 
-        const iconSize = 27
+        const iconSize = 27;
 
         //Friend List
-        const friends = this.props.friends.map(e => <User key={e.id} name={e.name} size={iconSize} self={false}/>)
+        const friends = this.props.friends.map(e => <User key={e.id} name={e.name} size={iconSize} self={false}/>);
         //what to expand friendlist size to 
-        const heightFriendsList = {height: 'min(' + parseInt(this.state.friendExpand ? this.props.friends.length * (iconSize + 25) : (iconSize + 25)) + 'px, 40vh)'}
+        const heightFriendsList = {height: 'min(' + parseInt(this.state.friendExpand ? this.props.friends.length * (iconSize + 25) : (iconSize + 25)) + 'px, 40vh)'};
 
 
         return (
@@ -51,7 +51,7 @@ class Sidebar extends React.Component {
                 <h5>&gt;&gt; start a bulletin board chat or something</h5>
                 
             </div>
-        )
+        );
     }
 }
 

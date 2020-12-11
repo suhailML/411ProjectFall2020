@@ -8,9 +8,9 @@ class Event extends React.Component {
         this.state = {
             clubName: this.props.clubName,
             title: this.props.title,
-            start_time: this.props.start_time, 
+            start_time: this.props.start_time/60, 
             end_time: this.props.end_time,
-        }
+        };
     }
 
     expand() {
@@ -20,40 +20,38 @@ class Event extends React.Component {
     rsvp() {
         this.setState({
             rsvp: true,
-        })
+        });
         console.log("RSVPed to event");
     }
     
     render() {
         return(
             <div>   
-                <div className="eventbox">
-                    
+                <div className="eventbox"> 
                     <button onClick={() => this.expand }> Details </button>
                     <button onClick={() => this.rsvp }> RSVP </button>
+                    {this.props.clubName}
+                    {this.props.title}
+                    {this.props.start_time}
+                    {this.props.end_time}
                 </div>
-                {this.props.clubName}
-                {this.props.title}
-                {this.props.start_time}
-                {this.props.end_time}
             </div> 
         )   
     }
-    
-    propTypes = {
-        eventid: PropTypes.number,
-        clubName: PropTypes.string,
-        title: PropTypes.string,
-        start_time: PropTypes.number,
-        end_time: PropTypes.number,
-        rsvp: PropTypes.bool
-    }
-    
-    defaultProps = {
-        rsvp: false
-    }    
 }
 
+Event.propTypes = {
+    eventid: PropTypes.number,
+    clubName: PropTypes.string,
+    title: PropTypes.string,
+    start_time: PropTypes.number,
+    end_time: PropTypes.number,
+    rsvp: PropTypes.bool
+};
+
+Event.defaultProps = {
+    rsvp: false
+};   
 
 
 export default Event
