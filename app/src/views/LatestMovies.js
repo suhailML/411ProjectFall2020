@@ -11,23 +11,9 @@ class LatestMovies extends React.Component {
         
         this.state = {
             isLoaded: false,
-            trending_list: [],
+            trending_list: []
         };
     }
-
-    // parseTrending(movie_list) {
-    //     //returning object in js = wrap in parenthesis
-    //     return movie_list.map(e => 
-    //         ({
-    //             title: e.original_name || e.original_title,
-    //             poster: 'https://image.tmdb.org/t/p/w200' + e.poster_path,
-    //             id: e.id,
-    //             genres: e.genre_ids,
-    //             desc: e.overview
-            
-    //         })
-    //     )
-    // }
 
     handleErr(err) {
         console.warn(err);
@@ -51,7 +37,6 @@ class LatestMovies extends React.Component {
                     isLoaded: true,
                     trending_list: json.results
                 });
-                // this.parseTrending(json.results);
             })
             .catch(this.handleErr);
     }

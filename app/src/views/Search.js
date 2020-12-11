@@ -1,7 +1,7 @@
 import React from 'react';
 import Movie from '../component/Movie';
 import Show from '../component/Show';
-import PropTypes from 'prop-types';
+//import PropTypes from 'prop-types';
 
 class Search extends React.Component {
     constructor(props) {
@@ -45,9 +45,7 @@ class Search extends React.Component {
                 query: input
             });
         } 
-    }
-
-    
+    }    
   
     handleErr(err) {
         console.warn(err);
