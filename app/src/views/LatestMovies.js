@@ -11,29 +11,8 @@ class LatestMovies extends React.Component {
         
         this.state = {
             isLoaded: false,
-            trending_list: [],
-            trending_shows: [],
-            trending_movies: []
+            trending_list: []
         };
-    }
-
-    parseTrending(movie_list) {
-        //returning object in js = wrap in parenthesis
-        console.log(movie_list);
-        // Search results can be one of: tv, movie, or person
-        movie_list.forEach(result => {
-            if (result.media_type === 'tv') {
-                // call get_tv_info function to return an object with more info about the show
-                this.setState({
-                    trending_shows: this.state.trending_shows.concat([result]),
-                });
-
-            } else if (result.media_type === 'movie') {
-                this.setState({
-                    trending_movies: this.state.trending_movies.concat([result])
-                });
-            } 
-        });
     }
 
     handleErr(err) {
@@ -57,7 +36,6 @@ class LatestMovies extends React.Component {
                     isLoaded: true,
                     trending_list: json.results
                 });
-                this.parseTrending(json.results);
             })
             .catch(this.handleErr);
     }

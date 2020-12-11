@@ -14,13 +14,16 @@ class Movie extends React.Component {
             poster: "",
             runtime: 0,
             info: [],
+            expand: false
         };
     }
 
 /* example of stateless components -> components that are functions (functional),
 they take props in a param and then you can access the keys*/
     expand() {
-        console.log("chicken");
+        this.setState({
+            expand: true
+        });
     }
 
     handleErr(err) {

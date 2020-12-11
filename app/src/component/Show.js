@@ -15,11 +15,16 @@ class Show extends React.Component {
             num_seasons: 0,
             num_episodes: 0,
             info: [],
+            expanded: false
         };
     }
 
     expand() {
-        console.log("chicken");
+        this.setState({
+            expanded: !this.state.expanded
+        });
+        console.log(this.state.expanded);
+        console.log("expanded");
     }
     
     handleErr(err) {
@@ -55,9 +60,10 @@ class Show extends React.Component {
         return (
             <div>
                 <div className="showbox">
-                    <button onClick={() => this.expand }> + </button>
+                    <button onClick={this.expand.bind(this)}> + </button>
                     <img src={this.state.poster} alt=""/>
                 </div>
+
                 {this.state.name}
                 <br></br>
                 {`Seasons: ${this.state.num_seasons}`}
