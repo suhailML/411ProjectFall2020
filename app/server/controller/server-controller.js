@@ -21,23 +21,8 @@ exports.tableSpecificSearch = async (req, res) => {
       res.json({ message: `There was an error retrieving genres: ${err}` })
     })
 }
-// C
 
-exports.rwDelete = async (req, res) => {
-  // Find specific book in the database and remove it
-  knex('recentlyWatched')
-    .where('id', req.body.id) // find correct record based on id
-    .del() // delete the record
-    .then(() => {
-      // Send a success message in response
-      res.json({ message: `Event ${req.body.id} deleted.` })
-    })
-    .catch(err => {
-      // Send a error message in response
-      res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` })
-    })
-}
-
+// recentlyWatched
 
 exports.rwAll = async (req, res) => {
     // Get all books from database
