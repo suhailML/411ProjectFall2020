@@ -64,6 +64,8 @@ they take props in a param and then you can access the keys*/
     }
 
     render() {
+
+        
         let style =  this.state.expanded ? 
         {
             height: '10vw',

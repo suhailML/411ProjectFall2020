@@ -1,6 +1,7 @@
 import React from 'react';
 import Movie from '../component/Movie';
 import Show from '../component/Show';
+import axios from 'axios';
 
 //TODO: modularize this
 //state is for data that can change
@@ -15,6 +16,86 @@ class LatestMovies extends React.Component {
         };
     }
 
+    displaytrending(movie_list) {
+        //returning object in js = wrap in parenthesis
+
+        console.log("HERE")
+        const fetchbooks = async () => {
+            // Send GET request to 'books/all' endpoint
+            axios
+              .get('http://localhost:4001/movieRouter/bAll')
+              .then(response => {
+                // Update the books state
+                console.log(response.data)
+                console.log(response)
+              })
+              .catch(error => console.error(`There was an error retrieving the book list: ${error}`))
+        }   
+        console.log("THERE");
+        const handleBookCreate = () => {
+            // Send POST request to 'books/create' endpoint
+            axios
+              .post('http://localhost:4001/movieRouter/eCreate', {
+                author: "yard",
+                title: "jard",
+                pubDate: "KLARD",
+                rating: "mard"
+              })
+              .then(res => {
+                console.log(res.data)
+                // Fetch all books to refresh
+                // the books on the bookshelf list
+                fetchbooks()
+              })
+              .catch(error => console.error(`There was an error creating the book`))
+          }
+          handleBookCreate();
+          console.log("AIR");
+
+          const fetchEvents = async () => {
+            // Send GET request to 'books/all' endpoint
+            axios
+              .get('http://localhost:4001/movieRouter/eAll')
+              .then(response => {
+                // Update the books state
+                console.log(response.data)
+                console.log(response)
+              })
+              .catch(error => console.error(`There was an error retrieving the book list: ${error}`))
+        } 
+
+        var hello = "hello";
+          const handleEventCreate = () => {
+            // Send POST request to 'books/create' endpoint
+            axios
+              .post('http://localhost:4001/movieRouter/eCreate', {
+                clubName: 'chicken appreciation club',
+                movieTitle: 'chicken run',
+                movieID: 333,
+                date: '12/12/12',
+                time: '12:12',
+                eventDescription: 'come watch chickens do chicken stuff'
+              })
+              .then(res => {
+                console.log(res.data)
+                // Fetch all books to refresh
+                // the books on the bookshelf list
+                fetchEvents()
+              })
+              .catch(error => console.error(`There was an error creating the event`))
+          }
+          handleEventCreate();
+    
+        return movie_list.map(e => 
+            ({
+                title: e.original_name || e.original_title,
+                poster: 'https://image.tmdb.org/t/p/w200' + e.poster_path,
+                id: e.id,
+                genres: e.genre_ids
+            })
+        )
+    }
+
     handleErr(err) {
         console.warn(err);
         let resp = new Response(
@@ -25,6 +106,8 @@ class LatestMovies extends React.Component {
         );
         return resp;  
     }
+
+    
 
     componentDidMount() {
 
@@ -99,3 +182,5 @@ class LatestMovies extends React.Component {
 }
 
 export default LatestMovies
+
+

@@ -27,26 +27,31 @@ router.put('/bDelete', movieRoutes.booksDelete)
 // this means that '/reset' translates to '/books/reset'
 router.put('/bReset', movieRoutes.booksReset)
 
+//event
 router.get('/eAll', movieRoutes.eventsAll)
 router.post('/eCreate', movieRoutes.eventsCreate)
 router.put('/eDelete', movieRoutes.eventsDelete)
 router.put('/eReset', movieRoutes.eventsReset)
 
+//user
 router.get('/uAll', movieRoutes.usersAll)
 router.post('/uCreate', movieRoutes.usersCreate)
 router.put('/uDelete', movieRoutes.usersDelete)
 router.put('/uReset', movieRoutes.usersReset)
 
+//genre
 router.get('/gAll', movieRoutes.genreAll)
 router.post('/gCreate', movieRoutes.genreCreate)
 router.put('/gDelete', movieRoutes.genreDelete)
 router.put('/gReset', movieRoutes.genreReset)
 
+//movie
 router.get('/mAll', movieRoutes.movieAll)
 router.post('/mCreate', movieRoutes.movieCreate)
 router.put('/mDelete', movieRoutes.movieDelete)
 router.put('/mReset', movieRoutes.movieReset)
 
+//recenly  washed
 router.get('/rwAll', movieRoutes.rwAll)
 router.post('/rwCreate', movieRoutes.rwCreate)
 router.put('/rwDelete', movieRoutes.rwDelete)

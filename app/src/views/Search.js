@@ -40,11 +40,7 @@ class Search extends React.Component {
     }
 
     componentDidUpdate(prevProp) {
-        console.log(prevProp.match.query)
-        // console.log(this.props.match.query);
         if (prevProp.match.params.query !== this.props.match.params.query) {
-
-            
             fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&query=${this.props.match.params.query}`)
             .then(response => response.json())
             .then(json => {
