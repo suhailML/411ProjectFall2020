@@ -73,9 +73,7 @@ exports.rwAll = async (req, res) => {
       })
   }
 
-
 // movies
-
 
 exports.movieAll = async (req, res) => {
     // Get all books from database
