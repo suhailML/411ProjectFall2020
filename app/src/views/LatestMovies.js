@@ -21,7 +21,7 @@ class LatestMovies extends React.Component {
         const fetchbooks = async () => {
             // Send GET request to 'books/all' endpoint
             axios
-              .get('http://localhost:4001/books/bAll')
+              .get('http://localhost:4001/movieRouter/bAll')
               .then(response => {
                 // Update the books state
                 console.log(response.data)
@@ -33,7 +33,7 @@ class LatestMovies extends React.Component {
         const handleBookCreate = () => {
             // Send POST request to 'books/create' endpoint
             axios
-              .post('http://localhost:4001/books/bCreate', {
+              .post('http://localhost:4001/movieRouter/eCreate', {
                 author: "yard",
                 title: "jard",
                 pubDate: "KLARD",
@@ -53,7 +53,7 @@ class LatestMovies extends React.Component {
           const fetchEvents = async () => {
             // Send GET request to 'books/all' endpoint
             axios
-              .get('http://localhost:4001/books/eAll')
+              .get('http://localhost:4001/movieRouter/eAll')
               .then(response => {
                 // Update the books state
                 console.log(response.data)
@@ -66,7 +66,7 @@ class LatestMovies extends React.Component {
           const handleEventCreate = () => {
             // Send POST request to 'books/create' endpoint
             axios
-              .post('http://localhost:4001/books/eCreate', {
+              .post('http://localhost:4001/movieRouter/eCreate', {
                 clubName: 'chicken appreciation club',
                 movieTitle: 'chicken run',
                 movieID: 333,

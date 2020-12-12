@@ -194,6 +194,45 @@ knex.schema
             console.error(`There was an error setting up the database: ${error}`)
           })
 
+          knex.schema
+          // Make sure no "books" table exists
+          // before trying to create new
+          .hasTable('userInfo')
+            .then((exists) => {
+              if (!exists) {
+                // If no "books" table exists
+                // create new, with "id", "author", "title",
+                // "pubDate" and "rating" columns
+                // and use "id" as a primary identification
+                // and increment "id" with every new record (book)
+                return knex.schema.createTable('userInfo', (table)  => {
+                  table.increments('id').primary()
+                  table.string('name')
+                  table.string('email')
+                  table.string('birthdayDate')
+                  table.string('userName')
+                  table.string('locality')
+                  table.string('clubAffiliations')
+                  table.string('watchedMovies')
+                })
+                .then(() => {
+                  // Log success message
+                  console.log('Table \'userInfo\' created')
+                })
+                .catch((error) => {
+                  console.error(`There was an error creating table: ${error}`)
+                })
+              }
+            })
+            .then(() => {
+              // Log success message
+              console.log('done')
+            })
+            .catch((error) => {
+              console.error(`There was an error setting up the database: ${error}`)
+            })
+
+
 // Just for debugging purposes:
 // Log all data in "books" table
 knex.select('*').from('books')
