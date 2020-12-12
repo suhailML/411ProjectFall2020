@@ -39,6 +39,31 @@ class Search extends React.Component {
         });
     }
 
+    componentDidUpdate(prevProp) {
+        console.log(prevProp.match.query)
+        // console.log(this.props.match.query);
+        if (prevProp.match.params.query !== this.props.match.params.query) {
+
+            
+            fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&query=${this.props.match.params.query}`)
+            .then(response => response.json())
+            .then(json => {
+                this.setState({
+                    isLoaded: true,
+                    search_results: json.results,
+                    query: this.props.match.params.query,
+                    search_results: [], 
+                    user_results: [],
+                    tv_results: [],
+                    movie_results: [],
+                    people_results: []
+                });
+                this.parseSearchResults(json.results);
+            })
+            .catch(this.handleErr);
+        } 
+    }
+
     handleInputChange(input){
         if (input !== this.state.query && input.length > 0) {
             this.setState({
@@ -59,7 +84,6 @@ class Search extends React.Component {
     }
   
     componentDidMount() {
-        console.log(this.props.match.params.query)
         /*THIS IS NOT PRODUCTION SAFE CODE -- THE ONLY SAFE WAY TO HIDE API KEY IS 
         TO CALL IT FROM A BACKEND SERVER; but since this local, it'll do*/
         fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&query=${this.props.match.params.query}`)
@@ -74,6 +98,8 @@ class Search extends React.Component {
         })
         .catch(this.handleErr);
     }
+
+
 
     render() {
         console.log(this.props);

@@ -3,12 +3,10 @@ import { Link, NavLink, useLocation, useParams, useRouteMatch } from 'react-rout
 
 
 const Navbar = () => {
-  let match = useRouteMatch();
-  const { userid } = useParams();
-  const location = useLocation();
-
+    const { userid } = useParams();
     const [ isOpen, setOpen ] = useState(false)
     const [ query, setQuery ] = useState('')
+
     return(
         <nav className="nav" role="navigation">
             <div className="container">
