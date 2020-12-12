@@ -18,37 +18,9 @@ class LatestMovies extends React.Component {
         //returning object in js = wrap in parenthesis
 
         console.log("HERE")
-        const fetchbooks = async () => {
-            // Send GET request to 'books/all' endpoint
-            axios
-              .get('http://localhost:4001/movieRouter/bAll')
-              .then(response => {
-                // Update the books state
-                console.log(response.data)
-                console.log(response)
-              })
-              .catch(error => console.error(`There was an error retrieving the book list: ${error}`))
-        }   
+
         console.log("THERE");
-        const handleBookCreate = () => {
-            // Send POST request to 'books/create' endpoint
-            axios
-              .post('http://localhost:4001/movieRouter/eCreate', {
-                author: "yard",
-                title: "jard",
-                pubDate: "KLARD",
-                rating: "mard"
-              })
-              .then(res => {
-                console.log(res.data)
-                // Fetch all books to refresh
-                // the books on the bookshelf list
-                fetchbooks()
-              })
-              .catch(error => console.error(`There was an error creating the book`))
-          }
-          handleBookCreate();
-          console.log("AIR");
+        console.log("AIR");
 
           const fetchEvents = async () => {
             // Send GET request to 'books/all' endpoint
