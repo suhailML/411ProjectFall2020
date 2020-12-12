@@ -9,7 +9,7 @@ import {
   } from "react-router-dom";
 
 import App from './App'
-import Login from './component/Login';
+import Login from './views/Login';
 import Navbar from './views/Navbar';
 import Home from './views/Home';
 import Quiz from './views/Quiz';
