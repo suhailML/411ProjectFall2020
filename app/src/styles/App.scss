@@ -14,6 +14,9 @@ $lavender-floral: hsla(263, 91%, 75%, 0.4); //purple
 @import url('https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&display=swap');
 $typeface: 'Chivo';
 
+body::-webkit-scrollbar {
+  display: none;
+}
 body {
   background-color: $grey;
   color: $white;
@@ -22,7 +25,17 @@ body {
 .App {
   display: grid;
   grid-template-columns: 80% 1fr;
+  grid-template-areas:
+               "navbar  sidebar"
+               "app sidebar";
+  background-color: $grey;
   font-family: $typeface;
+  height: 100vh;
+}
+
+
+.nav {
+  grid-area: navbar;
 }
 
 
@@ -40,6 +53,10 @@ $inner-space: 57px;
   overflow-x: scroll;
 }
 
+.feature::-webkit-scrollbar {
+  display: none;
+}
+
 @mixin moviebox ($color) {
   background-color: $color;
   padding: 12px 17px 12px;
@@ -50,7 +67,12 @@ $inner-space: 57px;
 
 .trend-moviebox { @include moviebox($lavender-floral);}
 
+.showbox {@include moviebox($lavender-floral);}
+
+.eventbox {@include moviebox($lavender-floral);}
+
 .sidebar {
+  grid-area: sidebar;
   background-color: $black;
   padding: 30px;
   overflow: hidden;
