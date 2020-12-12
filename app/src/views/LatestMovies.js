@@ -104,7 +104,7 @@ class LatestMovies extends React.Component {
             message: "Bad Request"
           })
         );
-        return resp;
+        return resp;  
     }
 
     

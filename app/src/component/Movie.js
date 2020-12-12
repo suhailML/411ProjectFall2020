@@ -93,3 +93,4 @@ they take props in a param and then you can access the keys*/
 
 
 export default Movie
+ 

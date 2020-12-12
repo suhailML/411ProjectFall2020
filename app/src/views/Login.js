@@ -1,10 +1,11 @@
-import React from 'react';
+import LoginButton from '../component/LoginC.js';
 
-const Login = () => {
-    return (
-        <div>
-            <p>drop that login code</p>
-        </div>
+
+
+const Loginfunc = () => {
+    return(
+        <LoginButton/>
     )
 }
-export default Login
+
+export default Loginfunc

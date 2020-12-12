@@ -7,6 +7,9 @@ import Sidebar from './component/Sidebar';
 import Auth from './component/Auth'
 import {useParams} from 'react-router-dom';
 import friends from './fakedata/friends';
+import Login from './component/LoginC';
+import Logout from './component/Logout';
+
 import Navbar from './views/Navbar';
 import BulletinBoard from './views/BulletinBoard';
 
@@ -20,15 +23,17 @@ function App() {
       <Navbar/>
 
         {/*todo: hide scroll bar*/}
-        <div style={{overflowY: 'scroll'}}>
+        <div style={{overflowY: 'scroll', height: "100vh"}}>
         
         <Switch>
           <Route exact path={match.path}>
           <BulletinBoard/>
-              <LatestMovies type="trending"/>
+            <LatestMovies type="trending"/>
             <LatestMovies type="west"/>
             <LatestMovies type="trending"/>
             <LatestMovies type="south"/>
+            <Login />
+            <Logout />
           </Route>
 
           {/* the reason why you put component={component} is so that you can
