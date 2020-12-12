@@ -62,6 +62,7 @@ class LatestMovies extends React.Component {
               .catch(error => console.error(`There was an error retrieving the book list: ${error}`))
         } 
 
+        var hello = "hello";
           const handleEventCreate = () => {
             // Send POST request to 'books/create' endpoint
             axios
