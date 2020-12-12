@@ -31,5 +31,12 @@ router.get('/eAll', booksRoutes.eventsAll)
 
 router.post('/eCreate', booksRoutes.eventsCreate)
 
+router.put('/eDelete', booksRoutes.eventsDelete)
+
+// Add route for PUT request to reset bookshelf list
+// In server.js, books route is specified as '/books'
+// this means that '/reset' translates to '/books/reset'
+router.put('/eReset', booksRoutes.eventsReset)
+
 // Export router
 module.exports = router

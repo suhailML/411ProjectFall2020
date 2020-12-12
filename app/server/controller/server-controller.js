@@ -109,3 +109,35 @@ exports.eventsAll = async (req, res) => {
         res.json({ message: `There was an error creating ${req.body.title} book: ${err}` })
       })
   }
+
+  exports.eventsDelete = async (req, res) => {
+    // Find specific book in the database and remove it
+    knex('events')
+      .where('id', req.body.id) // find correct record based on id
+      .del() // delete the record
+      .then(() => {
+        // Send a success message in response
+        res.json({ message: `Event ${req.body.id} deleted.` })
+      })
+      .catch(err => {
+        // Send a error message in response
+        res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` })
+      })
+  }
+  
+  // Remove all books on the list
+  exports.eventsReset = async (req, res) => {
+    // Remove all books from database
+    knex
+      .select('*') // select all records
+      .from('events') // from 'books' table
+      .truncate() // remove the selection
+      .then(() => {
+        // Send a success message in response
+        res.json({ message: 'Events list cleared.' })
+      })
+      .catch(err => {
+        // Send a error message in response
+        res.json({ message: `There was an error resetting Event list: ${err}.` })
+      })
+  }
