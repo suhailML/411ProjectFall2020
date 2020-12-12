@@ -3,22 +3,24 @@ import { GoogleLogin } from 'react-google-login';
 // refresh token
 import { refreshTokenSetup } from '../utils/refreshToken';
 
-const clientId = '846083291108-v823uld2av1u0112on0r0hgiqr591kdb.apps.googleusercontent.com';
+// const sourceFile = require("./Config")
+// var clientId = sourceFile.clientId;
+// console.log(clientId);
 
-const onSuccess = (res) => {
-  console.log('Login Success: currentUser:', res.profileObj);
-  alert(
-    `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
-  );
-  refreshTokenSetup(res);
-};
+// const onSuccess = (res) => {
+//   console.log('Login Success: currentUser:', res.profileObj);
+//   alert(
+//     `Logged in successfully welcome ${res.profileObj.name} 😍. \n See console for full profile object.`
+//   );
+//   refreshTokenSetup(res);
+// };
 
-const onFailure = (res) => {
-  console.log('Login failed: res:', res);
-  alert(
-    `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
-  );
-};
+// const onFailure = (res) => {
+//   console.log('Login failed: res:', res);
+//   alert(
+//     `Failed to login. 😢 Please ping this to repo owner twitter.com/sivanesh_fiz`
+//   );
+// };
 
 const responseGoogle = (response) => {
   console.log(response);

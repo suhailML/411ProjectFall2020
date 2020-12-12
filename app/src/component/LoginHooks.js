@@ -4,8 +4,8 @@ import { useGoogleLogin } from 'react-google-login';
 // refresh token
 import { refreshTokenSetup } from '../utils/refreshToken';
 
-const clientId =
-  '846083291108-v823uld2av1u0112on0r0hgiqr591kdb.apps.googleusercontent.com';
+// const sourceFile = require("./Config")
+// var clientId = sourceFile.clientId;
 
 function LoginHooks() {
   const onSuccess = (res) => {
