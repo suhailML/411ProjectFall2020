@@ -57,5 +57,7 @@ router.post('/rwCreate', movieRoutes.rwCreate)
 router.put('/rwDelete', movieRoutes.rwDelete)
 router.put('/rwReset', movieRoutes.rwReset)
 
+router.post('/tableSpecificSearch', movieRoutes.tableSpecificSearch)
+
 // Export router
 module.exports = router

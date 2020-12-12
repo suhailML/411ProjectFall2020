@@ -147,6 +147,48 @@ class LatestMovies extends React.Component {
     }
 
     render() {
+
+        var hello = "hello";
+
+        var hello = "hello";
+        const handleEventCreate = () => {
+          // Send POST request to 'books/create' endpoint
+          axios
+            .post('http://localhost:4001/movieRouter/eCreate', {
+              clubName: 'chinwe pull up club',
+              movieTitle: 'pullUP',
+              movieID: 333,
+              date: '12/12/12',
+              time: '12:12',
+              eventDescription: 'ugugug stuff'
+            })
+            .then(res => {
+              console.log(res.data)
+              // Fetch all books to refresh
+              // the books on the bookshelf list
+            })
+            .catch(error => console.error(`There was an error creating the event`))
+        }
+        handleEventCreate();
+  
+
+        const findSomething = () => {
+          // Send POST request to 'books/create' endpoint
+          axios
+            .post('http://localhost:4001/movieRouter/tableSpecificSearch', {
+              table: 'events',
+              column: 'movieTitle',
+              value: 'pullUP'
+            })
+            .then(res => {
+              console.log(res.data)
+              // Fetch all books to refresh
+              // the books on the bookshelf list
+            })
+            .catch(error => console.error(`could not do search`))
+        }
+        findSomething();  
+        
         var { isLoaded, trending_list } = this.state;
 
         if( !isLoaded ) {

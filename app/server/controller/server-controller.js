@@ -5,6 +5,40 @@ const knex = require('./../db')
 
 console.log("IN THE SERVER CONT")
 
+
+exports.tableSpecificSearch = async (req, res) => {
+  // Get all books from database
+  knex
+    .select('*') // select all records
+    .where(req.body.column, req.body.value)
+    .from(req.body.table) // from 'books' table
+    .then(userData => {
+      // Send books extracted from database in response
+      res.json(userData)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving genres: ${err}` })
+    })
+}
+// C
+
+exports.rwDelete = async (req, res) => {
+  // Find specific book in the database and remove it
+  knex('recentlyWatched')
+    .where('id', req.body.id) // find correct record based on id
+    .del() // delete the record
+    .then(() => {
+      // Send a success message in response
+      res.json({ message: `Event ${req.body.id} deleted.` })
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` })
+    })
+}
+
+
 exports.rwAll = async (req, res) => {
     // Get all books from database
     knex
