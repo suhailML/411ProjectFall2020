@@ -31,7 +31,7 @@ export function LoginButton() {
     return (
       <div>
         <GoogleLogin
-          clientId={clientId}
+          clientId={process.env.REACT_APP_CLIENT_ID}
           buttonText="Login"
           onSuccess={responseGoogle}
           onFailure={responseGoogle}

@@ -1,10 +1,14 @@
 import LoginButton from '../component/LoginC.js';
+import LogoutButton from '../component/Logout.js';
 
 
 
 const Loginfunc = () => {
     return(
-        <LoginButton/>
+        <div>
+            <LoginButton/>
+            <LogoutButton/>
+        </div>
     )
 }
 
