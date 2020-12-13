@@ -5,16 +5,43 @@ class Quiz extends React.Component{
     constructor(props) {
         super(props);
 
-        this.setState({
-
-        })
     }
 
+    color(){
+        let val = Math.random() *10;
+        console.log(val);
+        if( val >= 0 && val < 2.5) {
+            return ({color: "blue"})
+        } else if ( val >= 2.5 && val < 5){
+            return ({color: "purple"})
+        } else if( val >= 5 && val < 7.5) {
+            return ({color: "red"})
+        } else {
+            return ({color:"yellow"})
+        }
+    }
+
+    next() {
+
+    }
+
+
     render() {
+
         return(
+
                 <form action="" className="quiz-response">
                     <div className="Quiz">
-                        <label for="firstname">First name:</label>
+                        <p>
+                            What part of campus are you on
+                        </p>
+
+                        <div className="option" style={this.color()} onClick={() => this.next}><p>West</p></div>
+                        <div className="option" style={this.color()}><p>East</p></div>
+                        <div className="option" style={this.color()}><p>South</p></div>
+                        <div className="option" style={this.color()}><p>Medical Campus</p></div>
+
+                        <label for="firstname">Username</label>
                         <input type ="text" className="last-name-response" id="first-name-responose"/>
                 
                         <label for="lastname">Last name:</label>
@@ -35,7 +62,7 @@ class Quiz extends React.Component{
                             <option value="Senior">Senior</option>
                         </select>
                         
-                        <button type="submit">Submit</button>
+                        <button type="submit" onClick={() => this.put}>Submit</button>
                     </div>
                 </form>
         )

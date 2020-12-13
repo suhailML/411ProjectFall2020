@@ -27,7 +27,7 @@ function App() {
           <BulletinBoard/>
               <LatestMovies type="trending"/>
             <LatestMovies type="west"/>
-            <LatestMovies type="trending"/>
+            <LatestMovies type="east"/>
             <LatestMovies type="south"/>
           </Route>
 
