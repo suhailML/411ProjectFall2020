@@ -16,18 +16,9 @@ class Show extends React.Component {
             num_seasons: 0,
             num_episodes: 0,
             info: [],
-            expanded: false
         };
     }
 
-    expand() {
-        this.setState({
-            expanded: !this.state.expanded
-        });
-        console.log(this.state.expanded);
-        console.log("expanded");
-    }
-    
     handleErr(err) {
         console.warn(err);
         let resp = new Response(
@@ -75,4 +66,4 @@ class Show extends React.Component {
     }
 }
 
-export default Show
+export default Show;

@@ -10,16 +10,15 @@ class Event extends React.Component {
             title: this.props.title,
             start_time: this.props.start_time/60, 
             end_time: this.props.end_time,
+            rsvp: false
         };
+
+        this.attending = this.attending.bind(this);
     }
 
-    expand() {
-        console.log("expanded");
-    }
-    
-    rsvp() {
+    attending(prevState) {
         this.setState({
-            rsvp: true,
+            rsvpd: true,
         });
         console.log("RSVPed to event");
     }
@@ -40,18 +39,4 @@ class Event extends React.Component {
     }
 }
 
-Event.propTypes = {
-    eventid: PropTypes.number,
-    clubName: PropTypes.string,
-    title: PropTypes.string,
-    start_time: PropTypes.number,
-    end_time: PropTypes.number,
-    rsvp: PropTypes.bool
-};
-
-Event.defaultProps = {
-    rsvp: false
-};   
-
-
-export default Event
+export default Event;

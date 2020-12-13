@@ -26,10 +26,10 @@ class LatestMovies extends React.Component {
               .get('http://localhost:4001/movieRouter/bAll')
               .then(response => {
                 // Update the books state
-                console.log(response.data)
-                console.log(response)
+                console.log(response.data);
+                console.log(response);
               })
-              .catch(error => console.error(`There was an error retrieving the book list: ${error}`))
+              .catch(error => console.error(`There was an error retrieving the book list: ${error}`));
         }   
         console.log("THERE");
         const handleBookCreate = () => {
@@ -42,12 +42,12 @@ class LatestMovies extends React.Component {
                 rating: "mard"
               })
               .then(res => {
-                console.log(res.data)
+                console.log(res.data);
                 // Fetch all books to refresh
                 // the books on the bookshelf list
-                fetchbooks()
+                fetchbooks();
               })
-              .catch(error => console.error(`There was an error creating the book`))
+              .catch(error => console.error(`There was an error creating the book`));
           }
           handleBookCreate();
           console.log("AIR");
@@ -58,10 +58,10 @@ class LatestMovies extends React.Component {
               .get('http://localhost:4001/movieRouter/eAll')
               .then(response => {
                 // Update the books state
-                console.log(response.data)
-                console.log(response)
+                console.log(response.data);
+                console.log(response);
               })
-              .catch(error => console.error(`There was an error retrieving the book list: ${error}`))
+              .catch(error => console.error(`There was an error retrieving the book list: ${error}`));
         } 
 
         var hello = "hello";
@@ -77,12 +77,12 @@ class LatestMovies extends React.Component {
                 eventDescription: 'come watch chickens do chicken stuff'
               })
               .then(res => {
-                console.log(res.data)
+                console.log(res.data);
                 // Fetch all books to refresh
                 // the books on the bookshelf list
-                fetchEvents()
+                fetchEvents();
               })
-              .catch(error => console.error(`There was an error creating the event`))
+              .catch(error => console.error(`There was an error creating the event`));
           }
           handleEventCreate();
     
@@ -93,7 +93,7 @@ class LatestMovies extends React.Component {
                 id: e.id,
                 genres: e.genre_ids
             })
-        )
+        );
     }
 
     handleErr(err) {
@@ -147,8 +147,6 @@ class LatestMovies extends React.Component {
     }
 
     render() {
-
-
         const findSomething = () => {
           // Send POST request to 'books/create' endpoint
           axios
@@ -158,12 +156,13 @@ class LatestMovies extends React.Component {
               value: 'pullUP'
             })
             .then(res => {
-              console.log(res.data)
+              console.log(res.data);
               // Fetch all books to refresh
               // the books on the bookshelf list
             })
-            .catch(error => console.error(`could not do search`))
+            .catch(error => console.error(`could not do search`));
         }
+
         findSomething();  
 
         findSomething();  
@@ -175,7 +174,7 @@ class LatestMovies extends React.Component {
                 <div className="feature">
                     loading...
                 </div>
-            )
+            );
             
         } else {
             return (
@@ -195,7 +194,7 @@ class LatestMovies extends React.Component {
                         )}
                     </div>
                 </div>
-            )
+            );
         }
         
     }
