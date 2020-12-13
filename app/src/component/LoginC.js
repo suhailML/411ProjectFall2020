@@ -4,6 +4,7 @@ import { Redirect } from 'react-router-dom';
 // refresh token
 import { refreshTokenSetup } from '../utils/refreshToken';
 
+
 // const sourceFile = require("./Config")
 // var clientId = sourceFile.clientId;
 // console.log(clientId);
@@ -28,12 +29,9 @@ import { refreshTokenSetup } from '../utils/refreshToken';
 //signedIn == true to the parent component that called it and the the returning
 //of redirect should be in that parent component
 const toApp = (res) => {
-  console.log(res.profileObj.givenName)
-  return (<Redirect to={{
-    pathname: "home/" + res.profileObj.givenName,
-    state: {refererrer: "hello"} //can be accessed with this.props.location.state.refererrer
-  }}/>)
+  console.log(res.profileObj.givenName);
 }
+
 const responseGoogle = (response) => {
   console.log(response);
 }
@@ -45,7 +43,7 @@ export function LoginButton() {
         <GoogleLogin
           clientId={process.env.REACT_APP_CLIENT_ID}
           buttonText="Login"
-          onSuccess={toApp}
+          onSuccess={responseGoogle}
           onFailure={responseGoogle}
           cookiePolicy={'single_host_origin'}
           style={{ marginTop: '100px' }}

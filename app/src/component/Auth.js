@@ -10,7 +10,7 @@ const Auth = (InnerComponent) => {
         const auth = true;
         return (auth ? <InnerComponent/> : <Redirect to="/login"/>);
     }
-    return authComponent
+    return authComponent;
 }
 
 // class Auth extends React.Component {
