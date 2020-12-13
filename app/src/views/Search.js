@@ -12,30 +12,26 @@ class Search extends React.Component {
           user_results: [],
           tv_results: [],
           movie_results: [],
-          people_results: []
         };
     }
 
     parseSearchResults(search_results) {
-        //console.log(search_results);
+        var tv_results = [];
+        var movie_results = [];
+        console.log(search_results);
+
         // Search results can be one of: tv, movie, or person
         search_results.forEach(result => {
-            if (result.media_type === 'tv') {
-                // call get_tv_info function to return an object with more info about the show
-                this.setState({
-                    tv_results: this.state.tv_results.concat([result]),
-                });
+            if (result.media_type === 'tv' && result.poster_path !== undefined) {
+                tv_results.push(result);
 
-            } else if (result.media_type === 'movie') {
-                this.setState({
-                    movie_results: this.state.movie_results.concat([result])
-                });
-
-            } else {
-                this.setState({
-                    people_results: this.state.person_results.concat([result])
-                });
-            }
+            } else if (result.media_type === 'movie' && result.poster_path !== undefined) {
+                movie_results.push(result);
+            } 
+        });
+        this.setState({
+            tv_results: tv_results,
+            movie_results: movie_results
         });
     }
 
@@ -48,11 +44,9 @@ class Search extends React.Component {
                     isLoaded: true,
                     search_results: json.results,
                     query: this.props.match.params.query,
-                    search_results: [], 
                     user_results: [],
                     tv_results: [],
-                    movie_results: [],
-                    people_results: []
+                    movie_results: []
                 });
                 this.parseSearchResults(json.results);
             })
@@ -98,8 +92,7 @@ class Search extends React.Component {
 
 
     render() {
-        console.log(this.props);
-        var { isLoaded, search_results, user_results, tv_results, movie_results, people_results} = this.state;
+        var { isLoaded, user_results, tv_results, movie_results} = this.state;
 
         
         if( !isLoaded ) {
@@ -128,27 +121,27 @@ class Search extends React.Component {
                         {/* once you get the trend movies as an array from compDidMount
                         create a Movie Component */}
                             { movie_results.length > 0 ? 
-                            movie_results.map(movie => 
-                                <Movie key={movie.id} name={movie.title} movie={movie} />
+                                movie_results.map(movie => 
+                                <Movie id={movie.id} title={movie.title} movie={movie} />
                             ) : 
                             <p>No movies :(</p>}
                         </div>
+
                         <p>TV Shows</p>
                         <div className="feature">
                         {/* once you get the trend movies as an array from compDidMount
                         create a Movie Component */}
                         {tv_results.length > 0 ? 
                             tv_results.map(show => 
-                                <Show key={show.id} show={show}/>
+                                <Show id={show.id} name={show.name} show={show}/>
                             ) : <p>No TV Shows :(</p>}
                         </div>
                     </div>
-                </div>
-                
-            )
+                </div>    
+            );
         }   
     }
 }
 
 
-export default Search
+export default Search;

@@ -11,8 +11,6 @@ class BulletinBoard extends React.Component {
         };
     }
 
-    
-
     handleErr(err) {
         console.warn(err);
         let resp = new Response(

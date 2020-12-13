@@ -20,6 +20,6 @@ const events = [
         start_time: 1080,
         end_time: 1110,
     }
-]
+];
 
-export default events
+export default events;

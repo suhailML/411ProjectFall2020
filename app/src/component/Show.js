@@ -7,19 +7,29 @@ class Show extends React.Component {
         super(props);
 
         this.state = {
-            key: this.props.key,
             isLoaded: false,
             watched: false,
-            name: this.props.show.name,
+            name: this.props.name,
             id: this.props.show.id,
-            poster: "",
-            num_seasons: 0,
-            num_episodes: 0,
+            backdrop_path: "https://image.tmdb.org/t/p/w200" + this.props.show.backdrop_path,
+            poster_path: "https://image.tmdb.org/t/p/w200" + this.props.show.poster_path,
+            num_seasons: PropTypes.Number,
+            num_episodes: PropTypes.Number,
+            overview: this.props.show.overview,
             info: [],
         };
+
+        // this.isWatched = this.isWatched.bind(this);
     }
 
+    
+    // isWatched - make call to db to indicate if movie has been watched or not
+    // isWatched(prevState) {
+    //     console.log("Show watched");
+    // }
+
     handleErr(err) {
+        console.warn(err);
         console.warn(err);
         let resp = new Response(
           JSON.stringify({
@@ -37,9 +47,6 @@ class Show extends React.Component {
                 .then(results => {
                     this.setState({
                         isLoaded: true,
-                        watched: false,
-                        poster: 'https://image.tmdb.org/t/p/w200' + results.poster_path,
-                        backdrop: 'https://image.tmdb.org/t/p/w200' + results.backdrop_path,
                         num_seasons: results.number_of_seasons,
                         num_episodes: results.number_of_episodes,
                         info: results
@@ -52,8 +59,8 @@ class Show extends React.Component {
         return (
             <div>
                 <div className="showbox">
-                    {/* <button onClick={this.expand.bind(this)}> + </button> */}
-                    <img src={this.state.poster} alt=""/>
+                    <button> + </button> 
+                    <img src={this.state.poster_path} alt=""/>
                 </div>
 
                 {this.state.name}

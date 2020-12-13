@@ -1,10 +1,10 @@
 // bookshelf-app/server/db.js
 
 // Import path module
-const path = require('path')
+const path = require('path');
 
 // Get the location of database.sqlite file
-const dbPath = path.resolve(__dirname, 'db/database.sqlite')
+const dbPath = path.resolve(__dirname, 'db/database.sqlite');
 
 // Create connection to SQLite database
 const knex = require('knex')({
@@ -13,7 +13,7 @@ const knex = require('knex')({
     filename: dbPath,
   },
   useNullAsDefault: true
-})
+});
 
 // Create a table in the database called "books"
 knex.schema
@@ -28,28 +28,28 @@ knex.schema
         // and use "id" as a primary identification
         // and increment "id" with every new record (book)
         return knex.schema.createTable('books', (table)  => {
-          table.increments('id').primary()
-          table.integer('author')
-          table.string('title')
-          table.string('pubDate')
-          table.integer('rating')
+          table.increments('id').primary();
+          table.integer('author');
+          table.string('title');
+          table.string('pubDate');
+          table.integer('rating');
         })
         .then(() => {
           // Log success message
-          console.log('Table \'Books\' created')
+          console.log('Table \'Books\' created');
         })
         .catch((error) => {
-          console.error(`There was an error creating table: ${error}`)
-        })
+          console.error(`There was an error creating table: ${error}`);
+        });
       }
     })
     .then(() => {
       // Log success message
-      console.log('done')
+      console.log('done');
     })
     .catch((error) => {
-      console.error(`There was an error setting up the database: ${error}`)
-    })
+      console.error(`There was an error setting up the database: ${error}`);
+    });
 
     knex.schema
     // Make sure no "books" table exists
@@ -63,30 +63,31 @@ knex.schema
           // and use "id" as a primary identification
           // and increment "id" with every new record (book)
           return knex.schema.createTable('events', (table)  => {
-            table.increments('id').primary()
-            table.string('clubName')
-            table.string('movieTitle')
-            table.string('movieID')
-            table.string('date')
-            table.string('time')
-            table.string('eventDescription')
+            table.increments('id').primary();
+            table.string('clubName');
+            table.string('movieTitle');
+            table.string('movieID');
+            table.string('date');
+            table.string('startTime');
+            table.string('endTime');
+            table.string('eventDescription');
           })
           .then(() => {
             // Log success message
-            console.log('Table \'Events\' created')
+            console.log('Table \'Events\' created');
           })
           .catch((error) => {
-            console.error(`There was an error creating table: ${error}`)
-          })
+            console.error(`There was an error creating table: ${error}`);
+          });
         }
       })
       .then(() => {
         // Log success message
-        console.log('done')
+        console.log('done');
       })
       .catch((error) => {
-        console.error(`There was an error setting up the database: ${error}`)
-      })
+        console.error(`There was an error setting up the database: ${error}`);
+      });
 
     knex.schema
     // Make sure no "books" table exists
@@ -100,29 +101,29 @@ knex.schema
           // and use "id" as a primary identification
           // and increment "id" with every new record (book)
           return knex.schema.createTable('movies', (table)  => {
-            table.increments('id').primary()
-            table.string('movidAPIid')
-            table.string('movieTitle')
-            table.integer('genreID')
-            table.string('poster_url')
-            table.integer('IMBDscore')
+            table.increments('id').primary();
+            table.string('movidAPIid');
+            table.string('movieTitle');
+            table.integer('genreID');
+            table.string('poster_url');
+            table.integer('IMBDscore');
           })
           .then(() => {
             // Log success message
-            console.log('Table \'Movies\' created')
+            console.log('Table \'Movies\' created');
           })
           .catch((error) => {
-            console.error(`There was an error creating table: ${error}`)
-          })
+            console.error(`There was an error creating table: ${error}`);
+          });
         }
       })
       .then(() => {
         // Log success message
-        console.log('done')
+        console.log('done');
       })
       .catch((error) => {
-        console.error(`There was an error setting up the database: ${error}`)
-      })
+        console.error(`There was an error setting up the database: ${error}`);
+      });
 
       knex.schema
       // Make sure no "books" table exists
@@ -136,17 +137,17 @@ knex.schema
             // and use "id" as a primary identification
             // and increment "id" with every new record (book)
             return knex.schema.createTable('genres', (table)  => {
-              table.increments('id').primary()
-              table.int('genreID')
-              table.string('genreName')
+              table.increments('id').primary();
+              table.int('genreID');
+              table.string('genreName');
             })
             .then(() => {
               // Log success message
-              console.log('Table \'Genres\' created')
+              console.log('Table \'Genres\' created');
             })
             .catch((error) => {
-              console.error(`There was an error creating table: ${error}`)
-            })
+              console.error(`There was an error creating table: ${error}`);
+            });
           }
         })
         .then(() => {

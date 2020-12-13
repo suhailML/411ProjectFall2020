@@ -8,8 +8,8 @@ class Event extends React.Component {
         this.state = {
             clubName: this.props.clubName,
             title: this.props.title,
-            start_time: this.props.start_time/60, 
-            end_time: this.props.end_time,
+            start_time: PropTypes.string, 
+            end_time: PropTypes.string,
             rsvp: false
         };
 
@@ -27,11 +27,14 @@ class Event extends React.Component {
         return(
             <div>   
                 <div className="eventbox"> 
-                    <button onClick={() => this.expand }> Details </button>
-                    <button onClick={() => this.rsvp }> RSVP </button>
+                    <button onClick={() => this.attending }> RSVP </button>
+                    <br></br>
                     {this.props.clubName}
+                    <br></br>
                     {this.props.title}
+                    <br></br>
                     {this.props.start_time}
+                    <br></br>
                     {this.props.end_time}
                 </div>
             </div> 

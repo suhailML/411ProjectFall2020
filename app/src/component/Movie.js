@@ -9,15 +9,19 @@ class Movie extends React.Component {
         super(props);
 
         this.state = {
-            key: this.props.key,
             isLoaded: false,
             watched: false,
-            name: this.props.name,
-            id: this.props.movie.id,
-            poster: "",
-            runtime: 0,
-            info: [],
+            title: this.props.title,
+            id: this.props.id,
+            backdrop_path:"https://image.tmdb.org/t/p/w200" + this.props.movie.backdrop_path,
+            poster_path: "https://image.tmdb.org/t/p/w200" + this.props.movie.poster_path,
+            info: this.props.movie.overview,
+            release_date: this.props.movie.release_date
         };
+    }
+
+    isWatched(){
+        console.log("Movie Watched");
     }
 
     handleErr(err) {
@@ -31,38 +35,33 @@ class Movie extends React.Component {
         return resp;
     }
 
-    componentDidMount() {
-        fetch(`https://api.themoviedb.org/3/movie/${this.state.id}?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&append_to_response=release_date,overview,poster_path,runtime`)
-                .then(response => response.json())
-                .then(results => {
-                    //console.log(results);
-                    this.setState({
-                        isLoaded: true,
-                        watched: false,
-                        poster: 'https://image.tmdb.org/t/p/w200' + results.poster_path,
-                        backdrop: 'https://image.tmdb.org/t/p/w200' + results.backdrop_path,
-                        runtime: results.runtime,
-                        release_date: results.release_date,
-                        info: results
-                    });
-                })
-                .catch(this.handleErr);
-    }
+    // componentDidMount() {
+    //     fetch(`https://api.themoviedb.org/3/movie/${this.state.id}?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&append_to_response=release_date,overview,poster_path,runtime`)
+    //             .then(response => response.json())
+    //             .then(results => {
+    //                 //console.log(results);
+    //                 this.setState({
+    //                     isLoaded: true,
+    //                     watched: false,
+    //                     runtime: results.runtime,
+    //                     release_date: results.release_date,
+    //                     info: results
+    //                 });
+    //             })
+    //             .catch(this.handleErr);
+    // }
 
     render() {
-        return (
+        return(
             <div>
-                <div className="trend-moviebox">
-                    <button onClick={this.expanded}> + </button>
-                    <img src={this.state.poster} alt=""/>
-                </div>
-                {this.state.name}
-                <br></br>
-                {`Runtime: ${Math.floor(this.state.runtime/60)} Hours  ${this.state.runtime%60} Minutes`}
-                <br></br>
-                {`Release Date: ${this.state.release_date}`}
+            <div className="trend-moviebox">
+                <button> + </button>
+                <img src={this.state.poster_path} alt=""/>
             </div>
-        );
+            {this.state.title}
+            <br></br>
+            {`Release Date: ${this.state.release_date}`}
+        </div>)
     }
 }
 export default Movie;

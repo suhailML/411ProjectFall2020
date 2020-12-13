@@ -1,29 +1,38 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 
 class Quiz extends React.Component{
     constructor(props) {
         super(props);
-
     }
 
     color(){
         let val = Math.random() *10;
         console.log(val);
         if( val >= 0 && val < 2.5) {
-            return ({color: "blue"})
+            return ({color: "blue"});
         } else if ( val >= 2.5 && val < 5){
-            return ({color: "purple"})
+            return ({color: "purple"});
         } else if( val >= 5 && val < 7.5) {
-            return ({color: "red"})
+            return ({color: "red"});
         } else {
-            return ({color:"yellow"})
+            return ({color:"yellow"});
         }
     }
 
-    next() {
+    // next() {
 
-    }
+    // send_new_user() {
+    //     axios
+    //     .get('http://localhost:4001/movieRouter/bAll')
+    //     .then(response => {
+    //       // Update the books state
+    //       console.log(response.data);
+    //       console.log(response);
+    //     })
+    //     .catch(error => console.error(`There was an error retrieving the book list: ${error}`));
+    // }
 
 
     render() {
@@ -65,8 +74,8 @@ class Quiz extends React.Component{
                         <button type="submit" onClick={() => this.put}>Submit</button>
                     </div>
                 </form>
-        )
+        );
     }
 }
 
-export default Quiz
+export default Quiz;
