@@ -9,8 +9,11 @@ class EventForm extends React.Component {
             clubName: "",
             movieTitle: "",
             movieID: "",
-            date: "",
-            time: "",
+            month: "",
+            day:"",
+            year: "",
+            hour: "",
+            minute: "",
             eventDescription: ""
          });
 
@@ -19,15 +22,15 @@ class EventForm extends React.Component {
     }
 
     createNewEvent(event) {
-        var {clubName, movieTitle, movieID, date, time, eventDescription} = this.state;
+        var {clubName, movieTitle, movieID, month, day, year, hour, minute, eventDescription} = this.state;
         event.preventDefault();
         axios
             .post('http://localhost:4001/movieRouter/eCreate', {
                 clubName: clubName,
                 movieTitle: movieTitle,
                 movieID: movieID,
-                date: date,
-                time: time,
+                date: month + "/" + day  + "/" + year,
+                time: hour + ":" + minute,
                 eventDescription: eventDescription
             })
             .then(res => {
@@ -38,27 +41,15 @@ class EventForm extends React.Component {
             .catch(error => console.error(`Could not add event.`));
     }
 
-    handleChange(event){
-        if(event.target.name === "month") {
-            this.setState({[this.state.date]: event.target.value});
-        } else if (event.target.name === "day") {
-            this.setState({[this.state.date]: this.state.date + "/" + event.target.value + "/"});
-        } else if (event.target.name === "year") {
-            this.setState({[this.state.date]: this.state.date.concat(event.target.value)});
-        } else if (event.target.name === "hour") {
-            this.setState({[this.state.time]: event.target.value});
-        } else if (event.target.name === "minute") {
-            this.setState({[this.state.time]: this.state.date.concat(":" + event.target.value)});
-        } else {
-            this.setState({[event.target.name]: event.target.value});
-        }
+    handleChange(event, prevState){
+        this.setState({[event.target.name]: event.target.value});
         console.log(this.state);
     }
 
     render() {
         return(
             <div class="featurebox">
-                    <form onSubmit={this.createNewUser} className={"Event-form"}>
+                    <form onSubmit={this.createNewEvent} className={"Event-form"}>
                     <div className="AddEventForm" style={{display:'block'}}>
                         Club name:
                         <input type ="text" name="clubName" value={this.state.clubName}  onChange={this.handleChange}/>
@@ -71,16 +62,17 @@ class EventForm extends React.Component {
                         Date:
                         <br></br>
                         Month:
-                        <input type ="text" name="month" value={this.state.date}  onChange={this.handleChange}/>
+                        <input type ="text" name="month" value={this.state.month}  onChange={this.handleChange}/>
                         Day:
-                        <input type ="text" name="day" value={this.state.date}  onChange={this.handleChange}/>
+                        <input type ="text" name="day" value={this.state.day}  onChange={this.handleChange}/>
                         Year:
-                        <input type ="text" name="year" value={this.state.date}  onChange={this.handleChange}/>
+                        <input type ="text" name="year" value={this.state.year}  onChange={this.handleChange}/>
                         
                         <br></br>
                         Time:
-                        <input type ="text" name="hour" value={this.state.time}  onChange={this.handleChange}/>
-                        <input type ="text" name="minute" value={this.state.time}  onChange={this.handleChange}/>
+                        <input type ="text" name="hour" value={this.state.hour}  onChange={this.handleChange}/>
+                        :
+                        <input type ="text" name="minute" value={this.state.minute}  onChange={this.handleChange}/>
                         
                         <br></br>
                         Event Description:

@@ -230,13 +230,15 @@ knex
 }
 
 
+
+
 // users !!!!!!!!!!
 
 exports.usersAll = async (req, res) => {
 // Get all books from database
 knex
   .select('*') // select all records
-  .from('user') // from 'books' table
+  .from('userInfo') // from 'books' table
   .then(userData => {
     // Send books extracted from database in response
     res.json(userData)
@@ -291,7 +293,7 @@ exports.usersReset = async (req, res) => {
 // Remove all books from database
 knex
   .select('*') // select all records
-  .from('user') // from 'books' table
+  .from('userInfo') // from 'books' table
   .truncate() // remove the selection
   .then(() => {
     // Send a success message in response
@@ -322,7 +324,7 @@ knex
 // Create new event
 exports.eventsCreate = async (req, res) => {
 // Add new book to database
-knex('events')
+knex("events")
   .insert({ // insert new record, a book
     'clubName': req.body.clubName,
     'movieTitle': req.body.movieTitle,
@@ -333,11 +335,11 @@ knex('events')
   })
   .then(() => {
     // Send a success message in response
-    res.json({ message: `Book \'${req.body.title}\' by ${req.body.author} created.` })
+    res.json({ message: `Event by ${req.body.clubName} created.` })
   })
   .catch(err => {
     // Send a error message in response
-    res.json({ message: `There was an error creating ${req.body.title} book: ${err}` })
+    res.json({ message: `There was an error creating ${req.body.clubName} event: ${err}` })
   })
 }
 
