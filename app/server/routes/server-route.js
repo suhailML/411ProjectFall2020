@@ -57,7 +57,10 @@ router.post('/rwCreate', movieRoutes.rwCreate);
 router.put('/rwDelete', movieRoutes.rwDelete);
 router.put('/rwReset', movieRoutes.rwReset);
 
-router.post('/tableSpecificSearch', movieRoutes.tableSpecificSearch);
+//trendingWest
+router.post('/twAll', movieRoutes.trendingWestAll);
+router.post('/twCreate', movieRoutes.trendingWestCreate);
+
 
 // Export router
 module.exports = router;

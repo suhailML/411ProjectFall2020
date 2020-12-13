@@ -305,6 +305,8 @@ knex
   })
 }
 
+
+
 // events !!!!!!!!!!
 
 exports.eventsAll = async (req, res) => {
@@ -385,65 +387,57 @@ exports.trendingWestAll = async (req, res) => {
   knex
     .select('*') // select all records
     .from('trendingWest') // from 'books' table
-    .then(userData => {
+    .then(trendingWest => {
       // Send books extracted from database in response
-      res.json(userData)
+      res.json(trendingWest)
     })
     .catch(err => {
       // Send a error message in response
       res.json({ message: `There was an error retrieving events: ${err}` })
     })
   }
-  // // Create new event
-  // exports.eventsCreate = async (req, res) => {
-  // // Add new book to database
-  // knex("events")
-  //   .insert({ // insert new record, a book
-  //     'movieID': req.body.clubName,
-  //     'movieTitle': req.body.movieTitle,
-  //     'n': req.body.movieID,
-  //     'date': req.body.date,
-  //     'time': req.body.time,
-  //     'eventDescription':req.body.eventDescription
+
+  // Create new event
+  exports.trendingWestCreate = async (req, res) => {
+  // Add new book to database
+  knex("trendingWest")
+    .insert({ // insert new record, a book
+      'mediaID': req.body.mediaID,
+      'mediaTitle': req.body.mediaTitle,
+      'mediaType': req.body.mediaType,
+      'backdropPath': req.body.backdropPath,
+      'releaseDate': req.body.releaseDate,
+      'posterPath': req.body.posterPath,
+      // 'numSeasons': req.body.numSeasons,
+      // 'numEpisodes': req.body.numEpisodes,
+      'overview': req.body.overview,
+      'numWatches': req.body.numWatches
+    })
+    .then(() => {
+      // Send a success message in response
+      console.log(res);
+      res.json({ message: `Trending West created.` })
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error creating trending: ${err}` })
+    })
+  }
+
+  // exports.trendingWestCreate = async (req, res) => {
+  // knex("trendingWest")
+  //   .where('mediaID', '=', req.body.mediaID)
+  //   .increment({ 
+  //     numWatches: 1
   //   })
   //   .then(() => {
   //     // Send a success message in response
-  //     res.json({ message: `Event by ${req.body.clubName} created.` })
+  //     res.json({ message: `Trending West created.` })
   //   })
   //   .catch(err => {
   //     // Send a error message in response
-  //     res.json({ message: `There was an error creating ${req.body.clubName} event: ${err}` })
+  //     res.json({ message: `There was an error creating trending: ${err}` })
   //   })
   // }
   
-  // exports.eventsDelete = async (req, res) => {
-  // // Find specific book in the database and remove it
-  // knex('events')
-  //   .where('id', req.body.id) // find correct record based on id
-  //   .del() // delete the record
-  //   .then(() => {
-  //     // Send a success message in response
-  //     res.json({ message: `Event ${req.body.id} deleted.` })
-  //   })
-  //   .catch(err => {
-  //     // Send a error message in response
-  //     res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` })
-  //   })
-  // }
-  
-  // // Remove all books on the list
-  // exports.eventsReset = async (req, res) => {
-  // // Remove all books from database
-  // knex
-  //   .select('*') // select all records
-  //   .from('events') // from 'books' table
-  //   .truncate() // remove the selection
-  //   .then(() => {
-  //     // Send a success message in response
-  //     res.json({ message: 'Events list cleared.' })
-  //   })
-  //   .catch(err => {
-  //     // Send a error message in response
-  //     res.json({ message: `There was an error resetting Event list: ${err}.` })
-  //   })
-  // }
+

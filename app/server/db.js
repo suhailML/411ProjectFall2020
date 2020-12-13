@@ -175,7 +175,6 @@ knex.schema
               table.string('firstName')
               table.string('lastName')
               table.string('email')
-              table.string('birthdayDate')
               table.string('userName')
               table.string('locality')
               table.string('year')
@@ -200,6 +199,37 @@ knex.schema
           console.error(`There was an error setting up the database: ${error}`)
         })
 
+      knex.schema
+      // Make sure no "books" table exists
+      // before trying to create new
+      .hasTable('trendingWest')
+        .then((exists) => {
+          if (!exists) {
+            // If no "books" table exists
+            // create new, with "id", "author", "title",
+            // "pubDate" and "rating" columns
+            // and use "id" as a primary identification
+            // and increment "id" with every new record (book)
+            return knex.schema.createTable('trendingWest', (table)  => {
+              table.increments('id').primary()
+            })
+            .then(() => {
+              // Log success message
+              console.log('Table \'trendingWest\' created')
+            })
+            .catch((error) => {
+              console.log(error);
+              console.error(`There was an error creating table: ${error}`)
+            })
+          }
+        })
+        .then(() => {
+          // Log success message
+          console.log('done')
+        })
+        .catch((error) => {
+          console.error(`There was an error setting up the database: ${error}`)
+        })
 
 // Just for debugging purposes:
 // Log all data in "books" table
