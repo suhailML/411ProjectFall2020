@@ -249,29 +249,31 @@ knex
 // Create new book
 exports.usersCreate = async (req, res) => {
 // Add new book to database
-  knex('events')
-  .insert({ // insert new record, a book
-    'name': req.body.name,
+knex('userInfo')
+  .insert({ // insert new record, a user
+    'firstName': req.body.firstName,
+    'lastName': req.body.lastName,
     'email': req.body.email,
     'birthdayDate': req.body.birthdayDate,
     'userName': req.body.userName,
     'locality': req.body.locality,
+    'year': req.body.year,
     'clubAffiliations':req.body.clubAffiliations,
     'watchedMovies': req.body.watchedMovies
   })
   .then(() => {
     // Send a success message in response
-    res.json({ message: `User \'${req.body.name}\' created.` })
+    res.json({ message: `User ${req.body.firstName} created.` })
   })
   .catch(err => {
     // Send a error message in response
-    res.json({ message: `There was an error creating ${req.body.name}: ${err}` })
+    res.json({ message: `There was an error creating ${req.body.firstName}: ${err}` })
   })
 }
 
 exports.usersDelete = async (req, res) => {
 // Find specific book in the database and remove it
-knex('user')
+knex
   .where('id', req.body.id) // find correct record based on id
   .del() // delete the record
   .then(() => {

@@ -22,10 +22,10 @@ class Search extends React.Component {
 
         // Search results can be one of: tv, movie, or person
         search_results.forEach(result => {
-            if (result.media_type === 'tv' && result.poster_path != undefined) {
+            if (result.media_type === 'tv' && result.poster_path !== undefined) {
                 tv_results.push(result);
 
-            } else if (result.media_type === 'movie' && result.poster_path != undefined) {
+            } else if (result.media_type === 'movie' && result.poster_path !== undefined) {
                 movie_results.push(result);
             } 
         });

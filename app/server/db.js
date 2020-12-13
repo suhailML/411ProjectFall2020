@@ -208,11 +208,13 @@ knex.schema
                 // and increment "id" with every new record (book)
                 return knex.schema.createTable('userInfo', (table)  => {
                   table.increments('id').primary()
-                  table.string('name')
+                  table.string('firstName')
+                  table.string('lastName')
                   table.string('email')
                   table.string('birthdayDate')
                   table.string('userName')
                   table.string('locality')
+                  table.string('year')
                   table.string('clubAffiliations')
                   table.string('watchedMovies')
                 })
@@ -221,6 +223,7 @@ knex.schema
                   console.log('Table \'userInfo\' created')
                 })
                 .catch((error) => {
+                  console.log(error);
                   console.error(`There was an error creating table: ${error}`)
                 })
               }

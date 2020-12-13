@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import { LanguageServiceMode } from 'typescript';
 
 class Quiz extends React.Component{
     constructor(props) {
@@ -9,6 +10,7 @@ class Quiz extends React.Component{
         this.state = ({
             firstName: "",
             lastName: "",
+            userName: "",
             campusLocation: "",
             year: ""
         });
@@ -34,20 +36,29 @@ class Quiz extends React.Component{
     // next() {
 
     createNewUser(event) {
-        var {firstName, lastName, campusLocation, year} = this.state;
-        //event.preventDefault();
+        var {firstName, lastName, userName, campusLocation, year} = this.state;
+        event.preventDefault();
         axios
-        .create('http://localhost:4001/movieRouter/bAll')
-        .then(response => {
-          // Update the books state
-          console.log(response.data);
-          console.log(response);
-        })
-        .catch(error => console.error(`There was an error retrieving the book list: ${error}`));
+            .post('http://localhost:4001/movieRouter/uCreate', {
+                firstName: firstName,
+                lastName: lastName,
+                email: 'email',
+                birthdayDate: "DOB",
+                userName: userName,
+                locality: campusLocation,
+                year: year,
+                clubAffiliations: "club",
+                watchedMovies: "movies"
+            })
+            .then(res => {
+              console.log(res.data);
+              // Fetch all books to refresh
+              // the books on the bookshelf list
+            })
+            .catch(error => console.error(`could not do search`));
     }
 
     handleChange(event){
-        console.log(event.target.value);
         this.setState({[event.target.name]: event.target.value});
     }
 
@@ -65,6 +76,9 @@ class Quiz extends React.Component{
             
                     <label for="lastname">Last name:</label>
                     <input type ="text" name="lastName" value={this.state.lastName}  onChange={this.handleChange}/>
+
+                    <label for="username">Username:</label>
+                    <input type ="text" name="userName" value={this.state.userName}  onChange={this.handleChange}/>
                     
                     <label for="campuslocation">Location on Campus:</label>
                     <select name="campusLocation" value={this.state.campusLocation} onChange={this.handleChange}>
