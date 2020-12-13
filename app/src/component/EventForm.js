@@ -7,8 +7,8 @@ class EventForm extends React.Component {
 
         this.state = ({
             clubName: "",
-            movieTitle: "",
-            movieID: "",
+            mediaTitle: "",
+            mediaID: "",
             month: "",
             day:"",
             year: "",
@@ -22,13 +22,13 @@ class EventForm extends React.Component {
     }
 
     createNewEvent(event) {
-        var {clubName, movieTitle, movieID, month, day, year, hour, minute, eventDescription} = this.state;
+        var {clubName, mediaTitle, mediaID, month, day, year, hour, minute, eventDescription} = this.state;
         event.preventDefault();
         axios
             .post('http://localhost:4001/movieRouter/eCreate', {
                 clubName: clubName,
-                movieTitle: movieTitle,
-                movieID: movieID,
+                mediaTitle: mediaTitle,
+                mediaID: mediaID,
                 date: month + "/" + day  + "/" + year,
                 time: hour + ":" + minute,
                 eventDescription: eventDescription
@@ -43,7 +43,6 @@ class EventForm extends React.Component {
 
     handleChange(event, prevState){
         this.setState({[event.target.name]: event.target.value});
-        console.log(this.state);
     }
 
     render() {
@@ -56,7 +55,7 @@ class EventForm extends React.Component {
                 
                         <br></br>
                         Movie Title:
-                        <input type ="text" name="movieTitle" value={this.state.movieTitle}  onChange={this.handleChange}/>
+                        <input type ="text" name="mediaTitle" value={this.state.mediaTitle}  onChange={this.handleChange}/>
 
                         <br></br>
                         Date:

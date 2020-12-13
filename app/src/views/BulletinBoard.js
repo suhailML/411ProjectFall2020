@@ -27,7 +27,6 @@ class BulletinBoard extends React.Component {
         axios
             .get('http://localhost:4001/movieRouter/eAll')
             .then(res => {
-              console.log(res.data);
               this.setState({
                  events: res.data, 
               });
@@ -40,7 +39,6 @@ class BulletinBoard extends React.Component {
     render() {
         var events = this.state.events;
 
-        console.log(events);
         return (
             <div className="featurebox">
                 <p>Club Events</p>

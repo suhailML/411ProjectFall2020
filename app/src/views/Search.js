@@ -1,6 +1,7 @@
 import React from 'react';
 import Movie from '../component/Movie';
 import Show from '../component/Show';
+import axios from 'axios';
 //import PropTypes from 'prop-types';
 
 class Search extends React.Component {
@@ -15,6 +16,7 @@ class Search extends React.Component {
         };
     }
 
+
     parseSearchResults(search_results) {
         var tv_results = [];
         var user_results = [];
@@ -22,6 +24,7 @@ class Search extends React.Component {
         console.log(search_results);
 
         // make getAll call to database to get user info
+        
 
         // Search results can be one of: tv, movie, or person
         search_results.forEach(result => {

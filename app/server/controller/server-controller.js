@@ -314,21 +314,23 @@ knex
   .from('events') // from 'books' table
   .then(userData => {
     // Send books extracted from database in response
-    res.json(userData)
+    res.json(userData);
   })
   .catch(err => {
     // Send a error message in response
-    res.json({ message: `There was an error retrieving books: ${err}` })
+    res.json({ message: `There was an error retrieving event: ${err}` })
   })
 }
+
+
 // Create new event
 exports.eventsCreate = async (req, res) => {
 // Add new book to database
 knex("events")
   .insert({ // insert new record, a book
     'clubName': req.body.clubName,
-    'movieTitle': req.body.movieTitle,
-    'movieID': req.body.movieID,
+    'mediaTitle': req.body.mediaTitle,
+    'mediaID': req.body.mediaID,
     'date': req.body.date,
     'time': req.body.time,
     'eventDescription':req.body.eventDescription
@@ -358,7 +360,7 @@ knex('events')
   })
 }
 
-// Remove all books on the list
+// Remove all events on the list
 exports.eventsReset = async (req, res) => {
 // Remove all books from database
 knex
@@ -382,7 +384,7 @@ exports.trendingWestAll = async (req, res) => {
   // Get all events from database
   knex
     .select('*') // select all records
-    .from('events') // from 'books' table
+    .from('trendingWest') // from 'books' table
     .then(userData => {
       // Send books extracted from database in response
       res.json(userData)
@@ -392,129 +394,56 @@ exports.trendingWestAll = async (req, res) => {
       res.json({ message: `There was an error retrieving events: ${err}` })
     })
   }
-  // Create new event
-  exports.eventsCreate = async (req, res) => {
-  // Add new book to database
-  knex("events")
-    .insert({ // insert new record, a book
-      'movieID': req.body.clubName,
-      'movieTitle': req.body.movieTitle,
-      'n': req.body.movieID,
-      'date': req.body.date,
-      'time': req.body.time,
-      'eventDescription':req.body.eventDescription
-    })
-    .then(() => {
-      // Send a success message in response
-      res.json({ message: `Event by ${req.body.clubName} created.` })
-    })
-    .catch(err => {
-      // Send a error message in response
-      res.json({ message: `There was an error creating ${req.body.clubName} event: ${err}` })
-    })
-  }
+  // // Create new event
+  // exports.eventsCreate = async (req, res) => {
+  // // Add new book to database
+  // knex("events")
+  //   .insert({ // insert new record, a book
+  //     'movieID': req.body.clubName,
+  //     'movieTitle': req.body.movieTitle,
+  //     'n': req.body.movieID,
+  //     'date': req.body.date,
+  //     'time': req.body.time,
+  //     'eventDescription':req.body.eventDescription
+  //   })
+  //   .then(() => {
+  //     // Send a success message in response
+  //     res.json({ message: `Event by ${req.body.clubName} created.` })
+  //   })
+  //   .catch(err => {
+  //     // Send a error message in response
+  //     res.json({ message: `There was an error creating ${req.body.clubName} event: ${err}` })
+  //   })
+  // }
   
-  exports.eventsDelete = async (req, res) => {
-  // Find specific book in the database and remove it
-  knex('events')
-    .where('id', req.body.id) // find correct record based on id
-    .del() // delete the record
-    .then(() => {
-      // Send a success message in response
-      res.json({ message: `Event ${req.body.id} deleted.` })
-    })
-    .catch(err => {
-      // Send a error message in response
-      res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` })
-    })
-  }
+  // exports.eventsDelete = async (req, res) => {
+  // // Find specific book in the database and remove it
+  // knex('events')
+  //   .where('id', req.body.id) // find correct record based on id
+  //   .del() // delete the record
+  //   .then(() => {
+  //     // Send a success message in response
+  //     res.json({ message: `Event ${req.body.id} deleted.` })
+  //   })
+  //   .catch(err => {
+  //     // Send a error message in response
+  //     res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` })
+  //   })
+  // }
   
-  // Remove all books on the list
-  exports.eventsReset = async (req, res) => {
-  // Remove all books from database
-  knex
-    .select('*') // select all records
-    .from('events') // from 'books' table
-    .truncate() // remove the selection
-    .then(() => {
-      // Send a success message in response
-      res.json({ message: 'Events list cleared.' })
-    })
-    .catch(err => {
-      // Send a error message in response
-      res.json({ message: `There was an error resetting Event list: ${err}.` })
-    })
-  }
-  
-
-
-// OLD
-
-
-exports.booksAll = async (req, res) => {
-// Get all books from database
-  knex
-  .select('*') // select all records
-  .from('books') // from 'books' table
-  .then(userData => {
-    // Send books extracted from database in response
-    res.json(userData)
-  })
-  .catch(err => {
-    // Send a error message in response
-    res.json({ message: `There was an error retrieving books: ${err}` })
-  })
-}
-
-exports.booksCreate = async (req, res) => {
-// Add new book to database
-  knex('books')
-  .insert({ // insert new record, a book
-    'author': req.body.author,
-    'title': req.body.title,
-    'pubDate': req.body.pubDate,
-    'rating': req.body.rating
-  })
-  .then(() => {
-    // Send a success message in response
-    res.json({ message: `Book \'${req.body.title}\' by ${req.body.author} created.` })
-  })
-  .catch(err => {
-    // Send a error message in response
-    res.json({ message: `There was an error creating ${req.body.title} book: ${err}` })
-  })
-}
-
-// Remove specific book
-
-exports.booksDelete = async (req, res) => {
-// Find specific book in the database and remove it
-knex('books')
-  .where('id', req.body.id) // find correct record based on id
-  .del() // delete the record
-  .then(() => {
-    // Send a success message in response
-    res.json({ message: `Book ${req.body.id} deleted.` })
-  })
-  .catch(err => {
-    // Send a error message in response
-    res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` })
-  })
-}
-
-// Remove all books on the list
-exports.booksReset = async (req, res) => {
-// Remove all books from database
-knex
-  .select('*') // select all records
-  .from('books') // from 'books' table
-  .truncate() // remove the selection
-  .then(() => {
-    // Send a success message in response
-    res.json({ message: 'Book list cleared.' })
-  })
-  .catch(err => {
-    // Send a error message in response
-    res.json({ message: `There was an error resetting book list: ${err}.` })
-  })
-}
+  // // Remove all books on the list
+  // exports.eventsReset = async (req, res) => {
+  // // Remove all books from database
+  // knex
+  //   .select('*') // select all records
+  //   .from('events') // from 'books' table
+  //   .truncate() // remove the selection
+  //   .then(() => {
+  //     // Send a success message in response
+  //     res.json({ message: 'Events list cleared.' })
+  //   })
+  //   .catch(err => {
+  //     // Send a error message in response
+  //     res.json({ message: `There was an error resetting Event list: ${err}.` })
+  //   })
+  // }
