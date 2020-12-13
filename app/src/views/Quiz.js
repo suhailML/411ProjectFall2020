@@ -5,75 +5,87 @@ import axios from 'axios';
 class Quiz extends React.Component{
     constructor(props) {
         super(props);
+
+        this.state = ({
+            firstName: "",
+            lastName: "",
+            campusLocation: "",
+            year: ""
+        });
+
+        this.createNewUser = this.createNewUser.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    color(){
-        let val = Math.random() *10;
-        console.log(val);
-        if( val >= 0 && val < 2.5) {
-            return ({color: "blue"});
-        } else if ( val >= 2.5 && val < 5){
-            return ({color: "purple"});
-        } else if( val >= 5 && val < 7.5) {
-            return ({color: "red"});
-        } else {
-            return ({color:"yellow"});
-        }
-    }
+    // color(){
+    //     let val = Math.random() *10;
+    //     console.log(val);
+    //     if( val >= 0 && val < 2.5) {
+    //         return ({color: "blue"});
+    //     } else if ( val >= 2.5 && val < 5){
+    //         return ({color: "purple"});
+    //     } else if( val >= 5 && val < 7.5) {
+    //         return ({color: "red"});
+    //     } else {
+    //         return ({color:"yellow"});
+    //     }
+    // }
 
     // next() {
 
-    // send_new_user() {
-    //     axios
-    //     .get('http://localhost:4001/movieRouter/bAll')
-    //     .then(response => {
-    //       // Update the books state
-    //       console.log(response.data);
-    //       console.log(response);
-    //     })
-    //     .catch(error => console.error(`There was an error retrieving the book list: ${error}`));
-    // }
+    createNewUser(event) {
+        var {firstName, lastName, campusLocation, year} = this.state;
+        //event.preventDefault();
+        axios
+        .create('http://localhost:4001/movieRouter/bAll')
+        .then(response => {
+          // Update the books state
+          console.log(response.data);
+          console.log(response);
+        })
+        .catch(error => console.error(`There was an error retrieving the book list: ${error}`));
+    }
 
+    handleChange(event){
+        console.log(event.target.value);
+        this.setState({[event.target.name]: event.target.value});
+    }
 
     render() {
-
         return(
+            <form onSubmit={this.createNewUser} className={"quiz-response"}>
+                <div className="Quiz">
+                    
+                    {/* <div className="option" style={this.color()} onClick={() => this.next}><p>West</p></div>
+                    <div className="option" style={this.color()}><p>East</p></div>
+                    <div className="option" style={this.color()}><p>South</p></div>
+                    <div className="option" style={this.color()}><p>Medical Campus</p></div> */}
+                    <label for="firstName">First name:</label>
+                    <input type ="text" name="firstName" value={this.state.firstName}  onChange={this.handleChange}/>
+            
+                    <label for="lastname">Last name:</label>
+                    <input type ="text" name="lastName" value={this.state.lastName}  onChange={this.handleChange}/>
+                    
+                    <label for="campuslocation">Location on Campus:</label>
+                    <select name="campusLocation" value={this.state.campusLocation} onChange={this.handleChange}>
+                        <option value="West">West</option>
+                        <option value="East">East</option>
+                        <option value="Central">Central</option>
+                        <option value="South">South</option>
+                        <option value="Med">Med</option>
+                    </select>
 
-                <form action="" className="quiz-response">
-                    <div className="Quiz">
-                        <p>
-                            What part of campus are you on
-                        </p>
-
-                        <div className="option" style={this.color()} onClick={() => this.next}><p>West</p></div>
-                        <div className="option" style={this.color()}><p>East</p></div>
-                        <div className="option" style={this.color()}><p>South</p></div>
-                        <div className="option" style={this.color()}><p>Medical Campus</p></div>
-
-                        <label for="firstname">Username</label>
-                        <input type ="text" className="last-name-response" id="first-name-responose"/>
-                
-                        <label for="lastname">Last name:</label>
-                        <input type ="text" className="last-name-response" id="last-name-responose"/>
-                        
-                        <label for="campuslocation">Location on campus:</label>
-                        <select className="campus-location" id="campus-location">
-                            <option value="West">West</option>
-                            <option value="East">East</option>
-                            <option value="South">South</option>
-                        </select>
-    
-                        <label for="Year">Year:</label>
-                        <select className="year" id="year">
-                            <option value="Freshman">Freshman</option>
-                            <option value="Sophomore">Sophomore</option>
-                            <option value="Junior">Junior</option>
-                            <option value="Senior">Senior</option>
-                        </select>
-                        
-                        <button type="submit" onClick={() => this.put}>Submit</button>
-                    </div>
-                </form>
+                    <label for="year">Year:</label>
+                    <select name="year" value={this.state.year} onChange={this.handleChange}>
+                        <option value="1">Freshman</option>
+                        <option value="2">Sophomore</option>
+                        <option value="3">Junior</option>
+                        <option value="4">Senior</option>
+                    </select>
+                    
+                    <input type="submit"/>
+                </div>
+            </form>
         );
     }
 }

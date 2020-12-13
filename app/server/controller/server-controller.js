@@ -1,9 +1,9 @@
 // Import database
-const knex = require('./../db')
+const knex = require('./../db');
 
 // Retrieve all books
 
-console.log("IN THE SERVER CONT")
+console.log("IN THE SERVER CONT");
 
 
 exports.tableSpecificSearch = async (req, res) => {
@@ -14,12 +14,12 @@ knex
   .from(req.body.table) // from 'books' table
   .then(userData => {
     // Send books extracted from database in response
-    res.json(userData)
+    res.json(userData);
   })
   .catch(err => {
     // Send a error message in response
-    res.json({ message: `There was an error retrieving genres: ${err}` })
-  })
+    res.json({ message: `There was an error retrieving genres: ${err}` });
+  });
 }
 
 // recentlyWatched
@@ -31,12 +31,12 @@ exports.rwAll = async (req, res) => {
     .from('recentlyWatched') // from 'books' table
     .then(userData => {
       // Send books extracted from database in response
-      res.json(userData)
+      res.json(userData);
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error retrieving genres: ${err}` })
-    })
+      res.json({ message: `There was an error retrieving genres: ${err}` });
+    });
 }
 // Create new book
 exports.rwCreate = async (req, res) => {
@@ -52,12 +52,12 @@ exports.rwCreate = async (req, res) => {
     })
     .then(() => {
       // Send a success message in response
-      res.json({ message: `User \'${req.body.genreName}\' created.` })
+      res.json({ message: `User \'${req.body.genreName}\' created.` });
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error creating ${req.body.movieTitle}: ${err}` })
-    })
+      res.json({ message: `There was an error creating ${req.body.movieTitle}: ${err}` });
+    });
 }
 
 exports.rwDelete = async (req, res) => {
@@ -67,12 +67,12 @@ exports.rwDelete = async (req, res) => {
     .del() // delete the record
     .then(() => {
       // Send a success message in response
-      res.json({ message: `Event ${req.body.id} deleted.` })
+      res.json({ message: `Event ${req.body.id} deleted.` });
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` })
-    })
+      res.json({ message: `There was an error deleting ${req.body.id} book: ${err}` });
+    });
 }
 
 // Remove all books on the list
@@ -84,12 +84,12 @@ exports.rwReset = async (req, res) => {
     .truncate() // remove the selection
     .then(() => {
       // Send a success message in response
-      res.json({ message: 'Events list cleared.' })
+      res.json({ message: 'Events list cleared.' });
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error resetting Event list: ${err}.` })
-    })
+      res.json({ message: `There was an error resetting Event list: ${err}.` });
+    });
 }
 
 // movies
@@ -101,12 +101,12 @@ knex
   .from('movies') // from 'books' table
   .then(userData => {
     // Send books extracted from database in response
-    res.json(userData)
+    res.json(userData);
   })
   .catch(err => {
     // Send a error message in response
-    res.json({ message: `There was an error retrieving genres: ${err}` })
-  })
+    res.json({ message: `There was an error retrieving genres: ${err}` });
+  });
 }
 // Create new book
 exports.movieCreate = async (req, res) => {
