@@ -32,6 +32,7 @@ class BulletinBoard extends React.Component {
             <div className="featurebox">
                 <p>Club Events</p>
                 <div className="feature">
+                
                 <EventForm/>
                 {/* once you get the trend movies as an array from compDidMount
                 create a Movie Component */}

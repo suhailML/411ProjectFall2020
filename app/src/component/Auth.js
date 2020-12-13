@@ -1,4 +1,4 @@
-import React from 'react'
+import React from 'react';
 import { Redirect } from 'react-router-dom';
 
 /*i think HOC's or the export default expects a only a function 
@@ -8,7 +8,7 @@ const Auth = (InnerComponent) => {
     const authComponent = () => {
         /* change auth to really check login status*/
         const auth = true;
-        return (auth ? <InnerComponent/> : <Redirect to="/login"/>)
+        return (auth ? <InnerComponent/> : <Redirect to="/login"/>);
     }
     return authComponent
 }
@@ -29,4 +29,4 @@ const Auth = (InnerComponent) => {
 // }
 
 
-export default Auth
+export default Auth;

@@ -18,9 +18,9 @@ class Event extends React.Component {
 
     attending(prevState) {
         this.setState({
-            rsvpd: true,
+            rsvp: true,
         });
-        console.log("RSVPed to event");
+        console.log("rsvp:" + this.state.rsvp);
     }
     
     render() {
