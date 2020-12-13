@@ -95,6 +95,7 @@ class LatestMovies extends React.Component {
         //   handleEventCreate();
     }
 
+    
     handleErr(err) {
         console.warn(err);
         let resp = new Response(

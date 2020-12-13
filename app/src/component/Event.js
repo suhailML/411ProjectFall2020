@@ -6,17 +6,19 @@ class Event extends React.Component {
         super(props);
 
         this.state = {
+            id: this.props.id,
             clubName: this.props.clubName,
-            title: this.props.title,
-            start_time: PropTypes.string, 
-            end_time: PropTypes.string,
+            mediaTitle: this.props.mediaTitle,
+            mediaID: this.props.mediaID,
+            date: this.props.date,
+            time: this.props.time,
             rsvp: false
         };
 
         this.attending = this.attending.bind(this);
     }
 
-    attending(prevState) {
+    attending() {
         this.setState({
             rsvp: true,
         });
@@ -31,11 +33,13 @@ class Event extends React.Component {
                     <br></br>
                     {this.props.clubName}
                     <br></br>
-                    {this.props.title}
+                    {this.props.mediaTitle}
                     <br></br>
-                    {this.props.start_time}
+                    {this.props.time}
                     <br></br>
-                    {this.props.end_time}
+                    {this.props.date}
+                    <br></br>
+                    {this.props.eventDescription}
                 </div>
             </div> 
         )   
