@@ -307,6 +307,57 @@ knex
 
 
 
+// friendlist !!!!!!!!!!!!!
+
+exports.friends = async (req, res) => {
+  // Get all books from database
+  knex
+    .select('*') // select all records
+    .from('friendList') // from 'books' table
+    .innerJoin('friend', 'friend.id', '=', req.body.id)
+    .then(userData => {
+      // Send friends extracted from database in response
+      res.json(userData)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retreving friends list: ${err}` })
+    })
+}
+// add friend
+exports.addfriend = async (req, res) => {
+  // Add new book to database
+  knex('friendList')
+    .insert({ // insert new record, a book
+      'user': req.body.userID,
+      'friend': req.body.friendID,
+    })
+    .then(() => {
+      // Send a success message in response
+      res.json({ message: `User \'${req.body.userID}\' added \'${req.body.friendID}\' as friend.` })
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error addind friend ${req.body.friendID}: ${err}` })
+    })
+}
+
+exports.deleteFriend = async (req, res) => {
+  // Find specific friend link in the database and remove it
+  knex('friendList')
+    .where(req.body.userID,req.body.friendID ) // find correct record based on ids
+    .del() // delete the record
+    .then(() => {
+      // Send a success message in response
+      res.json({ message: `User ${req.body.userID} removed ${req.body.friendID} as friend.` })
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error removing friend ${req.body.friendID}: ${err}` })
+    })
+}
+
+
 // events !!!!!!!!!!
 
 exports.eventsAll = async (req, res) => {
