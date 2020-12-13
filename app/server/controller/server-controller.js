@@ -398,20 +398,25 @@ exports.trendingWestAll = async (req, res) => {
   }
 
   // Create new event
-  exports.trendingWestCreate = async (req, res) => {
+exports.trendingWestCreate = async (req, res) => {
   // Add new book to database
   knex("trendingWest")
-    .insert({ // insert new record, a book
-      'mediaID': req.body.mediaID,
-      'mediaTitle': req.body.mediaTitle,
-      'mediaType': req.body.mediaType,
-      'backdropPath': req.body.backdropPath,
-      'releaseDate': req.body.releaseDate,
-      'posterPath': req.body.posterPath,
-      // 'numSeasons': req.body.numSeasons,
-      // 'numEpisodes': req.body.numEpisodes,
-      'overview': req.body.overview,
-      'numWatches': req.body.numWatches
+    .whereNotExists(function(){
+      this.insert({ // insert new record, a book
+        'mediaID': req.body.mediaID,
+        'mediaTitle': req.body.mediaTitle,
+        'mediaType': req.body.mediaType,
+        'backdropPath': req.body.backdropPath,
+        'releaseDate': req.body.releaseDate,
+        'posterPath': req.body.posterPath,
+        // 'numSeasons': req.body.numSeasons,
+        // 'numEpisodes': req.body.numEpisodes,
+        'overview': req.body.overview,
+        'numWatches': 1
+      }).whereRaw('mediaID = req.body.mediaID')
+    }).whereExists(function() {
+      this.increment({ numWatches: 1 })
+      .whereRaw('mediaID = req.body.mediaID')
     })
     .then(() => {
       // Send a success message in response
@@ -424,6 +429,33 @@ exports.trendingWestAll = async (req, res) => {
     })
   }
 
+exports.trendingWestCreate = async (req, res) => {
+    // var exists
+    // Add new book to database
+    knex("trendingWest")
+      
+      .insert({ // insert new record, a book
+        'mediaID': req.body.mediaID,
+        'mediaTitle': req.body.mediaTitle,
+        'mediaType': req.body.mediaType,
+        'backdropPath': req.body.backdropPath,
+        'releaseDate': req.body.releaseDate,
+        'posterPath': req.body.posterPath,
+        // 'numSeasons': req.body.numSeasons,
+        // 'numEpisodes': req.body.numEpisodes,
+        'overview': req.body.overview,
+        'numWatches': req.body.numWatches
+      })
+      .then(() => {
+        // Send a success message in response
+        console.log(res);
+        res.json({ message: `Trending West created.` })
+      })
+      .catch(err => {
+        // Send a error message in response
+        res.json({ message: `There was an error creating trending: ${err}` })
+      })
+    }
   // exports.trendingWestCreate = async (req, res) => {
   // knex("trendingWest")
   //   .where('mediaID', '=', req.body.mediaID)

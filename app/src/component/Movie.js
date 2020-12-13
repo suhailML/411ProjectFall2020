@@ -44,6 +44,7 @@ class Movie extends React.Component {
             })
             .catch(error => console.error(`didnt work fuck`));
         }
+        this.setState({watched: true})
     }
 
     handleErr(err) {
