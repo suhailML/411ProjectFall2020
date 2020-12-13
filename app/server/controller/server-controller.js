@@ -5,6 +5,25 @@ const knex = require('./../db')
 
 console.log("IN THE SERVER CONT")
 
+
+exports.tableSpecificSearch = async (req, res) => {
+  // Get all books from database
+  knex
+    .select('*') // select all records
+    .where(req.body.column, req.body.value)
+    .from(req.body.table) // from 'books' table
+    .then(userData => {
+      // Send books extracted from database in response
+      res.json(userData)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving genres: ${err}` })
+    })
+}
+
+// recentlyWatched
+
 exports.rwAll = async (req, res) => {
     // Get all books from database
     knex

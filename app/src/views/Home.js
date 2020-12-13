@@ -6,7 +6,7 @@ const Home = () => {
         <div className="App">
             <div>
                 the home page! :D hopefully a lil aniamtion
-                <Link to="/home/chinwe"> Login button</Link>
+                <Link to="/login"> Login button</Link>
             </div>
             <div>the sidepart for nagivation</div>
         </div>

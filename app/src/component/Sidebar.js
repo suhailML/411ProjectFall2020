@@ -15,7 +15,7 @@ class Sidebar extends React.Component {
             ({
                 friendExpand: !prev.friendExpand,
             })
-        )
+        );
     }
 
 
@@ -52,4 +52,4 @@ class Sidebar extends React.Component {
     }
 }
 
-export default Sidebar
+export default Sidebar;

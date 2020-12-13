@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 // TODO: make width of text the same as trendbox
 // TODO: style for onclick changes on function return, not let
 
-
 class Movie extends React.Component {
     constructor(props) {
         super(props);
@@ -18,20 +17,7 @@ class Movie extends React.Component {
             poster: "",
             runtime: 0,
             info: [],
-            expand: false
         };
-        this.expanded = this.expanded.bind(this)
-    }
-
-/* example of stateless components -> components that are functions (functional),
-they take props in a param and then you can access the keys*/
-    expanded() {
-        this.setState((prevState) => {
-        console.log(prevState)
-        return ({
-            expand: !prevState.expand
-        })
-    })
     }
 
     handleErr(err) {
@@ -64,20 +50,9 @@ they take props in a param and then you can access the keys*/
     }
 
     render() {
-
-        
-        let style =  this.state.expanded ? 
-        {
-            height: '10vw',
-            width: '10vw',
-            position: 'absolute'
-        } :
-        {
-            display: 'block'
-        }
         return (
             <div>
-                <div className="trend-moviebox" style={style}>
+                <div className="trend-moviebox">
                     <button onClick={this.expanded}> + </button>
                     <img src={this.state.poster} alt=""/>
                 </div>
@@ -90,6 +65,5 @@ they take props in a param and then you can access the keys*/
         );
     }
 }
-
-
-export default Movie
+export default Movie;
+ 
