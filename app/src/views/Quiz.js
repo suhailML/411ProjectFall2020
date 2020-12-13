@@ -88,6 +88,8 @@ class Quiz extends React.Component{
                     style={{ marginTop: '100px' }}
                     isSignedIn={true}
                 />
+                
+
                 <form onSubmit={this.createNewUser} className={"quiz-response"}>
                     <div className="Quiz">
                         

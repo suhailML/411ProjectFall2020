@@ -112,7 +112,6 @@ class LatestMovies extends React.Component {
             case "east":
             case "west":
             case "central":
-            case "med":
             case "south":
                 axios.get("http://localhost:4001/movieRouter/mAll")
                 .then(response => {

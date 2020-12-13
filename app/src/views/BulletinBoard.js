@@ -23,8 +23,6 @@ class BulletinBoard extends React.Component {
         return resp;
     }
 
-
-
     render() {
         var { events } = this.state;
 

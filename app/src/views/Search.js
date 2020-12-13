@@ -17,8 +17,11 @@ class Search extends React.Component {
 
     parseSearchResults(search_results) {
         var tv_results = [];
+        var user_results = [];
         var movie_results = [];
         console.log(search_results);
+
+        // make getAll call to database to get user info
 
         // Search results can be one of: tv, movie, or person
         search_results.forEach(result => {

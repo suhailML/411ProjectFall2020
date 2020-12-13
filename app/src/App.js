@@ -32,8 +32,6 @@ function App() {
             <LatestMovies type="west"/>
             <LatestMovies type="east"/>
             <LatestMovies type="south"/>
-            <Login />
-            <Logout />
           </Route>
 
           {/* the reason why you put component={component} is so that you can
