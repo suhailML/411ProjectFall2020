@@ -40,13 +40,13 @@ class Quiz extends React.Component{
     // next() {
 
     createNewUser(event) {
-        var {firstName, lastName, userName, campusLocation, year} = this.state;
+        var {firstName, lastName, userName, email, campusLocation, year} = this.state;
         event.preventDefault();
         axios
             .post('http://localhost:4001/movieRouter/uCreate', {
                 firstName: firstName,
                 lastName: lastName,
-                email: 'email',
+                email: email,
                 birthdayDate: "DOB",
                 userName: userName,
                 locality: campusLocation,
@@ -64,6 +64,7 @@ class Quiz extends React.Component{
 
     handleChange(event){
         this.setState({[event.target.name]: event.target.value});
+        console.log(this.state.firstName);
     }
 
     loginResults(res) {

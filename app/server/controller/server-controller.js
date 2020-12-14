@@ -458,6 +458,7 @@ exports.trendingWestAll = async (req, res) => {
 exports.trendingWestCreate = async (req, res) => {
 
   // Add new book to database
+  knex.raw()
   knex("trendingWest")
     .insert({
       'id': req.body.id,
@@ -471,7 +472,7 @@ exports.trendingWestCreate = async (req, res) => {
       'overview': req.body.overview,
       'num_views': 1
     })
-    .onConflict( 'id')
+    .onConflict('id')
     .merge({
       num_views: 4
     })
