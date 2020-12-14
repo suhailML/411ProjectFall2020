@@ -243,8 +243,8 @@ knex.schema
                   // and use "id" as a primary identification
                   // and increment "id" with every new record (book)
                   return knex.schema.createTable('friendList', (table)  => {
-                    table.integer('userID');
-                    table.integer('friendID');
+                    table.integer('userId');
+                    table.integer('friendId');
                     table.foreign('userId').references('userId').inTable('userInfo');
                     table.foreign('friendId').references('userId').inTable('userInfo');
                   })
