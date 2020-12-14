@@ -38,6 +38,8 @@ router.get('/uAll', movieRoutes.usersAll);
 router.post('/uCreate', movieRoutes.usersCreate);
 router.put('/uDelete', movieRoutes.usersDelete);
 router.put('/uReset', movieRoutes.usersReset);
+router.get('/uGet', movieRoutes.getUser);
+router.get('/uSearch', movieRoutes.searchUsers);
 
 //genre
 router.get('/gAll', movieRoutes.genreAll);
