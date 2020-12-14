@@ -1,10 +1,10 @@
 import './styles/App.scss';
-import { Route, Switch, Link, useRouteMatch } from 'react-router-dom'
+import { Route, Switch, Link, useRouteMatch } from 'react-router-dom';
 
 import LatestMovies from './views/LatestMovies';
 import Search from './views/Search';
 import Sidebar from './component/Sidebar';
-import Auth from './component/Auth'
+import Auth from './component/Auth';
 import {useParams} from 'react-router-dom';
 import friends from './fakedata/friends';
 import Login from './component/LoginC';
@@ -28,9 +28,10 @@ function App() {
         <Switch>
           <Route exact path={match.path}>
           <BulletinBoard/>
-            <LatestMovies type="trending"/>
+            <LatestMovies type="global"/>
             <LatestMovies type="west"/>
             <LatestMovies type="east"/>
+            <LatestMovies type="central"/>
             <LatestMovies type="south"/>
           </Route>
 
@@ -43,7 +44,7 @@ function App() {
         
         
         </div>
-        <Sidebar name={userid} friends={friends}/>
+        <Sidebar userID={userid} name={userid}/>
     </div>
   );
 }

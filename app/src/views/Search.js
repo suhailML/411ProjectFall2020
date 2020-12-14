@@ -2,9 +2,11 @@ import React from 'react';
 import Movie from '../component/Movie';
 import Show from '../component/Show';
 import axios from 'axios';
+import User from '../component/User';
 //import PropTypes from 'prop-types';
 
 class Search extends React.Component {
+
     constructor(props) {
         super(props);
         this.state = {
@@ -24,7 +26,15 @@ class Search extends React.Component {
         console.log(search_results);
 
         // make getAll call to database to get user info
-        
+        axios.get("http://localhost:4001/movieRouter/uAll")
+                .then(response => {
+                    // Update the books state
+                    this.setState({
+                        user_results: response.data
+                    });
+                    console.log(response);
+                    console.log(response.data);
+                  });
 
         // Search results can be one of: tv, movie, or person
         search_results.forEach(result => {
@@ -88,7 +98,6 @@ class Search extends React.Component {
             this.setState({
                 isLoaded: true,
                 search_results: json.results
-
             });
             this.parseSearchResults(json.results);
         })
@@ -99,7 +108,6 @@ class Search extends React.Component {
 
     render() {
         var { isLoaded, user_results, tv_results, movie_results} = this.state;
-
         
         if( !isLoaded ) {
             return (
@@ -121,6 +129,16 @@ class Search extends React.Component {
                     </form> */}
                     
                     <div className="featurebox">
+                        <p>Users</p>
+                        <div className="feature">
+                        {/* once you get the trend movies as an array from compDidMount
+                        create a Movie Component */}
+                        {user_results.length > 0 ? 
+                            user_results.map(user => 
+                                <User userID={user.id} userName={user.userName} firstName={user.firstName} lastName={user.lastName} />
+                            ) : <p>No Users :(</p>}
+                        </div>
+
                         <h5>Search results for {this.state.query}</h5>
                         <p>Movies</p>
                         <div className="feature">
@@ -128,8 +146,7 @@ class Search extends React.Component {
                         create a Movie Component */}
                             { movie_results.length > 0 ? 
                                 movie_results.map(movie => 
-                                <Movie id={movie.id} title={movie.title} movie={movie} />
-                            ) : 
+                                    <Movie id={movie.id} title={movie.title} poster_path={movie.poster_path} backdrop_path={movie.backdrop_path} release_date={movie.release_date} overview={movie.overview}/>                            ) : 
                             <p>No movies :(</p>}
                         </div>
 
@@ -139,7 +156,7 @@ class Search extends React.Component {
                         create a Movie Component */}
                         {tv_results.length > 0 ? 
                             tv_results.map(show => 
-                                <Show id={show.id} name={show.name} show={show}/>
+                                <Show id={show.id} title={show.name} poster_path={show.poster_path} num_seasons={show.num_seasons} num_episodes={show.num_episodes} overview={show.overview}/>
                             ) : <p>No TV Shows :(</p>}
                         </div>
                     </div>

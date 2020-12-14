@@ -58,8 +58,13 @@ router.put('/rwDelete', movieRoutes.rwDelete);
 router.put('/rwReset', movieRoutes.rwReset);
 
 //trendingWest
-router.post('/twAll', movieRoutes.trendingWestAll);
+router.get('/twAll', movieRoutes.trendingWestAll);
 router.post('/twCreate', movieRoutes.trendingWestCreate);
+
+//friends
+router.get('/fAll', movieRoutes.friendAll);
+router.post('/fCreate', movieRoutes.friendCreate);
+router.post('/fDelete', movieRoutes.friendDelete);
 
 
 // Export router

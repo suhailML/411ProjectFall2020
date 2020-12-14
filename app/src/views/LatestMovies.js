@@ -111,8 +111,32 @@ class LatestMovies extends React.Component {
 
         switch(this.props.type){
             case "east":
+                break;
+
             case "west":
+                axios.get("http://localhost:4001/movieRouter/twAll")
+                .then(response => {
+                    // Update the books state
+                    this.setState({
+                        isLoaded: true,
+                        trending_list: response.data
+                    });
+                    console.log(response.data);
+                  });
+                  break;
+
             case "central":
+                axios.get("http://localhost:4001/movieRouter/All")
+                .then(response => {
+                    // Update the books state
+                    this.setState({
+                        isLoaded: true,
+                        trending_list: response.data
+                    });
+                    console.log(response);
+                  });
+                  break;
+
             case "south":
                 axios.get("http://localhost:4001/movieRouter/mAll")
                 .then(response => {
@@ -136,6 +160,7 @@ class LatestMovies extends React.Component {
                     });
                 })
                 .catch(this.handleErr);
+                break;
         }
 
         /*THIS IS NOT PRODUCTION SAFE CODE -- THE ONLY SAFE WAY TO HIDE API KEY IS 
@@ -175,23 +200,6 @@ class LatestMovies extends React.Component {
     }
 
     render() {
-        // const findSomething = () => {
-        //   // Send POST request to 'books/create' endpoint
-        //   axios
-        //     .post('http://localhost:4001/movieRouter/tableSpecificSearch', {
-        //       table: 'events',
-        //       column: 'movieTitle',
-        //       value: 'pullUP'
-        //     })
-        //     .then(res => {
-        //       console.log(res.data);
-        //       // Fetch all books to refresh
-        //       // the books on the bookshelf list
-        //     })
-        //     .catch(error => console.error(`could not do search`));
-        // }
-
-        // findSomething();  
 
         var { isLoaded, trending_list } = this.state;
 
@@ -203,25 +211,49 @@ class LatestMovies extends React.Component {
             );
             
         } else {
-            return (
-                <div className="featurebox">
-                    <p>{this.getHeader(this.props.type)}</p>
-                    <div className="feature">
-                        {/* once you get the trend movies as an array from compDidMount
-                        create a Movie Component */}
-                        {trending_list.map(trending => 
-                            {
-                                if (trending.media_type === "tv" && trending.poster_path !== null) {
-                                    return(<Show id={trending.id} name={trending.name} show={trending}/>);
-                                
-                                } else if (trending.media_type === "movie" && trending.poster_path !== null) {
-                                    return(<Movie id={trending.id} title={trending.title} movie={trending}/>);
+            if (this.props.type === "global") {
+                return (
+                    <div className="featurebox">
+                        <p>{this.getHeader(this.props.type)}</p>
+                        <div className="feature">
+                            {/* once you get the trend movies as an array from compDidMount
+                            create a Movie Component */}
+                            {trending_list.map(trending => 
+                                {
+                                    if (trending.media_type === "tv" && trending.poster_path !== null) {
+                                        return(<Show id={trending.id} title={trending.name} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} overview={trending.overview}/>);
+                                    
+                                    } else if (trending.media_type === "movie" && trending.poster_path !== null) {
+                                        return(<Movie id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} release_date={trending.release_date} overview={trending.overview}/>);
+                                    }
                                 }
-                            }
-                        )}
+                            )}
+                        </div>
                     </div>
-                </div>
-            );
+                );
+
+            } else {
+                return (
+                    <div className="featurebox">
+                        <p>{this.getHeader(this.props.type)}</p>
+                        <div className="feature">
+                            {/* once you get the trend movies as an array from compDidMount
+                            create a Movie Component */}
+                            {trending_list.map(trending => 
+                                {
+                                    if (trending.type === "tv" && trending.poster_path !== null) {
+                                        return(<Show id={trending.id} title={trending.title} poster_path={trending.poster_path} num_seasons={trending.num_seasons} num_episodes={trending.num_episodes} overview={trending.overview}/>);
+                                    
+                                    } else if (trending.type === "movie" && trending.poster_path !== null) {
+                                        return(<Movie id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} release_date={trending.release_date} overview={trending.overview}/>);
+                                    }
+                                }
+                            )}
+                        </div>
+                    </div>
+                );
+            }
+            
         }
         
     }

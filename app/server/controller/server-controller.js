@@ -307,9 +307,11 @@ knex
 
 
 
+
+
 // friendlist !!!!!!!!!!!!!
 
-exports.friends = async (req, res) => {
+exports.friendAll = async (req, res) => {
   // Get all books from database
   knex
     .select('*') // select all records
@@ -325,7 +327,7 @@ exports.friends = async (req, res) => {
     })
 }
 // add friend
-exports.addfriend = async (req, res) => {
+exports.friendCreate = async (req, res) => {
   // Add new book to database
   knex('friendList')
     .insert({ // insert new record, a book
@@ -338,11 +340,11 @@ exports.addfriend = async (req, res) => {
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error addind friend ${req.body.friendID}: ${err}` })
+      res.json({ message: `There was an error adding friend ${req.body.friendID}: ${err}` })
     })
 }
 
-exports.deleteFriend = async (req, res) => {
+exports.friendDelete = async (req, res) => {
   // Find specific friend link in the database and remove it
   knex('friendList')
     .where(req.body.userID,req.body.friendID ) // find correct record based on ids
@@ -356,6 +358,10 @@ exports.deleteFriend = async (req, res) => {
       res.json({ message: `There was an error removing friend ${req.body.friendID}: ${err}` })
     })
 }
+
+
+
+
 
 
 // events !!!!!!!!!!
@@ -454,17 +460,18 @@ exports.trendingWestCreate = async (req, res) => {
   knex("trendingWest")
     .whereNotExists(function(){
       this.insert({ // insert new record, a book
-        'mediaID': req.body.mediaID,
-        'mediaTitle': req.body.mediaTitle,
-        'mediaType': req.body.mediaType,
-        'backdropPath': req.body.backdropPath,
-        'releaseDate': req.body.releaseDate,
-        'posterPath': req.body.posterPath,
-        // 'numSeasons': req.body.numSeasons,
-        // 'numEpisodes': req.body.numEpisodes,
+        'id': req.body.id,
+        'title': req.body.title,
+        'type': req.body.type,
+        'backdrop_path': req.body.backdrop_path,
+        'poster_path': req.body.poster_path,
+        'release_date': req.body.release_date,
+        'num_seasons': req.body.num_seasons,
+        'num_episodes': req.body.num_episodes,
         'overview': req.body.overview,
         'numWatches': 1
-      }).whereRaw('mediaID = req.body.mediaID')
+      }).whereRaw('id = req.body.id')
+
     }).whereExists(function() {
       this.increment({ numWatches: 1 })
       .whereRaw('mediaID = req.body.mediaID')
@@ -480,47 +487,32 @@ exports.trendingWestCreate = async (req, res) => {
     })
   }
 
-exports.trendingWestCreate = async (req, res) => {
-    // var exists
-    // Add new book to database
-    knex("trendingWest")
+// exports.trendingWestCreate = async (req, res) => {
+//     // var exists
+//     // Add new book to database
+//     knex("trendingWest")
       
-      .insert({ // insert new record, a book
-        'mediaID': req.body.mediaID,
-        'mediaTitle': req.body.mediaTitle,
-        'mediaType': req.body.mediaType,
-        'backdropPath': req.body.backdropPath,
-        'releaseDate': req.body.releaseDate,
-        'posterPath': req.body.posterPath,
-        // 'numSeasons': req.body.numSeasons,
-        // 'numEpisodes': req.body.numEpisodes,
-        'overview': req.body.overview,
-        'numWatches': req.body.numWatches
-      })
-      .then(() => {
-        // Send a success message in response
-        console.log(res);
-        res.json({ message: `Trending West created.` })
-      })
-      .catch(err => {
-        // Send a error message in response
-        res.json({ message: `There was an error creating trending: ${err}` })
-      })
-    }
-  // exports.trendingWestCreate = async (req, res) => {
-  // knex("trendingWest")
-  //   .where('mediaID', '=', req.body.mediaID)
-  //   .increment({ 
-  //     numWatches: 1
-  //   })
-  //   .then(() => {
-  //     // Send a success message in response
-  //     res.json({ message: `Trending West created.` })
-  //   })
-  //   .catch(err => {
-  //     // Send a error message in response
-  //     res.json({ message: `There was an error creating trending: ${err}` })
-  //   })
-  // }
+//       .insert({ // insert new record, a book
+//         'mediaID': req.body.mediaID,
+//         'mediaTitle': req.body.mediaTitle,
+//         'mediaType': req.body.mediaType,
+//         'backdropPath': req.body.backdropPath,
+//         'releaseDate': req.body.releaseDate,
+//         'posterPath': req.body.posterPath,
+//         // 'numSeasons': req.body.numSeasons,
+//         // 'numEpisodes': req.body.numEpisodes,
+//         'overview': req.body.overview,
+//         'numWatches': req.body.numWatches
+//       })
+//       .then(() => {
+//         // Send a success message in response
+//         console.log(res);
+//         res.json({ message: `Trending West created.` })
+//       })
+//       .catch(err => {
+//         // Send a error message in response
+//         res.json({ message: `There was an error creating trending: ${err}` })
+//       })
+//     }
   
 

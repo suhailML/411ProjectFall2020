@@ -12,30 +12,30 @@ class Movie extends React.Component {
         this.state = {
             isLoaded: false,
             watched: false,
-            title: this.props.title,
             id: this.props.id,
-            backdrop_path:"https://image.tmdb.org/t/p/w200" + this.props.movie.backdrop_path,
-            poster_path: "https://image.tmdb.org/t/p/w200" + this.props.movie.poster_path,
-            info: this.props.movie.overview,
-            release_date: this.props.movie.release_date
+            title: this.props.title,
+            backdrop_path:"https://image.tmdb.org/t/p/w200" + this.props.backdrop_path,
+            poster_path: "https://image.tmdb.org/t/p/w200" + this.props.poster_path,
+            overview: this.props.overview,
+            release_date: this.props.release_date
         };
 
         this.isWatched = this.isWatched.bind(this);
     }
 
     isWatched(event){
-        var {watched, title, id, backdrop_path, poster_path, info, release_date} = this.state;
+        var {watched, title, id, backdrop_path, poster_path, overview, release_date} = this.state;
         event.preventDefault();
         if (!watched) {
             axios
             .post('http://localhost:4001/movieRouter/twCreate', {
-                mediaID: id,
-                mediaTitle: title,
-                mediaType: 'movie',
-                backdropPath: backdrop_path,
-                posterPath: poster_path,
-                releaseDate: release_date,
-                overview: info
+                id: id,
+                title: title,
+                type: 'movie',
+                backdrop_path: backdrop_path,
+                poster_path: poster_path,
+                release_date: release_date,
+                overview: overview
             })
             .then(res => {
               console.log(res.data);
@@ -44,7 +44,7 @@ class Movie extends React.Component {
             })
             .catch(error => console.error(`didnt work fuck`));
         }
-        this.setState({watched: true})
+        this.setState({watched: true});
     }
 
     handleErr(err) {

@@ -1,23 +1,42 @@
-import React from 'react'
+import React from 'react';
+import { isThrowStatement } from 'typescript';
 
-const User = (props) => {
-    const style = {
-        height: props.size,
-        width: props.size,
-        marginRight: 10,
-        borderRadius: '100%',
-        backgroundColor: props.self ? '#b285f9' : '#f9aa41'
+class User extends React.Component {
+
+    constructor(props) {
+        super(props);
+
+        this.state = ({
+            userID: this.props.userID,
+            userName: this.props.userName,
+            firstName: this.props.firstName,
+            lastName: this.props.lastName,
+        });
     }
 
-    return (
-        <div>
-            <div className="user">
-                <div style={style}></div>
-                <p>{props.name}</p>
+    render() {
+        const style = {
+            height: this.props.size,
+            width: this.props.size,
+            marginRight: 10,
+            borderRadius: '100%',
+            backgroundColor: this.props.self ? '#b285f9' : '#f9aa41'
+        }
+
+        var {userID, userName, firstName, lastName} = this.state;
+        console.log(this.state);
+
+        return (
+            <div>
+                <div style={style}>
+                    <div className="user">
+                        <p>{`@${userName}`}</p>
+                    </div>
+                </div>
             </div>
-        </div>
-        
-    )
+            
+        );
+    }
 }
 
-export default User
+export default User;

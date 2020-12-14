@@ -9,14 +9,13 @@ class Show extends React.Component {
         this.state = {
             isLoaded: false,
             watched: false,
-            name: this.props.name,
-            id: this.props.show.id,
-            backdrop_path: "https://image.tmdb.org/t/p/w200" + this.props.show.backdrop_path,
-            poster_path: "https://image.tmdb.org/t/p/w200" + this.props.show.poster_path,
+            title: this.props.title,
+            id: this.props.id,
+            backdrop_path: "https://image.tmdb.org/t/p/w200" + this.props.backdrop_path,
+            poster_path: "https://image.tmdb.org/t/p/w200" + this.props.poster_path,
             num_seasons: PropTypes.Number,
             num_episodes: PropTypes.Number,
-            overview: this.props.show.overview,
-            info: [],
+            overview: this.props.overview,
         };
 
         // this.isWatched = this.isWatched.bind(this);
@@ -63,7 +62,7 @@ class Show extends React.Component {
                     <img src={this.state.poster_path} alt=""/>
                 </div>
 
-                {this.state.name}
+                {this.state.title}
                 <br></br>
                 {`Seasons: ${this.state.num_seasons}`}
                 <br></br>

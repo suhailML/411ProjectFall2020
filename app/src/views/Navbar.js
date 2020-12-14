@@ -7,6 +7,8 @@ const Navbar = () => {
   const [ isOpen, setOpen ] = useState(false);
   const [ query, setQuery ] = useState('');
 
+  
+
   return(
       <nav className="nav" role="navigation">
         <div className="container">
