@@ -468,63 +468,35 @@ exports.trendingWestAll = async (req, res) => {
 
   // Create new event
 exports.trendingWestCreate = async (req, res) => {
-  // Add new book to database
-  knex("trendingWest")
-    .whereNotExists(function(){
-      this.insert({ // insert new record, a book
-        'id': req.body.id,
-        'title': req.body.title,
-        'type': req.body.type,
-        'backdrop_path': req.body.backdrop_path,
-        'poster_path': req.body.poster_path,
-        'release_date': req.body.release_date,
-        'num_seasons': req.body.num_seasons,
-        'num_episodes': req.body.num_episodes,
-        'overview': req.body.overview,
-        'numWatches': 1
-      }).whereRaw('id = req.body.id')
 
-    }).whereExists(function() {
-      this.increment({ numWatches: 1 })
-      .whereRaw('mediaID = req.body.mediaID')
+  // Add new book to database
+  knex.raw()
+  knex("trendingWest")
+    .insert({
+      'id': req.body.id,
+      'title': req.body.title,
+      'type': req.body.type,
+      'backdrop_path': req.body.backdrop_path,
+      'poster_path': req.body.poster_path,
+      'release_date': req.body.release_date,
+      'num_seasons': req.body.num_seasons,
+      'num_episodes': req.body.num_episodes,
+      'overview': req.body.overview,
+      'num_views': 1
     })
-    .then(() => {
-      // Send a success message in response
-      console.log(res);
-      res.json({ message: `Trending West created.` })
+    .onConflict('id')
+    .merge({
+      num_views: 4
+    })
+    .then(trendingWest => {
+      // Send books extracted from database in response
+      res.json(trendingWest)
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error creating trending: ${err}` })
+      res.json({ message: `There was an error retrieving events: ${err}` })
     })
-  }
 
-// exports.trendingWestCreate = async (req, res) => {
-//     // var exists
-//     // Add new book to database
-//     knex("trendingWest")
-      
-//       .insert({ // insert new record, a book
-//         'mediaID': req.body.mediaID,
-//         'mediaTitle': req.body.mediaTitle,
-//         'mediaType': req.body.mediaType,
-//         'backdropPath': req.body.backdropPath,
-//         'releaseDate': req.body.releaseDate,
-//         'posterPath': req.body.posterPath,
-//         // 'numSeasons': req.body.numSeasons,
-//         // 'numEpisodes': req.body.numEpisodes,
-//         'overview': req.body.overview,
-//         'numWatches': req.body.numWatches
-//       })
-//       .then(() => {
-//         // Send a success message in response
-//         console.log(res);
-//         res.json({ message: `Trending West created.` })
-//       })
-//       .catch(err => {
-//         // Send a error message in response
-//         res.json({ message: `There was an error creating trending: ${err}` })
-//       })
-//     }
+
   
-
+  }

@@ -25,6 +25,7 @@ const Navbar = () => {
             <span aria-hidden="true"></span>
           </a>
         </div>
+        
         <div className={`navbar-menu ${isOpen && "is-active"}`}>
           <div className="navbar-start">          
               <input id="inputbox" type="text" placeholder="Search.." name="search" onChange={e => setQuery(e.target.value)}></input>
