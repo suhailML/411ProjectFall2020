@@ -248,6 +248,18 @@ knex
     res.json({ message: `There was an error retrieving books: ${err}` })
   })
 }
+
+//get single user
+exports.getUser = async (req, res) => {
+  knex('userInfo')
+    .where('id', req.params.userId)
+    .then(info => res.json(info))
+    .catch(err => {
+      res.json({message: `Error ${err} for getting userInfo`})
+    })
+  
+}
+
 // Create new book
 exports.usersCreate = async (req, res) => {
 // Add new book to database
