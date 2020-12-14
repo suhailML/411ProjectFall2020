@@ -231,35 +231,39 @@ knex.schema
           console.error(`There was an error setting up the database: ${error}`)
         })
 
-        knex.schema
-        // Make sure no "books" table exists
-        // before trying to create new
-        .hasTable('friendList')
-          .then((exists) => {
-            if (!exists) {
-
-              return knex.schema.createTable('friendList', (table)  => {
-                table.integer('user');
-                table.integer('friend');
-                table.foreign('user').references('id').inTable('userInfo');
-                table.foreign('friend').references('id').inTable('userInfo');
+            knex.schema
+            // Make sure no "books" table exists
+            // before trying to create new
+            .hasTable('friendList')
+              .then((exists) => {
+                if (!exists) {
+                  // If no "books" table exists
+                  // create new, with "id", "author", "title",
+                  // "pubDate" and "rating" columns
+                  // and use "id" as a primary identification
+                  // and increment "id" with every new record (book)
+                  return knex.schema.createTable('friendList', (table)  => {
+                    table.integer('user');
+                    table.integer('friend');
+                    table.foreign('userId').references('userId').inTable('userInfo');
+                    table.foreign('friendId').references('userId').inTable('userInfo');
+                  })
+                  .then(() => {
+                    // Log success message
+                    console.log('Table \'FriendList \' created')
+                  })
+                  .catch((error) => {
+                    console.error(`There was an error creating table: ${error}`)
+                  })
+                }
               })
               .then(() => {
                 // Log success message
-                console.log('Table \'FriendList \' created')
+                console.log('done')
               })
               .catch((error) => {
-                console.error(`There was an error creating table: ${error}`)
+                console.error(`There was an error setting up the database: ${error}`)
               })
-            }
-          })
-          .then(() => {
-            // Log success message
-            console.log('done')
-          })
-          .catch((error) => {
-            console.error(`There was an error setting up the database: ${error}`)
-          })
 
 // Just for debugging purposes:
 // Log all data in "books" table
