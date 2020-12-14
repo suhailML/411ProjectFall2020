@@ -119,15 +119,6 @@ class Search extends React.Component {
         } else {
             return (
                 <div>
-                    {/* <form className="searchinput" action={this.handleInputChange}>
-                        <input
-                        placeholder="Search for..."
-                        ref={input => this.search = input}
-                        onChange={this.handleInputChange}
-                        />
-                        <button type="submit">Submit</button>
-                    </form> */}
-                    
                     <div className="featurebox">
                         <p>Users</p>
                         <div className="feature">
@@ -146,7 +137,7 @@ class Search extends React.Component {
                         create a Movie Component */}
                             { movie_results.length > 0 ? 
                                 movie_results.map(movie => 
-                                    <Movie id={movie.id} title={movie.title} poster_path={movie.poster_path} backdrop_path={movie.backdrop_path} release_date={movie.release_date} overview={movie.overview}/>                            ) : 
+                                    <Movie id={movie.id} title={movie.title} poster_path={"https://image.tmdb.org/t/p/w200" + movie.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200"+ movie.backdrop_path} release_date={movie.release_date} overview={movie.overview}/>                            ) : 
                             <p>No movies :(</p>}
                         </div>
 
@@ -156,7 +147,7 @@ class Search extends React.Component {
                         create a Movie Component */}
                         {tv_results.length > 0 ? 
                             tv_results.map(show => 
-                                <Show id={show.id} title={show.name} poster_path={show.poster_path} num_seasons={show.num_seasons} num_episodes={show.num_episodes} overview={show.overview}/>
+                                <Show id={show.id} title={show.name} poster_path={"https://image.tmdb.org/t/p/w200" + show.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200"+ show.backdrop_path} num_seasons={show.num_seasons} num_episodes={show.num_episodes} overview={show.overview}/>
                             ) : <p>No TV Shows :(</p>}
                         </div>
                     </div>

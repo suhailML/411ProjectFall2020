@@ -16,85 +16,6 @@ class LatestMovies extends React.Component {
         };
     }
 
-    displaytrending(trending_results) {
-        // console.log(trending_results);
-        // return trending_results.map(e => 
-        //     ({
-        //         title: e.original_name || e.original_title,
-        //         id: e.id,
-        //         genres: e.genre_ids
-        //     })
-        // );
-
-        //returning object in js = wrap in parenthesis
-        // console.log("HERE");
-        // const fetchbooks = async () => {
-        //     // Send GET request to 'books/all' endpoint
-        //     axios
-        //       .get('http://localhost:4001/movieRouter/bAll')
-        //       .then(response => {
-        //         // Update the books state
-        //         console.log(response.data);
-        //         console.log(response);
-        //       })
-        //       .catch(error => console.error(`There was an error retrieving the book list: ${error}`));
-        // }   
-        // console.log("THERE");
-        // const handleBookCreate = () => {
-        //     // Send POST request to 'books/create' endpoint
-        //     axios
-        //       .post('http://localhost:4001/movieRouter/eCreate', {
-        //         author: "yard",
-        //         title: "jard",
-        //         pubDate: "KLARD",
-        //         rating: "mard"
-        //       })
-        //       .then(res => {
-        //         console.log(res.data);
-        //         // Fetch all books to refresh
-        //         // the books on the bookshelf list
-        //         fetchbooks();
-        //       })
-        //       .catch(error => console.error(`There was an error creating the book`));
-        //   }
-        //   handleBookCreate();
-        //   console.log("AIR");
-
-        //   const fetchEvents = async () => {
-        //     // Send GET request to 'books/all' endpoint
-        //     axios
-        //       .get('http://localhost:4001/movieRouter/eAll')
-        //       .then(response => {
-        //         // Update the books state
-        //         console.log(response.data);
-        //         console.log(response);
-        //       })
-        //       .catch(error => console.error(`There was an error retrieving the book list: ${error}`));
-        // } 
-
-        // var hello = "hello";
-        //   const handleEventCreate = () => {
-        //     // Send POST request to 'books/create' endpoint
-        //     axios
-        //       .post('http://localhost:4001/movieRouter/eCreate', {
-        //         clubName: 'chicken appreciation club',
-        //         movieTitle: 'chicken run',
-        //         movieID: 333,
-        //         date: '12/12/12',
-        //         time: '12:12',
-        //         eventDescription: 'come watch chickens do chicken stuff'
-        //       })
-        //       .then(res => {
-        //         console.log(res.data);
-        //         // Fetch all books to refresh
-        //         // the books on the bookshelf list
-        //         fetchEvents();
-        //       })
-        //       .catch(error => console.error(`There was an error creating the event`));
-        //   }
-        //   handleEventCreate();
-    }
-
     
     handleErr(err) {
         console.warn(err);
@@ -126,28 +47,10 @@ class LatestMovies extends React.Component {
                   break;
 
             case "central":
-                axios.get("http://localhost:4001/movieRouter/All")
-                .then(response => {
-                    // Update the books state
-                    this.setState({
-                        isLoaded: true,
-                        trending_list: response.data
-                    });
-                    console.log(response);
-                  });
-                  break;
+                break;
 
             case "south":
-                axios.get("http://localhost:4001/movieRouter/mAll")
-                .then(response => {
-                    // Update the books state
-                    this.setState({
-                        isLoaded: true,
-                        trending_list: response.data
-                    });
-                    console.log(response);
-                  });
-                  break;
+                break;
 
             default:
                 fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
@@ -221,10 +124,10 @@ class LatestMovies extends React.Component {
                             {trending_list.map(trending => 
                                 {
                                     if (trending.media_type === "tv" && trending.poster_path !== null) {
-                                        return(<Show id={trending.id} title={trending.name} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} overview={trending.overview}/>);
+                                        return(<Show id={trending.id} title={trending.name} poster_path={"https://image.tmdb.org/t/p/w200"+ trending.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200" + trending.backdrop_path} overview={trending.overview}/>);
                                     
                                     } else if (trending.media_type === "movie" && trending.poster_path !== null) {
-                                        return(<Movie id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} release_date={trending.release_date} overview={trending.overview}/>);
+                                        return(<Movie id={trending.id} title={trending.title} poster_path={"https://image.tmdb.org/t/p/w200" + trending.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200" + trending.backdrop_path} release_date={trending.release_date} overview={trending.overview}/>);
                                     }
                                 }
                             )}
@@ -241,8 +144,9 @@ class LatestMovies extends React.Component {
                             create a Movie Component */}
                             {trending_list.map(trending => 
                                 {
+                                    console.log(trending);
                                     if (trending.type === "tv" && trending.poster_path !== null) {
-                                        return(<Show id={trending.id} title={trending.title} poster_path={trending.poster_path} num_seasons={trending.num_seasons} num_episodes={trending.num_episodes} overview={trending.overview}/>);
+                                        return(<Show id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} num_seasons={trending.num_seasons} num_episodes={trending.num_episodes} overview={trending.overview}/>);
                                     
                                     } else if (trending.type === "movie" && trending.poster_path !== null) {
                                         return(<Movie id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} release_date={trending.release_date} overview={trending.overview}/>);

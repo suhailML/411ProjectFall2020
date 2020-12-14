@@ -14,8 +14,8 @@ class Movie extends React.Component {
             watched: false,
             id: this.props.id,
             title: this.props.title,
-            backdrop_path:"https://image.tmdb.org/t/p/w200" + this.props.backdrop_path,
-            poster_path: "https://image.tmdb.org/t/p/w200" + this.props.poster_path,
+            backdrop_path: this.props.backdrop_path,
+            poster_path: this.props.poster_path,
             overview: this.props.overview,
             release_date: this.props.release_date
         };
