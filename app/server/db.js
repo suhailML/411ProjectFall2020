@@ -171,7 +171,7 @@ knex.schema
             // and use "id" as a primary identification
             // and increment "id" with every new record (book)
             return knex.schema.createTable('userInfo', (table)  => {
-              table.increments('id').primary()
+              table.integer('userId')
               table.string('firstName')
               table.string('lastName')
               table.string('email')
