@@ -230,7 +230,38 @@ knex
 }
 
 
+exports.getUser = async (req, res) => {
+  // Get specific user from database
+  knex
+    .select('*') // select all records
+    .from('userInfo') // from 'userInfo' table
+    .where('userId',req.body.userID)
+    .then(userData => {
+      // Send specified userInfo based on userId extracted from database in response
+      res.json(userData)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error getiing specific user: ${err}` })
+    })
+}
 
+exports.searchUsers = async (req, res) => {
+  // Get specific user from database
+knex
+  .select('*') // select all records
+  .from('userInfo') // from 'userInfo' table
+  .where('userId', req.body.id).orwhere('firstName', 'like', `%${req.body.firstName}%`).orwhere('lastName', 'like', `%${req.body.lastName}%`)
+  // find correct record based on id
+  .then(userData => {
+    // Send specified userInfo based on userId extracted from database in response
+    res.json(userData)
+  })
+  .catch(err => {
+    // Send a error message in response
+    res.json({ message: `There was an error getting search users: ${err}` })
+  })
+}
 
 // users !!!!!!!!!!
 
@@ -306,17 +337,15 @@ knex
 }
 
 
-
-
-
 // friendlist !!!!!!!!!!!!!
 
 exports.friendAll = async (req, res) => {
   // Get all books from database
   knex
-    .select('*') // select all records
-    .from('friendList') // from 'books' table
-    .innerJoin('friend', 'friend.id', '=', req.body.id)
+    .select('userId') // select all records
+    .from({u:'userInfo'}) // from 'userInfo' table
+    .innerJoin({f:'friendList'}, 'f.friendId', '=', 'u.userId')
+    .where('f.friendId',req.body.userID)
     .then(userData => {
       // Send friends extracted from database in response
       res.json(userData)
@@ -331,8 +360,8 @@ exports.friendCreate = async (req, res) => {
   // Add new book to database
   knex('friendList')
     .insert({ // insert new record, a book
-      'user': req.body.userID,
-      'friend': req.body.friendID,
+      'userId': req.body.userID,
+      'friendId': req.body.friendID,
     })
     .then(() => {
       // Send a success message in response
