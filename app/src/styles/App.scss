@@ -17,6 +17,11 @@ $typeface: 'Chivo';
 body::-webkit-scrollbar {
   display: none;
 }
+
+:root{
+  --app-width: calc(92% - 1vw);
+}
+
 body {
   background-color: $grey;
   color: $white;
@@ -36,11 +41,14 @@ body {
 
 .nav {
   grid-area: navbar;
+  width: var(--app-width);
+  margin: 0 auto;
+  padding: 20px 0 20px
 }
 
 
 .featurebox{
-  width: 85%;
+  width: var(--app-width);
   margin: 0 auto;
 }
 //background boxes that hold movies
@@ -100,6 +108,7 @@ $inner-space: 57px;
 
 @media only screen and (max-width: 300px) {
   .App {
+
     grid-template-columns: 1fr;
   }
 }

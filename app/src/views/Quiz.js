@@ -20,7 +20,7 @@ class Quiz extends React.Component{
 
         this.createNewUser = this.createNewUser.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        this.loginResults = this.loginResults.bind(this);
+        // this.loginResults = this.loginResults.bind(this);
     }
 
     // color(){
@@ -39,6 +39,10 @@ class Quiz extends React.Component{
 
     // next() {
 
+    componentDidMount(){
+        this.prepoulate();
+    }
+
     createNewUser(event) {
         var {firstName, lastName, userName, email, campusLocation, year} = this.state;
         event.preventDefault();
@@ -56,40 +60,46 @@ class Quiz extends React.Component{
             })
             .then(res => {
               console.log(res.data);
-              // Fetch all books to refresh
-              // the books on the bookshelf list
+              
             })
+            .then(() => {this.props.history.push('/home/' + firstName)})
             .catch(error => console.error(`could not do search`));
     }
 
     handleChange(event){
         this.setState({[event.target.name]: event.target.value});
         console.log(this.state.firstName);
+        console.log(this.props.location.state);
     }
 
-    loginResults(res) {
-        console.log(res);
-        this.setState({
-            firstName: res.profileObj.givenName,
-            lastName: res.profileObj.familyName,
-            email: res.profileObj.email
-        });
-        console.log(this.state);
+    prepoulate(){
+        try {
+            const { firstName, lastName, email } = this.props.location.state;
+            this.setState({
+                firstName: firstName,
+                lastName: lastName,
+                email: email
+            })
+        } catch(e) {
+            console.log("no state data")
+
+        }
+        
     }
+
+    // loginResults(res) {
+    //     console.log(res);
+    //     this.setState({
+    //         firstName: res.profileObj.givenName,
+    //         lastName: res.profileObj.familyName,
+    //         email: res.profileObj.email
+    //     });
+    //     console.log(this.state);
+    // }
 
     render() {
         return(
             <div>
-                <GoogleLogin
-                    clientId={process.env.REACT_APP_CLIENT_ID}
-                    buttonText="Login"
-                    onSuccess={this.loginResults}
-                    onFailure={this.loginResults}
-                    cookiePolicy={'single_host_origin'}
-                    style={{ marginTop: '100px' }}
-                    isSignedIn={true}
-                />
-                
 
                 <form onSubmit={this.createNewUser} className={"quiz-response"}>
                     <div className="Quiz">

@@ -27,11 +27,11 @@ function App() {
         
         <Switch>
           <Route exact path={match.path}>
-          <BulletinBoard/>
             <LatestMovies type="global"/>
             <LatestMovies type="west"/>
             <LatestMovies type="east"/>
             <LatestMovies type="south"/>
+            <BulletinBoard/>
           </Route>
 
           {/* the reason why you put component={component} is so that you can

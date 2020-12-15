@@ -5,49 +5,83 @@ import { Redirect } from 'react-router-dom';
 
 import LogoutButton from '../component/Logout.js';
 import axios from 'axios';
+import auth from '../component/LoginC.js'
 
 
 
 class Login extends React.Component {
-    constructor() {
-        super()
+    constructor(props) {
+        super(props)
         this.state= {
+            isSignedIn: false
+
         }
+        this.toApp.bind(this)
+        // this.authorize.bind(this)
+        // this.nextPath.bind(this)
     }
 
-    toApp(res) {
-        const id = parseInt(res.googleId);
-        console.log("your id is " + id);
-        console.log(res);
+    nextPath(){
 
-        axios.get("http://localhost:4001/movieRouter/" + id)
+    }
+
+    toApp = (res) => {
+        const id = res.tokenId;
+        const { history } = this.props
+        axios.post("http://localhost:4001/movieRouter/api/" + id)
             .then(res => {
-
                 console.log(res)
-                if (res.data.length == 0){
-                    console.log("chinyy")
-                    // this.setState({
-                    //     id: id,
-                    //     auth: true,
-                    //     newUser: true
-                    // })
+                this.setState({
+                    isSignedIn: true
+                })
+                if (res.data.info.length == 0) {
+                    console.log("huh?")
+                    history.push({
+                        pathname: "/signup",
+                        state: {
+                            firstName: res.data.firstName,
+                            lastName: res.data.lastName,
+                            email: res.data.email
+                        }
+                    })
                 } else {
-                    // this.setState({
-                    //     id: id,
-                    //     auth: true,
-                    //     newUser: false
-                    // })
+                    history.push("/home/" + res.data.firstName)
                 }
-            })
-            .catch(err => console.log(`Fail with err ${err}`))
+            })           
+        .catch(err => console.log(`Fail with err ${err}`))
+        // console.log('id is ' + id)
+        // auth.checkToken(id, auth.getUserInfo)
+        // this.setState({
+        //     isSignedIn: true
+        // })
     }
+
+    // authorize(){
+    //     const { history } = this.props
+    //     const state  = auth.getUserInfo();
+    //     const { id } = auth.getUserInfo();
+    //     const path = auth.getPath();
+    //     console.log(state)
+    //     console.log(id)
+    //     console.log(path)
+
+    //     if (path === 'signup'){
+    //         history.push({
+    //             location: "/signup",
+    //             state: state
+    //         })
+    //     } else if (path=='home'){
+    //         history.push("/home/" + id)
+    //     } else {
+    //         console.log('stay here')
+    //     } 
+    // }
 
     responseGoogle(res){
         console.log(res + "not working ")
     }
 
     render() {
-        const { auth } = this.state
         return (
             <section>
             <GoogleLogin
@@ -60,10 +94,9 @@ class Login extends React.Component {
             isSignedIn={true}
             />
 
-
-            {/* {this.state.auth && this.state.newUser ? <Redirect to="/signup"/> : <Redirect to={"/home/" + this.state.id}/>} */}
-
             </section>
+
+            
 
         )
     }

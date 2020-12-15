@@ -18,7 +18,7 @@ class User extends React.Component {
         const style = {
             height: this.props.size,
             width: this.props.size,
-            marginRight: 10,
+            marginRight: 4,
             borderRadius: '100%',
             backgroundColor: this.props.self ? '#b285f9' : '#f9aa41'
         }
@@ -27,11 +27,10 @@ class User extends React.Component {
         console.log(this.state);
 
         return (
-            <div>
-                <div style={style}>
-                    <div className="user">
-                        <p>{`@${userName}`}</p>
-                    </div>
+            <div className="user">
+                <div style={style}></div>
+                <div>
+                    <p>{userName}</p>
                 </div>
             </div>
             
