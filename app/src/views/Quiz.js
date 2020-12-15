@@ -62,7 +62,7 @@ class Quiz extends React.Component{
               console.log(res.data);
               
             })
-            .then(() => {this.props.history.push('/home/' + firstName)})
+            .then(() => {this.props.history.push('/home/' + userName)})
             .catch(error => console.error(`could not do search`));
     }
 
@@ -99,7 +99,7 @@ class Quiz extends React.Component{
 
     render() {
         return(
-            <div>
+            <div className="App home">
 
                 <form onSubmit={this.createNewUser} className={"quiz-response"}>
                     <div className="Quiz">
@@ -110,17 +110,21 @@ class Quiz extends React.Component{
                         <div className="option" style={this.color()}><p>Medical Campus</p></div> */}
                         <label for="firstName">First name:</label>
                         <input type ="text" name="firstName" value={this.state.firstName} onChange={this.handleChange}/>
-                
+                        <br></br>
+                        <br></br>
                         <label for="lastname">Last name:</label>
                         <input type ="text" name="lastName" value={this.state.lastName}  onChange={this.handleChange}/>
-
+                        <br></br>
+                        <br></br>
                         <label for="username">Username:</label>
                         <input type ="text" name="userName" value={this.state.userName}  onChange={this.handleChange}/>
-
+                        <br></br>
+                        <br></br>
                         <label for="email">Email:</label>
                         <input type ="text" name="email" value={this.state.email}  onChange={this.handleChange}/>
-                        
-                        <label for="campuslocation">Location on Campus:</label>
+                        <br></br>
+                        <br></br>
+                        <label for="campuslocation">Campus Location:</label>
                         <select name="campusLocation" value={this.state.campusLocation} onChange={this.handleChange}>
                             <option value="West">West</option>
                             <option value="East">East</option>
@@ -128,7 +132,8 @@ class Quiz extends React.Component{
                             <option value="South">South</option>
                             <option value="Med">Med</option>
                         </select>
-
+                        <br></br>
+                        <br></br>
                         <label for="year">Year:</label>
                         <select name="year" value={this.state.year} onChange={this.handleChange}>
                             <option value="1">Freshman</option>
@@ -136,8 +141,9 @@ class Quiz extends React.Component{
                             <option value="3">Junior</option>
                             <option value="4">Senior</option>
                         </select>
-                        
-                        <input type="submit"/>
+                        <br></br>
+                        <br></br>
+                        <input className="submit" type="submit"/>
                     </div>
                 </form>
             </div>

@@ -3,13 +3,23 @@ import { Link } from 'react-router-dom'
 
 const Home = () => {
     return(
-        <div className="App">
-            <div>
-                the home page! :D hopefully a lil aniamtion
-                <Link to="/login"> Login button</Link>
-            </div>
-            <div>the sidepart for nagivation</div>
-        </div>
+        <section className="App home">
+            <article>
+            <header>
+            <h1> Does West have better taste than East?</h1>
+            <h3> BUWatchesWhat shows you what's trending on Boston
+                University's campus, and gives you recommendations
+                on what to watch.
+            </h3>
+            </header>
+            
+                <Link to="/login"> 
+                    <div className="button">Login</div>
+                </Link>
+            </article>
+            
+            <div className="">Chicken!</div>
+        </section>
     )
 }
 

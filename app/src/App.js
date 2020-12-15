@@ -23,7 +23,7 @@ function App() {
       <Navbar/>
 
         {/*todo: hide scroll bar*/}
-        <div style={{overflowY: 'scroll', height: "100vh"}}>
+        <div style={{overflowY: 'scroll', height: "100%"}}>
         
         <Switch>
           <Route exact path={match.path}>

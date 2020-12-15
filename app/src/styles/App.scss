@@ -18,7 +18,19 @@ body::-webkit-scrollbar {
   display: none;
 }
 
+h1 {
+  font-size: var(--big-header);
+}
+
+article{
+  width: var(--inner-width);
+
+}
 :root{
+  --app-padding: 10px;
+  --app-height: calc(100vh - var(--app-padding));
+  --inner-width: 65%;
+  --big-header: 3em;
   --app-width: calc(92% - 1vw);
 }
 
@@ -35,7 +47,14 @@ body {
                "app sidebar";
   background-color: $grey;
   font-family: $typeface;
-  height: 100vh;
+  height: var(--app-height);
+  overflow: hidden;
+}
+
+.App.home {
+  align-items: center;
+  width: var(--app-width);
+  margin: 0 auto;
 }
 
 
@@ -46,6 +65,21 @@ body {
   padding: 20px 0 20px
 }
 
+.Quiz {
+  width: calc(var(--inner-width) / 2);
+  font-size: 1.2em;
+  margin: 0 auto;
+
+}
+
+input {
+  transform: 777ms;
+  font-size: 1.12em;
+}
+
+.submit:hover {
+  background-color: $purple
+}
 
 .featurebox{
   width: var(--app-width);
@@ -75,10 +109,34 @@ $inner-space: 57px;
 
 .trend-moviebox { @include moviebox($lavender-floral);}
 
-.showbox {@include moviebox($lavender-floral);}
+.showbox {@include moviebox($yellow-orange);}
 
-.eventbox {@include moviebox($lavender-floral);}
+.eventbox {@include moviebox($rosso-corsa);}
 
+@mixin buttondiv ($color, $width, $height) {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color;
+  width: $width;
+  height: $height;
+  text-decoration: none;
+  padding: 3px;
+  border-radius: 4px;
+  color: $black;
+  transition: 777ms;
+}
+
+.button {@include buttondiv($orange, 7vw, 6vh)}
+.button:hover {
+  background-color: #cc0000;
+}
+
+.nonsense {@include buttondiv($purple, 90%, 90%)}
+.nonsense:hover {
+  border-radius: 100%;
+  background-color: $rosso-corsa;
+}
 .sidebar {
   grid-area: sidebar;
   background-color: $black;
