@@ -22,6 +22,21 @@ knex
   });
 }
 
+exports.getAnyAll = async (req, res) => {
+  // Get all books from database
+  knex
+    .select('*') // select all records
+    .from(req.body.table) // from 'books' table
+    .then(userData => {
+      // Send books extracted from database in response
+      res.json(userData);
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving genres: ${err}` });
+    });
+  }
+
 // recentlyWatched
 
 exports.rwAll = async (req, res) => {
@@ -502,13 +517,15 @@ knex
 
 //----------- trending in West ------------
 
-exports.trendingWestAll = async (req, res) => {
+exports.trendingWestAll = (req, res) => {
+  console.log(req);
   // Get all events from database
   knex
     .select('*') // select all records
-    .from('trendingWest') // from 'books' table
+    .from('trenWest')
     .then(trendingData => {
       // Send books extracted from database in response
+      console.log(trendingData)
       res.json(trendingData);
     })
     .catch(err => {

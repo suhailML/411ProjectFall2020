@@ -66,8 +66,9 @@ router.post('/fCreate', movieRoutes.friendCreate);
 router.post('/fDelete', movieRoutes.friendDelete);
 
 
-//trendingWest
+//trendingWest 
 router.get('/twAll', movieRoutes.trendingWestAll);
+router.post('/all', movieRoutes.getAnyAll);
 router.post('/twCreate', movieRoutes.trendingWestCreate);
 
 //trendingCentral

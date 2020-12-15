@@ -32,7 +32,9 @@ class LatestMovies extends React.Component {
 
         switch(this.props.type){
             case "east":
-                axios.get("http://localhost:4001/movieRouter/teAll")
+                axios.post("http://localhost:4001/movieRouter/all", {
+                      table: 'trendingEast'
+                  }) 
                     .then(response => {
                         console.log(response);
                         console.log(response.data);
@@ -44,7 +46,9 @@ class LatestMovies extends React.Component {
                   break;
 
             case "west":
-                axios.get("http://localhost:4001/movieRouter/twAll")
+                  axios.post("http://localhost:4001/movieRouter/all", {
+                      table: 'trendingWest'
+                  }) 
                     .then(response => {
                         console.log(response);
                         console.log(response.data);
@@ -56,7 +60,9 @@ class LatestMovies extends React.Component {
                   break;
 
             case "central":
-                axios.get("http://localhost:4001/movieRouter/tcAll")
+                axios.post("http://localhost:4001/movieRouter/all", {
+                      table: 'trendingCentral'
+                  }) 
                     .then(response => {
                         console.log(response);
                         console.log(response.data);
@@ -65,10 +71,11 @@ class LatestMovies extends React.Component {
                             trending_list: response.data
                         });
                   });
-                  break;
 
             case "south":
-                axios.get("http://localhost:4001/movieRouter/tsAll")
+                axios.post("http://localhost:4001/movieRouter/all", {
+                      table: 'trendingSouth'
+                  }) 
                     .then(response => {
                         console.log(response);
                         console.log(response.data);
