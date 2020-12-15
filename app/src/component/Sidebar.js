@@ -24,7 +24,7 @@ class Sidebar extends React.Component {
     }
 
     getFriends(){
-        axios.get("http://localhost:4001/movieRouter/uAll")
+        axios.get("http://localhost:4001/movieRouter/fAll")
         .then(response => {
             // Update the books state
             this.setState({
