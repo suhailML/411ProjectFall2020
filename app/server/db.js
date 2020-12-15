@@ -224,6 +224,7 @@ knex.schema
               table.string('poster_path');
               table.integer('num_seasons');
               table.integer('num_episodes');
+              table.string('release_date');
               table.string('overview');
               table.integer('num_views');
             })

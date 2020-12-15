@@ -507,9 +507,9 @@ exports.trendingWestAll = async (req, res) => {
   knex
     .select('*') // select all records
     .from('trendingWest') // from 'books' table
-    .then(userData => {
+    .then(trendingData => {
       // Send books extracted from database in response
-      res.json(userData);
+      res.json(trendingData);
     })
     .catch(err => {
       // Send a error message in response

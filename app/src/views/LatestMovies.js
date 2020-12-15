@@ -44,7 +44,7 @@ class LatestMovies extends React.Component {
                   break;
 
             case "west":
-                axios.get("http://localhost:4001/movieRouter/eAll")
+                axios.get("http://localhost:4001/movieRouter/twAll")
                     .then(response => {
                         console.log(response);
                         console.log(response.data);
