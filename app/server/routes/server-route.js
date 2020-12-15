@@ -60,14 +60,27 @@ router.post('/rwCreate', movieRoutes.rwCreate);
 router.put('/rwDelete', movieRoutes.rwDelete);
 router.put('/rwReset', movieRoutes.rwReset);
 
-//trendingWest
-router.get('/twAll', movieRoutes.trendingWestAll);
-router.post('/twCreate', movieRoutes.trendingWestCreate);
-
 //friends
 router.get('/fAll', movieRoutes.friendAll);
 router.post('/fCreate', movieRoutes.friendCreate);
 router.post('/fDelete', movieRoutes.friendDelete);
+
+
+//trendingWest
+router.get('/twAll', movieRoutes.trendingWestAll);
+router.post('/twCreate', movieRoutes.trendingWestCreate);
+
+//trendingCentral
+router.get('/tcAll', movieRoutes.trendingCentralAll);
+router.post('/tcCreate', movieRoutes.trendingCentralCreate);
+
+//trendingEast
+router.get('/teAll', movieRoutes.trendingEastAll);
+router.post('/teCreate', movieRoutes.trendingEastCreate);
+
+//trendingSouth
+router.get('/tsAll', movieRoutes.trendingSouthAll);
+router.post('/tsCreate', movieRoutes.trendingSouthCreate);
 
 
 // Export router

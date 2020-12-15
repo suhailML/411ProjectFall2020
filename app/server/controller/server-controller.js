@@ -230,6 +230,26 @@ knex
 }
 
 
+
+
+
+// -------- USER -----------
+
+exports.usersAll = async (req, res) => {
+  // Get all books from database
+  knex
+    .select('*') // select all records
+    .from('userInfo') // from 'books' table
+    .then(userData => {
+      // Send books extracted from database in response
+      res.json(userData)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving books: ${err}` })
+    })
+  }
+
 exports.getUser = async (req, res) => {
   // Get specific user from database
   knex
@@ -266,22 +286,6 @@ knex
   })
 }
 
-// users !!!!!!!!!!
-
-exports.usersAll = async (req, res) => {
-// Get all books from database
-knex
-  .select('*') // select all records
-  .from('userInfo') // from 'books' table
-  .then(userData => {
-    // Send books extracted from database in response
-    res.json(userData)
-  })
-  .catch(err => {
-    // Send a error message in response
-    res.json({ message: `There was an error retrieving books: ${err}` })
-  })
-}
 
 //get single user
 exports.getUser = async (req, res) => {
@@ -291,7 +295,6 @@ exports.getUser = async (req, res) => {
     .catch(err => {
       res.json({message: `Error ${err} for getting userInfo`})
     })
-  
 }
 
 // Create new book
@@ -352,7 +355,12 @@ knex
 }
 
 
-// friendlist !!!!!!!!!!!!!
+
+
+
+
+
+// --------- friends ------------
 
 exports.friendAll = async (req, res) => {
   // Get all books from database
@@ -402,6 +410,11 @@ exports.friendDelete = async (req, res) => {
       res.json({ message: `There was an error removing friend ${req.body.friendID}: ${err}` })
     })
 }
+
+
+
+
+
 
 
 
@@ -480,9 +493,15 @@ knex
   })
 }
 
-// trending in west !!!!
 
-// 
+
+
+
+
+
+
+//----------- trending in West ------------
+
 exports.trendingWestAll = async (req, res) => {
   // Get all events from database
   knex
@@ -498,10 +517,8 @@ exports.trendingWestAll = async (req, res) => {
     })
   }
 
-  // Create new event
-exports.trendingWestCreate = async (req, res) => {
 
-  // Add new book to database
+exports.trendingWestCreate = async (req, res) => {
   knex.raw()
   knex("trendingWest")
     .insert({
@@ -528,7 +545,158 @@ exports.trendingWestCreate = async (req, res) => {
       // Send a error message in response
       res.json({ message: `There was an error retrieving events: ${err}` })
     })
+}
 
+
+
+
+
+
+//----------- trending in East ------------
+
+exports.trendingEastAll = async (req, res) => {
+  // Get all events from database
+  knex
+    .select('*') // select all records
+    .from('trendingEast') // from 'books' table
+    .then(trendingEast => {
+      // Send books extracted from database in response
+      res.json(trendingEast)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving events: ${err}` })
+    })
+  }
 
   
+exports.trendingEastCreate = async (req, res) => {
+  knex.raw()
+  knex("trendingEast")
+    .insert({
+      'id': req.body.id,
+      'title': req.body.title,
+      'type': req.body.type,
+      'backdrop_path': req.body.backdrop_path,
+      'poster_path': req.body.poster_path,
+      'release_date': req.body.release_date,
+      'num_seasons': req.body.num_seasons,
+      'num_episodes': req.body.num_episodes,
+      'overview': req.body.overview,
+      'num_views': 1
+    })
+    .onConflict('id')
+    .merge({
+      num_views: 4
+    })
+    .then(trendingEast => {
+      // Send books extracted from database in response
+      res.json(trendingEast)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving events: ${err}` })
+    })
+}
+
+
+
+
+
+//----------- trending in South ------------
+
+exports.trendingSouthAll = async (req, res) => {
+  // Get all events from database
+  knex
+    .select('*') // select all records
+    .from('trendingSouth') // from 'books' table
+    .then(trendingSouth => {
+      // Send books extracted from database in response
+      res.json(trendingSouth)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving events: ${err}` })
+    })
   }
+
+  
+exports.trendingSouthCreate = async (req, res) => {
+  knex.raw()
+  knex("trendingSouth")
+    .insert({
+      'id': req.body.id,
+      'title': req.body.title,
+      'type': req.body.type,
+      'backdrop_path': req.body.backdrop_path,
+      'poster_path': req.body.poster_path,
+      'release_date': req.body.release_date,
+      'num_seasons': req.body.num_seasons,
+      'num_episodes': req.body.num_episodes,
+      'overview': req.body.overview,
+      'num_views': 1
+    })
+    .onConflict('id')
+    .merge({
+      num_views: 4
+    })
+    .then(trendingSouth => {
+      // Send books extracted from database in response
+      res.json(trendingSouth)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving events: ${err}` })
+    })
+}
+
+
+
+
+//----------- trending in Central ------------
+
+exports.trendingCentralAll = async (req, res) => {
+  // Get all events from database
+  knex
+    .select('*') // select all records
+    .from('trendingCentral') // from 'books' table
+    .then(trendingCentral => {
+      // Send books extracted from database in response
+      res.json(trendingCentral)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving events: ${err}` })
+    })
+  }
+
+  
+exports.trendingCentralCreate = async (req, res) => {
+  knex.raw()
+  knex("trendingCentral")
+    .insert({
+      'id': req.body.id,
+      'title': req.body.title,
+      'type': req.body.type,
+      'backdrop_path': req.body.backdrop_path,
+      'poster_path': req.body.poster_path,
+      'release_date': req.body.release_date,
+      'num_seasons': req.body.num_seasons,
+      'num_episodes': req.body.num_episodes,
+      'overview': req.body.overview,
+      'num_views': 1
+    })
+    .onConflict('id')
+    .merge({
+      num_views: 4
+    })
+    .then(trendingCentral => {
+      // Send books extracted from database in response
+      res.json(trendingCentral)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retrieving events: ${err}` })
+    })
+}
+
