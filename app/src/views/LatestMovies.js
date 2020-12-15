@@ -32,31 +32,57 @@ class LatestMovies extends React.Component {
 
         switch(this.props.type){
             case "east":
-                break;
+                axios.get("http://localhost:4001/movieRouter/teAll")
+                    .then(response => {
+                        console.log(response);
+                        console.log(response.data);
+                        this.setState({
+                            isLoaded: true,
+                            trending_list: response.data
+                        });
+                  });
+                  break;
 
             case "west":
-                axios.get("http://localhost:4001/movieRouter/twAll")
-                .then(response => {
-                    // Update the books state
-                    this.setState({
-                        isLoaded: true,
-                        trending_list: response.data
-                    });
-                    console.log(response.data);
+                axios.get("http://localhost:4001/movieRouter/eAll")
+                    .then(response => {
+                        console.log(response);
+                        console.log(response.data);
+                        this.setState({
+                            isLoaded: true,
+                            trending_list: response.data
+                        });
                   });
                   break;
 
             case "central":
-                break;
+                axios.get("http://localhost:4001/movieRouter/tcAll")
+                    .then(response => {
+                        console.log(response);
+                        console.log(response.data);
+                        this.setState({
+                            isLoaded: true,
+                            trending_list: response.data
+                        });
+                  });
+                  break;
 
             case "south":
-                break;
+                axios.get("http://localhost:4001/movieRouter/tsAll")
+                    .then(response => {
+                        console.log(response);
+                        console.log(response.data);
+                        this.setState({
+                            isLoaded: true,
+                            trending_list: response.data
+                        });
+                  });
+                  break;
 
             default:
                 fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
                 .then(response => response.json())
                 .then(json => {
-                    console.log(json);
                     this.setState({
                         isLoaded: true,
                         trending_list: json.results
@@ -65,19 +91,6 @@ class LatestMovies extends React.Component {
                 .catch(this.handleErr);
                 break;
         }
-
-        /*THIS IS NOT PRODUCTION SAFE CODE -- THE ONLY SAFE WAY TO HIDE API KEY IS 
-        TO CALL IT FROM A BACKEND SERVER; but since this local, it'll do*/
-        // fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
-        //     .then(response => response.json())
-        //     .then(json => {
-        //         this.setState({
-        //             isLoaded: true,
-        //             trending_list: json.results,
-        //         });
-        //         console.log(json.results);
-        //     })
-        //     .catch(this.handleErr);
     }
 
     getHeader(movielist_type) {

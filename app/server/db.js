@@ -199,6 +199,12 @@ knex.schema
           console.error(`There was an error setting up the database: ${error}`)
         })
 
+
+
+
+
+      // ------- trendingWest ---------- 
+
       knex.schema
       // Make sure no "books" table exists
       // before trying to create new
@@ -211,7 +217,15 @@ knex.schema
             // and use "id" as a primary identification
             // and increment "id" with every new record (book)
             return knex.schema.createTable('trendingWest', (table)  => {
-              table.increments('id').primary()
+              table.integer('id').primary()
+              table.string('title');
+              table.string('type');
+              table.string('backdrop_path');
+              table.string('poster_path');
+              table.integer('num_seasons');
+              table.integer('num_episodes');
+              table.string('overview');
+              table.integer('num_views');
             })
             .then(() => {
               // Log success message
@@ -231,6 +245,141 @@ knex.schema
           console.error(`There was an error setting up the database: ${error}`)
         })
 
+
+
+      // ---------- trendingEast -------------
+      knex.schema
+      // Make sure no "books" table exists
+      // before trying to create new
+      .hasTable('trendingEast')
+        .then((exists) => {
+          if (!exists) {
+            // If no "books" table exists
+            // create new, with "id", "author", "title",
+            // "pubDate" and "rating" columns
+            // and use "id" as a primary identification
+            // and increment "id" with every new record (book)
+            return knex.schema.createTable('trendingEast', (table)  => {
+              table.integer('id').primary()
+              table.string('title');
+              table.string('type');
+              table.string('backdrop_path');
+              table.string('poster_path');
+              table.integer('num_seasons');
+              table.integer('num_episodes');
+              table.string('overview');
+              table.integer('num_views');
+            })
+            .then(() => {
+              // Log success message
+              console.log('Table \'trendingEast\' created')
+            })
+            .catch((error) => {
+              console.log(error);
+              console.error(`There was an error creating table: ${error}`)
+            })
+          }
+        })
+        .then(() => {
+          // Log success message
+          console.log('done')
+        })
+        .catch((error) => {
+          console.error(`There was an error setting up the database: ${error}`)
+        })
+
+
+
+
+
+      knex.schema
+      // Make sure no "books" table exists
+      // before trying to create new
+      .hasTable('trendingCentral')
+        .then((exists) => {
+          if (!exists) {
+            // If no "books" table exists
+            // create new, with "id", "author", "title",
+            // "pubDate" and "rating" columns
+            // and use "id" as a primary identification
+            // and increment "id" with every new record (book)
+            return knex.schema.createTable('trendingCentral', (table)  => {
+              table.integer('id').primary()
+              table.string('title');
+              table.string('type');
+              table.string('backdrop_path');
+              table.string('poster_path');
+              table.integer('num_seasons');
+              table.integer('num_episodes');
+              table.string('overview');
+              table.integer('num_views');
+            })
+            .then(() => {
+              // Log success message
+              console.log('Table \'trendingCentral\' created')
+            })
+            .catch((error) => {
+              console.log(error);
+              console.error(`There was an error creating table: ${error}`)
+            })
+          }
+        })
+        .then(() => {
+          // Log success message
+          console.log('done')
+        })
+        .catch((error) => {
+          console.error(`There was an error setting up the database: ${error}`)
+        })
+        
+        
+        
+        
+        knex.schema
+        // Make sure no "books" table exists
+        // before trying to create new
+        .hasTable('trendingSouth')
+          .then((exists) => {
+            if (!exists) {
+              // If no "books" table exists
+              // create new, with "id", "author", "title",
+              // "pubDate" and "rating" columns
+              // and use "id" as a primary identification
+              // and increment "id" with every new record (book)
+              return knex.schema.createTable('trendingSouth', (table)  => {
+                table.integer('id').primary()
+                table.string('title');
+                table.string('type');
+                table.string('backdrop_path');
+                table.string('poster_path');
+                table.integer('num_seasons');
+                table.integer('num_episodes');
+                table.string('overview');
+                table.integer('num_views');
+              })
+              .then(() => {
+                // Log success message
+                console.log('Table \'trendingSouth\' created')
+              })
+              .catch((error) => {
+                console.log(error);
+                console.error(`There was an error creating table: ${error}`)
+              })
+            }
+          })
+          .then(() => {
+            // Log success message
+            console.log('done')
+          })
+          .catch((error) => {
+            console.error(`There was an error setting up the database: ${error}`)
+          })
+
+
+
+
+
+        // ---------- friendList ----------
         knex.schema
         // Make sure no "books" table exists
         // before trying to create new

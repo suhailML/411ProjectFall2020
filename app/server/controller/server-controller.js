@@ -507,19 +507,18 @@ exports.trendingWestAll = async (req, res) => {
   knex
     .select('*') // select all records
     .from('trendingWest') // from 'books' table
-    .then(trendingWest => {
+    .then(userData => {
       // Send books extracted from database in response
-      res.json(trendingWest)
+      res.json(userData);
     })
     .catch(err => {
       // Send a error message in response
-      res.json({ message: `There was an error retrieving events: ${err}` })
+      res.json({ message: `There was an error retrieving event: ${err}` })
     })
   }
 
 
 exports.trendingWestCreate = async (req, res) => {
-  knex.raw()
   knex("trendingWest")
     .insert({
       'id': req.body.id,
@@ -558,10 +557,9 @@ exports.trendingEastAll = async (req, res) => {
   // Get all events from database
   knex
     .select('*') // select all records
-    .from('trendingEast') // from 'books' table
-    .then(trendingEast => {
-      // Send books extracted from database in response
-      res.json(trendingEast)
+    .from('events') // from 'books' table
+    .then(results => {
+        console.log(results);
     })
     .catch(err => {
       // Send a error message in response

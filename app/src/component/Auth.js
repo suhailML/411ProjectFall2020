@@ -10,7 +10,7 @@ const Auth = (InnerComponent) => {
     const authComponent = () => {
         
         /* change auth to really check login status*/
-        const auth = false
+        const auth = true;
         return (auth ? <InnerComponent/> : <Redirect to="/login"/>);
     }
     return authComponent;

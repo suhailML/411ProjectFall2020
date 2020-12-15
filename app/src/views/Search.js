@@ -26,7 +26,7 @@ class Search extends React.Component {
         console.log(search_results);
 
         // make getAll call to database to get user info
-        axios.get("http://localhost:4001/movieRouter/uAll")
+        axios.get("http://localhost:4001/movieRouter/uSearch")
                 .then(response => {
                     // Update the books state
                     this.setState({
@@ -46,6 +46,7 @@ class Search extends React.Component {
             } 
         });
         this.setState({
+            user_results: user_results,
             tv_results: tv_results,
             movie_results: movie_results
         });
