@@ -141,6 +141,8 @@ knex.schema
             table.string('location')
             table.string('date')
             table.string('time')
+            table.foreign('userID').references('userId').inTable('userInfo');
+            table.foreign('movieID').references('movidAPIid').inTable('movies');
           })
           .then(() => {
             // Log success message
@@ -171,11 +173,11 @@ knex.schema
             // and use "id" as a primary identification
             // and increment "id" with every new record (book)
             return knex.schema.createTable('userInfo', (table)  => {
-              table.integer('userId')
+              table.integer('userId').unique()
               table.string('firstName')
               table.string('lastName')
               table.string('email')
-              table.string('userName')
+              table.string('userName').unique()
               table.string('locality')
               table.string('year')
               table.string('clubAffiliations')
@@ -377,9 +379,6 @@ knex.schema
           })
 
 
-
-
-
         // ---------- friendList ----------
         knex.schema
         // Make sure no "books" table exists
@@ -401,6 +400,38 @@ knex.schema
               .then(() => {
                 // Log success message
                 console.log('Table \'FriendList \' created')
+              })
+              .catch((error) => {
+                console.error(`There was an error creating table: ${error}`)
+              })
+            }
+          })
+          .then(() => {
+            // Log success message
+            console.log('done')
+          })
+          .catch((error) => {
+            console.error(`There was an error setting up the database: ${error}`)
+          })
+
+                 // ---------- WatchList ----------
+        knex.schema
+        // Make sure no "watchList" table exists
+        // before trying to create new
+        .hasTable('watchList')
+          .then((exists) => {
+            if (!exists) {
+              // If no "watch" table exists
+
+              return knex.schema.createTable('watchList', (table)  => {
+                table.integer('userId');
+                table.integer('movieID');
+                table.foreign('userId').references('userId').inTable('userInfo');
+                table.foreign('movieID').references('movidAPIid').inTable('movies');
+              })
+              .then(() => {
+                // Log success message
+                console.log('Table \'watchList \' created')
               })
               .catch((error) => {
                 console.error(`There was an error creating table: ${error}`)

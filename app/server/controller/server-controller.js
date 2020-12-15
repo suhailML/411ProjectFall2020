@@ -427,7 +427,54 @@ exports.friendDelete = async (req, res) => {
     })
 }
 
-
+// --------- watchlist ------------
+exports.watchAll = async (req, res) => {
+  // Get all wathced by user from database
+  knex
+    .select('userId') // select all records
+    .from({u:'userInfo'}) // from 'userInfo' table
+    .innerJoin({m:'watchList'}, 'm.movieID', '=', 'u.userId')
+    .where('m.movieID',req.body.userID)
+    .then(userData => {
+      // Send watched movieID extracted from database in response
+      res.json(userData)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retreving watch list: ${err}` })
+    })
+}
+// add friend
+exports.watchCreate = async (req, res) => {
+  // Add new book to database
+  knex('watchList')
+    .insert({ // insert new record, a book
+      'userId': req.body.userID,
+      'movieID': req.body.movieID,
+    })
+    .then(() => {
+      // Send a success message in response
+      res.json({ message: `User \'${req.body.userID}\' added \'${req.body.movieID}\' to watched movies.` })
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error adding movie ${req.body.movieID}: ${err}` })
+    })
+}
+exports.watchDelete = async (req, res) => {
+  // Find specific friend link in the database and remove it
+  knex('watchList')
+    .where(req.body.userID,req.body.movieID ) // find correct record based on ids
+    .del() // delete the record
+    .then(() => {
+      // Send a success message in response
+      res.json({ message: `User ${req.body.userID} removed ${req.body.movieID} from watchlist` })
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error removing friend ${req.body.friendID}: ${err}` })
+    })
+}
 
 
 

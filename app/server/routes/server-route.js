@@ -65,6 +65,10 @@ router.get('/fAll', movieRoutes.friendAll);
 router.post('/fCreate', movieRoutes.friendCreate);
 router.post('/fDelete', movieRoutes.friendDelete);
 
+//friends
+router.get('/wAll', movieRoutes.watchAll);
+router.post('/wCreate', movieRoutes.watchCreate);
+router.post('/wDelete', movieRoutes.watchDelete);
 
 //trendingWest 
 router.get('/twAll', movieRoutes.trendingWestAll);
