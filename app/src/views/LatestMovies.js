@@ -59,19 +59,6 @@ class LatestMovies extends React.Component {
                   });
                   break;
 
-            case "central":
-                axios.post("http://localhost:4001/movieRouter/all", {
-                      table: 'trendingCentral'
-                  }) 
-                    .then(response => {
-                        console.log(response);
-                        console.log(response.data);
-                        this.setState({
-                            isLoaded: true,
-                            trending_list: response.data
-                        });
-                  });
-
             case "south":
                 axios.post("http://localhost:4001/movieRouter/all", {
                       table: 'trendingSouth'
