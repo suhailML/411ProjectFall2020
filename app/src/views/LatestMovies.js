@@ -105,9 +105,6 @@ class LatestMovies extends React.Component {
             case "east":
                 return "Trending in East";
 
-            case "central":
-                return "Trending in Central";
-
             case "west":
                 return "Trending in West";
 

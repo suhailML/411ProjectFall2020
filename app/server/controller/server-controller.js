@@ -53,6 +53,7 @@ exports.rwAll = async (req, res) => {
       res.json({ message: `There was an error retrieving genres: ${err}` });
     });
 }
+
 // Create new book
 exports.rwCreate = async (req, res) => {
   // Add new book to database
@@ -522,7 +523,7 @@ exports.trendingWestAll = (req, res) => {
   // Get all events from database
   knex
     .select('*') // select all records
-    .from('trenWest')
+    .from("trendingWest")
     .then(trendingData => {
       // Send books extracted from database in response
       console.log(trendingData)
@@ -577,6 +578,7 @@ exports.trendingEastAll = async (req, res) => {
     .from('events') // from 'books' table
     .then(results => {
         console.log(results);
+        res.json(results);
     })
     .catch(err => {
       // Send a error message in response
@@ -667,51 +669,4 @@ exports.trendingSouthCreate = async (req, res) => {
 
 
 
-
-//----------- trending in Central ------------
-
-exports.trendingCentralAll = async (req, res) => {
-  // Get all events from database
-  knex
-    .select('*') // select all records
-    .from('trendingCentral') // from 'books' table
-    .then(trendingCentral => {
-      // Send books extracted from database in response
-      res.json(trendingCentral)
-    })
-    .catch(err => {
-      // Send a error message in response
-      res.json({ message: `There was an error retrieving events: ${err}` })
-    })
-  }
-
-  
-exports.trendingCentralCreate = async (req, res) => {
-  knex.raw()
-  knex("trendingCentral")
-    .insert({
-      'id': req.body.id,
-      'title': req.body.title,
-      'type': req.body.type,
-      'backdrop_path': req.body.backdrop_path,
-      'poster_path': req.body.poster_path,
-      'release_date': req.body.release_date,
-      'num_seasons': req.body.num_seasons,
-      'num_episodes': req.body.num_episodes,
-      'overview': req.body.overview,
-      'num_views': 1
-    })
-    .onConflict('id')
-    .merge({
-      num_views: 4
-    })
-    .then(trendingCentral => {
-      // Send books extracted from database in response
-      res.json(trendingCentral)
-    })
-    .catch(err => {
-      // Send a error message in response
-      res.json({ message: `There was an error retrieving events: ${err}` })
-    })
-}
 

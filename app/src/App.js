@@ -31,7 +31,6 @@ function App() {
             <LatestMovies type="global"/>
             <LatestMovies type="west"/>
             <LatestMovies type="east"/>
-            <LatestMovies type="central"/>
             <LatestMovies type="south"/>
           </Route>
 
