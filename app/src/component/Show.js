@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 // TODO: make width of text the same as trendbox
 
 class Show extends React.Component {
@@ -38,6 +39,32 @@ class Show extends React.Component {
         );
         return resp;
     }
+
+    isWatched(event){
+        var {watched, title, id, backdrop_path, number_seasons, number_episodes, poster_path, overview, release_date} = this.state;
+        event.preventDefault();
+        if (!watched) {
+            axios
+            .post('http://localhost:4001/movieRouter/twCreate', {
+                id: id,
+                title: title,
+                type: 'movie',
+                backdrop_path: backdrop_path,
+                poster_path: poster_path,
+                release_date: release_date,
+                overview: overview,
+                num_seasons: number_seasons,
+                num_episodes: number_episodes,
+            })
+            .then(res => {
+              console.log(res.data);
+              // Fetch all books to refresh
+              // the books on the bookshelf list
+            })
+            .catch(error => console.error(`didnt work fuck`));
+        }
+        this.setState({watched: true});
+    }
     
     
     componentDidMount() {
@@ -47,8 +74,7 @@ class Show extends React.Component {
                     this.setState({
                         isLoaded: true,
                         num_seasons: results.number_of_seasons,
-                        num_episodes: results.number_of_episodes,
-                        info: results
+                        num_episodes: results.number_of_episodes
                     });
                 })
                 .catch(this.handleErr);

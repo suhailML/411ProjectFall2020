@@ -55,18 +55,6 @@ class LatestMovies extends React.Component {
                   });
                   break;
 
-            case "central":
-                axios.get("http://localhost:4001/movieRouter/tcAll")
-                    .then(response => {
-                        console.log(response);
-                        console.log(response.data);
-                        this.setState({
-                            isLoaded: true,
-                            trending_list: response.data
-                        });
-                  });
-                  break;
-
             case "south":
                 axios.get("http://localhost:4001/movieRouter/tsAll")
                     .then(response => {
@@ -97,9 +85,6 @@ class LatestMovies extends React.Component {
         switch(movielist_type){
             case "east":
                 return "Trending in East";
-
-            case "central":
-                return "Trending in Central";
 
             case "west":
                 return "Trending in West";
