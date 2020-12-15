@@ -311,23 +311,23 @@ exports.getUser = async (req, res) => {
 
 exports.searchUsers = async (req, res) => {
   // Get specific user from database
-knex
-  .select('*') // select all records
-  .from('userInfo') // from 'userInfo' table
-  .where('userId', req.body.id)
-  .orwhere('firstName', 'like', `%${req.body.firstName}%`)
-  .orwhere('lastName', 'like', `%${req.body.lastName}%`)
-  .orwhere('userName', 'like', `%${req.body.userName}%`)
-  // find correct record based on id
-  .then(userData => {
-    // Send specified userInfo based on userId extracted from database in response
-    res.json(userData)
-  })
-  .catch(err => {
-    // Send a error message in response
-    res.json({ message: `There was an error getting search users: ${err}` })
-  })
-}
+  knex
+    .select('*') // select all records
+    .from('userInfo') // from 'userInfo' table
+    .where('id', req.body.id)
+    .orwhere('firstName', 'like', `%${req.body.firstName}%`)
+    .orwhere('lastName', 'like', `%${req.body.lastName}%`)
+    .orwhere('userName', 'like', `%${req.body.userName}%`)
+    // find correct record based on id
+    .then(userData => {
+      // Send specified userInfo based on userId extracted from database in response
+      res.json(userData)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error getting search users: ${err}` })
+    })
+  }
 
 
 //get single user— only works if id known beforehand
@@ -602,7 +602,7 @@ exports.trendingEastAll = async (req, res) => {
   // Get all events from database
   knex
     .select('*') // select all records
-    .from('events') // from 'books' table
+    .from('trendingEast') // from 'books' table
     .then(results => {
         console.log(results);
         res.json(results);
