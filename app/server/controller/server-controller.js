@@ -424,7 +424,7 @@ knex
 exports.friendAll = async (req, res) => {
   // Get all books from database
   knex
-    .select('userId') // select all records
+    .select('friendId') // select all records
     .from({u:'userInfo'}) // from 'userInfo' table
     .innerJoin({f:'friendList'}, 'f.friendId', '=', 'u.userId')
     .where('f.friendId',req.body.userID)
@@ -438,6 +438,7 @@ exports.friendAll = async (req, res) => {
       res.json({ message: `There was an error retreving friends list: ${err}` })
     })
 }
+
 // add friend
 exports.friendCreate = async (req, res) => {
   // Add new book to database

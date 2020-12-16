@@ -33,7 +33,8 @@ class User extends React.Component {
                     firstName: userInfo.firstName,
                     lastName: userInfo.lastName,
                     locality: userInfo.locality,
-                    year: userInfo.year
+                    year: userInfo.year,
+                    showAll: userInfo.showAll
                 })
                 }
                 catch (err)
@@ -43,22 +44,22 @@ class User extends React.Component {
             });
     }
 
-    addFriend(event){
-        var url = 'http://localhost:4001/movieRouter/tsCreate';
-        var {watched, title, id, backdrop_path, poster_path, overview, release_date} = this.state;
-        event.preventDefault();
-        if (!watched) {
-            axios
-            .post('http://localhost:4001/movieRouter/tsCreate', {
+    // addFriend(event){
+    //     var url = 'http://localhost:4001/movieRouter/';
+    //     var {} = this.state;
+    //     event.preventDefault();
+    //     if (!watched) {
+    //         axios
+    //         .post('http://localhost:4001/movieRouter/tsCreate', {
                 
-            })
-            .then(res => {
-              console.log(res.data);
-            })
-            .catch(error => console.error(`didnt work fuck`));
-        }
-        this.setState({watched: true});
-    }
+    //         })
+    //         .then(res => {
+    //           console.log(res.data);
+    //         })
+    //         .catch(error => console.error(`didnt work fuck`));
+    //     }
+    //     this.setState({watched: true});
+    // }
 
     render() {
 

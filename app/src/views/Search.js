@@ -17,7 +17,6 @@ class Search extends React.Component {
         };
     }
 
-
     parseSearchResults(search_results) {
         var tv_results = [];
         var user_results = [];

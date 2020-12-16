@@ -9,7 +9,6 @@ import {
   } from "react-router-dom";
 
 import App from './App';
-import Login from './views/Login';
 import Home from './views/Home';
 import Quiz from './views/Quiz';
 
