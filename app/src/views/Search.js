@@ -24,17 +24,17 @@ class Search extends React.Component {
         var user_results = [];
         var movie_results = [];
 
-        // // make getAll call to database to get user info
-        // axios.post("http://localhost:4001/movieRouter/userSpecificSearch",{
-        //         query: this.state.query
-        //     }) 
-        //     .then(response => {
-        //         var userInfo = response.data
-        //         console.log(userInfo);
-        //         this.setState({
-        //             user_results: userInfo
-        //         })
-        //     });
+        // make getAll call to database to get user info
+        axios.post("http://localhost:4001/movieRouter/uSearch",{
+                query: this.state.query
+            }) 
+            .then(response => {
+                var userInfo = response.data;
+                this.setState({
+                    user_results: userInfo
+                })
+            });
+            
         // Search results can be one of: tv, movie, or person
         search_results.forEach(result => {
             if (result.media_type === 'tv' && result.poster_path !== null) {
@@ -111,6 +111,8 @@ class Search extends React.Component {
     render() {
         var { isLoaded, user_results, tv_results, movie_results} = this.state;
         
+        console.log(user_results);
+
         if( !isLoaded ) {
             return (
                 <div className="feature">
@@ -122,17 +124,17 @@ class Search extends React.Component {
             return (
                 <div>
                     <div className="featurebox">
+                        <h3>Search results for {this.state.query}</h3>
                         <p>Users</p>
                         <div className="feature">
                         {/* once you get the trend movies as an array from compDidMount
                         create a Movie Component */}
-                        {(user_results.every((user_result) => {return (user_result.poster_path !== null)}) || user_results > 0) ?
-                                user_results.map(user => 
-                                    <User id={user.id} userName={user.userName}/>
-                            ) : <p>No users :(</p>}
+                        {user_results.length > 0 ?
+                            user_results.map(user => 
+                                <User id={user.id} userName={user.userName} size={7}/>
+                            ) : <p>No users :(</p> }
                         </div>
 
-                        <h5>Search results for {this.state.query}</h5>
                         <p>Movies</p>
                         <div className="feature">
                         {/* once you get the trend movies as an array from compDidMount

@@ -332,10 +332,10 @@ exports.searchUsers = async (req, res) => {
   knex
     .select('*') // select all records
     .from('userInfo') // from 'userInfo' table
-    .where('id', req.body.id)
-    .orWhere('firstName', 'LIKE', `%${req.body.firstName}%`)
-    .orWhere('lastName', 'LIKE', `%${req.body.lastName}%`)
-    .orWhere('userName', 'LIKE', `%${req.body.userName}%`)
+    .where('id', req.body.query)
+    .orWhere('firstName', 'LIKE', `%${req.body.query}%`)
+    .orWhere('lastName', 'LIKE', `%${req.body.query}%`)
+    .orWhere('userName', 'LIKE', `%${req.body.query}%`)
     // find correct record based on id
     .then(userData => {
       // Send specified userInfo based on userId extracted from database in response

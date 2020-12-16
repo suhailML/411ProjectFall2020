@@ -36,7 +36,6 @@ router.post('/api/:tokenid', movieRoutes.authorize)
 
 //event
 router.get('/eAll', movieRoutes.eventsAll);
-router.post('/eCreate', movieRoutes.eventsCreate);
 router.put('/eDelete', movieRoutes.eventsDelete);
 router.put('/eReset', movieRoutes.eventsReset);
 
@@ -47,7 +46,7 @@ router.post('/uCreate', movieRoutes.usersCreate);
 router.put('/uDelete', movieRoutes.usersDelete);
 router.put('/uReset', movieRoutes.usersReset);
 // router.get('/uGet', movieRoutes.getUser);
-router.get('/uSearch', movieRoutes.searchUsers);
+router.post('/uSearch', movieRoutes.searchUsers);
 
 //genre
 router.get('/gAll', movieRoutes.genreAll);
