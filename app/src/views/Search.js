@@ -24,17 +24,17 @@ class Search extends React.Component {
         var user_results = [];
         var movie_results = [];
 
-        // make getAll call to database to get user info
-        axios.post("http://localhost:4001/movieRouter/userSpecificSearch",{
-                query: this.state.query
-            }) 
-            .then(response => {
-                var userInfo = response.data
-                console.log(userInfo);
-                this.setState({
-                    user_results: userInfo
-                })
-            });
+        // // make getAll call to database to get user info
+        // axios.post("http://localhost:4001/movieRouter/userSpecificSearch",{
+        //         query: this.state.query
+        //     }) 
+        //     .then(response => {
+        //         var userInfo = response.data
+        //         console.log(userInfo);
+        //         this.setState({
+        //             user_results: userInfo
+        //         })
+        //     });
         // Search results can be one of: tv, movie, or person
         search_results.forEach(result => {
             if (result.media_type === 'tv' && result.poster_path !== null) {
@@ -55,7 +55,7 @@ class Search extends React.Component {
 
     componentDidUpdate(prevProp) {
         if (prevProp.match.params.query !== this.props.match.params.query) {
-            fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&query=${this.props.match.params.query}`)
+            fetch(`https://api.themoviedb.org/3/search/multi?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&query=${this.props.match.params.query}&page=2&include_adult=false`)
             .then(response => response.json())
             .then(json => {
                 this.setState({
