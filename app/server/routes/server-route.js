@@ -27,6 +27,9 @@ const router = express.Router();
 // this means that '/reset' translates to '/books/reset'
 // router.put('/bReset', movieRoutes.booksReset);
 
+//server-side auth
+router.post('/api/:tokenid', movieRoutes.authorize)
+
 //event
 router.get('/eAll', movieRoutes.eventsAll);
 router.post('/eCreate', movieRoutes.eventsCreate);

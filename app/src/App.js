@@ -23,15 +23,15 @@ function App() {
       <Navbar/>
 
         {/*todo: hide scroll bar*/}
-        <div style={{overflowY: 'scroll', height: "100vh"}}>
+        <div style={{overflowY: 'scroll', height: "100%"}}>
         
         <Switch>
           <Route exact path={match.path}>
-          <BulletinBoard/>
             <LatestMovies type="global"/>
             <LatestMovies type="west"/>
             <LatestMovies type="east"/>
             <LatestMovies type="south"/>
+            <BulletinBoard/>
           </Route>
 
           {/* the reason why you put component={component} is so that you can

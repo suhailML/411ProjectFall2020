@@ -1,9 +1,36 @@
 // Import database
 const knex = require('./../db');
+const axios = require('axios');
 
 // Retrieve all books
 
 console.log("IN THE SERVER CONT");
+
+exports.authorize = async (req, res) => {
+  var data;
+  axios.get("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + req.params.tokenid)
+    .then(authdata => {
+      console.log(authdata.data)
+      if (authdata.data.email_verified === "true"){
+         data = authdata.data
+      }
+      })
+    .then(() => {
+      const { email } = data
+      knex('userInfo')
+          .where('email', email)
+          .then(info => res.json({
+            info: info,
+            firstName: data.given_name,
+            lastName: data.family_name,
+            email: email
+          }))
+          .catch(err => {
+            res.json({message: `Error ${err} for getting userInfo`})
+        })
+    })
+    .catch(e => console.log(e))
+}
 
 
 exports.tableSpecificSearch = async (req, res) => {
@@ -303,15 +330,15 @@ exports.searchUsers = async (req, res) => {
   }
 
 
-//get single user
-exports.getUser = async (req, res) => {
-  knex('userInfo')
-    .where('id', req.params.userId)
-    .then(info => res.json(info))
-    .catch(err => {
-      res.json({message: `Error ${err} for getting userInfo`})
-    })
-}
+//get single user— only works if id known beforehand
+// exports.getUser = async (req, res) => {
+//   knex('userInfo')
+//     .where('id', req.params.userId)
+//     .then(info => res.json(info))
+//     .catch(err => {
+//       res.json({message: `Error ${err} for getting userInfo`})
+//     })
+// }
 
 // Create new book
 exports.usersCreate = async (req, res) => {
