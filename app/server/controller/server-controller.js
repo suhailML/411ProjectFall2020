@@ -52,11 +52,11 @@ knex
 exports.userSpecificSearch = async (req, res) => {
 // Get all books from database
 knex.select('*') // select all records
-  .where('id'," like" , `${req.body.query}%`)
-  .orwhere('firstName', 'like', `${req.body.query}%`)
-  .orwhere('lastName', 'like', `${req.body.query}%`)
-  .orwhere('userName', 'like', `${req.body.query}%`)
-  .from('userList')
+  .from('userInfo') // from 'userInfo' table
+  .where('id'," LIKE" , `${req.body.query}%`)
+  .orWhere('firstName', 'LIKE', `%${req.body.query}%`)
+  .orWhere('lastName', 'LIKE', `%${req.body.query}%`)
+  .orWhere('userName', 'LIKE', `%${req.body.query}%`)
   .then(userData => {
     // Send books extracted from database in response
     res.json(userData);
@@ -332,10 +332,10 @@ exports.searchUsers = async (req, res) => {
   knex
     .select('*') // select all records
     .from('userInfo') // from 'userInfo' table
-    .where('id', req.body.id)
-    .orwhere('firstName', 'like', `%${req.body.firstName}%`)
-    .orwhere('lastName', 'like', `%${req.body.lastName}%`)
-    .orwhere('userName', 'like', `%${req.body.userName}%`)
+    .where('id', req.body.query)
+    .orWhere('firstName', 'LIKE', `%${req.body.query}%`)
+    .orWhere('lastName', 'LIKE', `%${req.body.query}%`)
+    .orWhere('userName', 'LIKE', `%${req.body.query}%`)
     // find correct record based on id
     .then(userData => {
       // Send specified userInfo based on userId extracted from database in response
@@ -472,7 +472,54 @@ exports.friendDelete = async (req, res) => {
     })
 }
 
-
+// --------- watchlist ------------
+exports.watchAll = async (req, res) => {
+  // Get all wathced by user from database
+  knex
+    .select('userId') // select all records
+    .from({u:'userInfo'}) // from 'userInfo' table
+    .innerJoin({m:'watchList'}, 'm.movieID', '=', 'u.userId')
+    .where('m.movieID',req.body.userID)
+    .then(userData => {
+      // Send watched movieID extracted from database in response
+      res.json(userData)
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error retreving watch list: ${err}` })
+    })
+}
+// add friend
+exports.watchCreate = async (req, res) => {
+  // Add new book to database
+  knex('watchList')
+    .insert({ // insert new record, a book
+      'userId': req.body.userID,
+      'movieID': req.body.movieID,
+    })
+    .then(() => {
+      // Send a success message in response
+      res.json({ message: `User \'${req.body.userID}\' added \'${req.body.movieID}\' to watched movies.` })
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error adding movie ${req.body.movieID}: ${err}` })
+    })
+}
+exports.watchDelete = async (req, res) => {
+  // Find specific friend link in the database and remove it
+  knex('watchList')
+    .where(req.body.userID,req.body.movieID ) // find correct record based on ids
+    .del() // delete the record
+    .then(() => {
+      // Send a success message in response
+      res.json({ message: `User ${req.body.userID} removed ${req.body.movieID} from watchlist` })
+    })
+    .catch(err => {
+      // Send a error message in response
+      res.json({ message: `There was an error removing friend ${req.body.friendID}: ${err}` })
+    })
+}
 
 
 
