@@ -136,13 +136,11 @@ knex.schema
           return knex.schema.createTable('recentlyWatched', (table)  => {
             table.increments('id').primary()
             table.string('movieTitle')
-            table.int('movieID')
-            table.string('userID')
+            table.int('movieID').references('movies.movidAPIid').onUpdate('CASCADE').onDelete('CASCADE'); // if primary key is changed, update this foreign key.
+            table.string('userID').references('userInfo.userId').onUpdate('CASCADE').onDelete('CASCADE'); // if primary key is changed, update this foreign key.
             table.string('location')
             table.string('date')
             table.string('time')
-            table.foreign('userID').references('userId').inTable('userInfo');
-            table.foreign('movieID').references('movidAPIid').inTable('movies');
           })
           .then(() => {
             // Log success message
@@ -173,7 +171,7 @@ knex.schema
             // and use "id" as a primary identification
             // and increment "id" with every new record (book)
             return knex.schema.createTable('userInfo', (table)  => {
-              table.integer('userId').unique()
+              table.integer('userId').unique().primary()
               table.string('firstName')
               table.string('lastName')
               table.string('email')
@@ -392,10 +390,8 @@ knex.schema
               // and use "id" as a primary identification
               // and increment "id" with every new record (book)
               return knex.schema.createTable('friendList', (table)  => {
-                table.integer('userId');
-                table.integer('friendId');
-                table.foreign('userId').references('userId').inTable('userInfo');
-                table.foreign('friendId').references('userId').inTable('userInfo');
+                table.integer('userId').references('userInfo.userId').onUpdate('CASCADE').onDelete('CASCADE'); // if primary key is changed, update this foreign key.
+                table.integer('friendId').references('userInfo.userId').onUpdate('CASCADE').onDelete('CASCADE'); // if primary key is changed, update this foreign key.
               })
               .then(() => {
                 // Log success message
@@ -424,10 +420,8 @@ knex.schema
               // If no "watch" table exists
 
               return knex.schema.createTable('watchList', (table)  => {
-                table.integer('userId');
-                table.integer('movieID');
-                table.foreign('userId').references('userId').inTable('userInfo');
-                table.foreign('movieID').references('movidAPIid').inTable('movies');
+                table.integer('userId').references('userInfo.userId').onUpdate('CASCADE').onDelete('CASCADE'); // if primary key is changed, update this foreign key.
+                table.integer('movieID').references('movies.movidAPIid').onUpdate('CASCADE').onDelete('CASCADE'); // if primary key is changed, update this foreign key.
               })
               .then(() => {
                 // Log success message
