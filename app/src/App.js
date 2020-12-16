@@ -43,7 +43,7 @@ function App() {
         
         
         </div>
-        <Sidebar userID={userid} name={userid}/>
+        <Sidebar userID={userid}/>
     </div>
   );
 }

@@ -8,7 +8,11 @@ class Sidebar extends React.Component {
 
         this.state={
             friendExpand: false,
-            friends: []
+            friends: [],
+            userID: this.props.userID,
+            userName: "",
+            firstName: "",
+            lastName: ""
         };
 
         this.expandlist = this.expandlist.bind(this);
@@ -33,7 +37,24 @@ class Sidebar extends React.Component {
             console.log(response);
             console.log(response.data);
           });
+    }
 
+    componentDidMount() {
+        axios.post("http://localhost:4001/movieRouter/tableSpecificSearch", {
+                table: "userInfo",
+                column: "id",
+                value: this.props.userID
+            }) 
+            .then(response => {
+                var userInfo = response.data[0]
+                
+                this.setState({
+                    userName:  userInfo.userName,
+                    firstName: userInfo.firstName,
+                    lastName: userInfo.lastName
+                })
+            });
+        
     }
 
     render() {
@@ -50,9 +71,9 @@ class Sidebar extends React.Component {
 
         return (
             <div className="sidebar">
-                <h4> hi {this.props.name} </h4>
+                <h4> hi {this.state.firstName} </h4>
                 {/*style prop takes an object for inline styles in JSX*/}
-                <User userName={this.props.name} size={33} self={true}/>
+                <User userID={this.props.userID} size={33} self={true}/>
 
                 <h2> Friends</h2>
                 <hr></hr>

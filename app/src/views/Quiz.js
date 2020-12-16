@@ -4,12 +4,14 @@ import axios from 'axios';
 import LoginButton from '../component/LoginC';
 import { refreshTokenSetup } from '../utils/refreshToken';
 import GoogleLogin from 'react-google-login';
+import { buildQueries } from '@testing-library/react';
 
 class Quiz extends React.Component{
     constructor(props) {
         super(props);
 
         this.state = ({
+            userID: null,
             firstName: "",
             lastName: "",
             userName: "",
@@ -43,33 +45,28 @@ class Quiz extends React.Component{
         this.prepoulate();
     }
 
-    createNewUser(event) {
+    async createNewUser(event) {
         var {firstName, lastName, userName, email, campusLocation, year} = this.state;
+      
         event.preventDefault();
         axios
             .post('http://localhost:4001/movieRouter/uCreate', {
                 firstName: firstName,
                 lastName: lastName,
                 email: email,
-                birthdayDate: "DOB",
                 userName: userName,
                 locality: campusLocation,
                 year: year,
-                clubAffiliations: "club",
-                watchedMovies: "movies"
+                clubAffiliations: "club"
             })
             .then(res => {
-              console.log(res.data);
-              
+                this.props.history.push('/home/' + res.data.id[0]);
             })
-            .then(() => {this.props.history.push('/home/' + userName)})
             .catch(error => console.error(`could not do search`));
     }
 
     handleChange(event){
         this.setState({[event.target.name]: event.target.value});
-        console.log(this.state.firstName);
-        console.log(this.props.location.state);
     }
 
     prepoulate(){
@@ -82,9 +79,7 @@ class Quiz extends React.Component{
             })
         } catch(e) {
             console.log("no state data")
-
-        }
-        
+        }      
     }
 
     // loginResults(res) {
@@ -125,7 +120,7 @@ class Quiz extends React.Component{
                         <br></br>
                         <br></br>
                         <label for="campuslocation">Campus Location:</label>
-                        <select name="campusLocation" value={this.state.campusLocation} onChange={this.handleChange}>
+                        <select name="campusLocation" value={this.state.campusLocation} defaultValue="West" onChange={this.handleChange}>
                             <option value="West">West</option>
                             <option value="East">East</option>
                             <option value="Central">Central</option>
@@ -135,7 +130,7 @@ class Quiz extends React.Component{
                         <br></br>
                         <br></br>
                         <label for="year">Year:</label>
-                        <select name="year" value={this.state.year} onChange={this.handleChange}>
+                        <select name="year" value={this.state.year} defaultValue="West" onChange={this.handleChange}>
                             <option value="1">Freshman</option>
                             <option value="2">Sophomore</option>
                             <option value="3">Junior</option>

@@ -26,21 +26,16 @@ class Search extends React.Component {
         console.log(search_results);
 
         // make getAll call to database to get user info
-        axios.get("http://localhost:4001/movieRouter/uSearch",{
-                id: this.state.query,
-                firstName: this.state.query, 
-                lastName: this.state.query, 
-                userName: this.state.query
-            })
-                .then(response => {
-                    // Update the books state
-                    this.setState({
-                        user_results: response.data
-                    });
-                    console.log(response);
-                    console.log(response.data);
-                  });
-
+        axios.post("http://localhost:4001/movieRouter/userSpecificSearch",{
+                query: this.state.query
+            }) 
+            .then(response => {
+                var userInfo = response.data
+                console.log(userInfo);
+                this.setState({
+                    user_results: userInfo
+                })
+            });
         // Search results can be one of: tv, movie, or person
         search_results.forEach(result => {
             if (result.media_type === 'tv' && result.poster_path !== undefined) {
@@ -50,6 +45,8 @@ class Search extends React.Component {
                 movie_results.push(result);
             } 
         });
+
+        
         this.setState({
             user_results: user_results,
             tv_results: tv_results,
@@ -130,10 +127,10 @@ class Search extends React.Component {
                         <div className="feature">
                         {/* once you get the trend movies as an array from compDidMount
                         create a Movie Component */}
-                        {user_results.length > 0 ? 
-                            user_results.map(user => 
-                                <User userID={user.id} userName={user.userName} firstName={user.firstName} lastName={user.lastName} />
-                            ) : <p>No Users :(</p>}
+                        {(user_results.every((user_result) => {return (user_result.poster_path !== null)})&& user_results > 0) ?
+                                user_results.map(user => 
+                                    <User id={user.id} userName={user.userName}/>) : 
+                                <p>No users :(</p>}
                         </div>
 
                         <h5>Search results for {this.state.query}</h5>
@@ -141,7 +138,7 @@ class Search extends React.Component {
                         <div className="feature">
                         {/* once you get the trend movies as an array from compDidMount
                         create a Movie Component */}
-                            { movie_results.length > 0 ? 
+                        {(movie_results.every((movie_result) => {return (movie_result.poster_path !== null)})&& movie_results > 0) ?
                                 movie_results.map(movie => 
                                     <Movie id={movie.id} title={movie.title} poster_path={"https://image.tmdb.org/t/p/w200" + movie.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200"+ movie.backdrop_path} release_date={movie.release_date} overview={movie.overview}/>                            ) : 
                             <p>No movies :(</p>}
@@ -151,10 +148,11 @@ class Search extends React.Component {
                         <div className="feature">
                         {/* once you get the trend movies as an array from compDidMount
                         create a Movie Component */}
-                        {tv_results.length > 0 ? 
+                        {(tv_results.every((tv_result) => {return (tv_result.poster_path !== null)})&& tv_results > 0) ? 
                             tv_results.map(show => 
                                 <Show id={show.id} title={show.name} poster_path={"https://image.tmdb.org/t/p/w200" + show.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200"+ show.backdrop_path} num_seasons={show.num_seasons} num_episodes={show.num_episodes} overview={show.overview}/>
-                            ) : <p>No TV Shows :(</p>}
+                            ) : <p>No TV Shows</p>  
+                        }
                         </div>
                     </div>
                 </div>    

@@ -27,6 +27,10 @@ const router = express.Router();
 // this means that '/reset' translates to '/books/reset'
 // router.put('/bReset', movieRoutes.booksReset);
 
+router.post('/tableSpecificSearch', movieRoutes.tableSpecificSearch)
+router.post('/userSpecificSearch', movieRoutes.userSpecificSearch)
+
+
 //server-side auth
 router.post('/api/:tokenid', movieRoutes.authorize)
 
@@ -38,11 +42,11 @@ router.put('/eReset', movieRoutes.eventsReset);
 
 //user
 router.get('/uAll', movieRoutes.usersAll);
-router.get('/:userId', movieRoutes.getUser);
+router.get('/uGet', movieRoutes.getUser);
 router.post('/uCreate', movieRoutes.usersCreate);
 router.put('/uDelete', movieRoutes.usersDelete);
 router.put('/uReset', movieRoutes.usersReset);
-router.get('/uGet', movieRoutes.getUser);
+// router.get('/uGet', movieRoutes.getUser);
 router.get('/uSearch', movieRoutes.searchUsers);
 
 //genre
