@@ -23,7 +23,6 @@ class Search extends React.Component {
         var tv_results = [];
         var user_results = [];
         var movie_results = [];
-        console.log(search_results);
 
         // make getAll call to database to get user info
         axios.post("http://localhost:4001/movieRouter/userSpecificSearch",{
@@ -38,10 +37,10 @@ class Search extends React.Component {
             });
         // Search results can be one of: tv, movie, or person
         search_results.forEach(result => {
-            if (result.media_type === 'tv' && result.poster_path !== undefined) {
+            if (result.media_type === 'tv' && result.poster_path !== null) {
                 tv_results.push(result);
 
-            } else if (result.media_type === 'movie' && result.poster_path !== undefined) {
+            } else if (result.media_type === 'movie' && result.poster_path !== null) {
                 movie_results.push(result);
             } 
         });
@@ -111,7 +110,6 @@ class Search extends React.Component {
 
     render() {
         var { isLoaded, user_results, tv_results, movie_results} = this.state;
-        console.log(movie_results);
         
         if( !isLoaded ) {
             return (
@@ -139,10 +137,10 @@ class Search extends React.Component {
                         <div className="feature">
                         {/* once you get the trend movies as an array from compDidMount
                         create a Movie Component */}
-                        {(movie_results.every((movie_result) => {return (movie_result.poster_path !== null)}) || movie_results > 0) ?
-                            movie_results.map(movie => 
-                                <Movie id={movie.id} title={movie.title} poster_path={"https://image.tmdb.org/t/p/w200" + movie.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200"+ movie.backdrop_path} release_date={movie.release_date} overview={movie.overview}/> 
-                            ) : <p>No movies </p>}
+                        { movie_results.length > 0 ? 
+                                movie_results.map(movie => 
+                                    <Movie id={movie.id} title={movie.title} poster_path={"https://image.tmdb.org/t/p/w200" + movie.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200"+ movie.backdrop_path} release_date={movie.release_date} overview={movie.overview}/>                            ) : 
+                            <p>No movies :(</p>}
                         </div>
 
 
@@ -150,11 +148,10 @@ class Search extends React.Component {
                         <div className="feature">
                         {/* once you get the trend movies as an array from compDidMount
                         create a Movie Component */}
-                        {(tv_results.every((tv_result) => {return (tv_result.poster_path !== null)})|| tv_results > 0) ? 
+                        {tv_results.length > 0 ? 
                             tv_results.map(show => 
                                 <Show id={show.id} title={show.name} poster_path={"https://image.tmdb.org/t/p/w200" + show.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200"+ show.backdrop_path} num_seasons={show.num_seasons} num_episodes={show.num_episodes} overview={show.overview}/>
-                            ) : <p>No TV Shows</p>  
-                        }
+                            ) : <p>No TV Shows :(</p>}
                         </div>
                     </div>
                 </div>    
