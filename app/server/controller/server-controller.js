@@ -54,6 +54,8 @@ exports.userSpecificSearch = async (req, res) => {
 knex.select('*') // select all records
   .where('id'," like" , `${req.body.query}%`)
   .orwhere('firstName', 'like', `${req.body.query}%`)
+  .orwhere('lastName', 'like', `${req.body.query}%`)
+  .orwhere('userName', 'like', `${req.body.query}%`)
   .from('userList')
   .then(userData => {
     // Send books extracted from database in response
