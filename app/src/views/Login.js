@@ -15,8 +15,8 @@ class Login extends React.Component {
 
     toApp = (res) => {
         const id = res.tokenId;
-        const { history } = this.props
-        console.log(history);
+        const { history } = this.props.props;
+        console.log(this.props.props);
         axios.post("http://localhost:4001/movieRouter/api/" + id)
             .then(res => {
                 auth.setAuthStatus(true)

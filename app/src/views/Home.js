@@ -6,7 +6,6 @@ class Home extends React.Component{
         super(props);
     }
 
-        <section className="App home">
     render(){
         console.log(this.props);
         return(
