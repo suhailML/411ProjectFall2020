@@ -52,11 +52,11 @@ knex
 exports.userSpecificSearch = async (req, res) => {
 // Get all books from database
 knex.select('*') // select all records
-  .where('id'," like" , `${req.body.query}%`)
-  .orwhere('firstName', 'like', `${req.body.query}%`)
-  .orwhere('lastName', 'like', `${req.body.query}%`)
-  .orwhere('userName', 'like', `${req.body.query}%`)
-  .from('userList')
+  .from('userInfo') // from 'userInfo' table
+  .where('id'," LIKE" , `${req.body.query}%`)
+  .orWhere('firstName', 'LIKE', `%${req.body.query}%`)
+  .orWhere('lastName', 'LIKE', `%${req.body.query}%`)
+  .orWhere('userName', 'LIKE', `%${req.body.query}%`)
   .then(userData => {
     // Send books extracted from database in response
     res.json(userData);
@@ -333,9 +333,9 @@ exports.searchUsers = async (req, res) => {
     .select('*') // select all records
     .from('userInfo') // from 'userInfo' table
     .where('id', req.body.id)
-    .orwhere('firstName', 'like', `%${req.body.firstName}%`)
-    .orwhere('lastName', 'like', `%${req.body.lastName}%`)
-    .orwhere('userName', 'like', `%${req.body.userName}%`)
+    .orWhere('firstName', 'LIKE', `%${req.body.firstName}%`)
+    .orWhere('lastName', 'LIKE', `%${req.body.lastName}%`)
+    .orWhere('userName', 'LIKE', `%${req.body.userName}%`)
     // find correct record based on id
     .then(userData => {
       // Send specified userInfo based on userId extracted from database in response
