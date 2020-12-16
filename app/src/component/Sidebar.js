@@ -12,7 +12,9 @@ class Sidebar extends React.Component {
             userID: this.props.userID,
             userName: "",
             firstName: "",
-            lastName: ""
+            lastName: "",
+            locality: "",
+            year: ""
         };
 
         this.expandlist = this.expandlist.bind(this);
@@ -46,15 +48,16 @@ class Sidebar extends React.Component {
                 value: this.props.userID
             }) 
             .then(response => {
-                var userInfo = response.data[0]
+                var userInfo = response.data[0];
                 
                 this.setState({
                     userName:  userInfo.userName,
                     firstName: userInfo.firstName,
-                    lastName: userInfo.lastName
+                    lastName: userInfo.lastName,
+                    locality:  userInfo.locality,
+                    year: userInfo.year
                 })
             });
-        
     }
 
     render() {

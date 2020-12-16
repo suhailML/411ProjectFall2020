@@ -1,7 +1,5 @@
-import { buildQueries } from '@testing-library/react';
 import axios from 'axios';
 import React from 'react';
-import { isStringTextContainingNode, isThrowStatement } from 'typescript';
 
 class User extends React.Component {
 
@@ -11,8 +9,11 @@ class User extends React.Component {
         this.state = ({
             userID: this.props.userID,
             userName: this.props.userName,
-            firstName: this.props.firstName,
-            lastName: this.props.lastName,
+            firstName: "",
+            lastName: "",
+            locality:"",
+            year: "",
+            showAll: this.props.showAll
         });
     }
 
@@ -30,7 +31,9 @@ class User extends React.Component {
                 this.setState({
                     userName:  userInfo.userName,
                     firstName: userInfo.firstName,
-                    lastName: userInfo.lastName
+                    lastName: userInfo.lastName,
+                    locality: userInfo.locality,
+                    year: userInfo.year
                 })
                 }
                 catch (err)
@@ -40,7 +43,27 @@ class User extends React.Component {
             });
     }
 
+    addFriend(event){
+        var url = 'http://localhost:4001/movieRouter/tsCreate';
+        var {watched, title, id, backdrop_path, poster_path, overview, release_date} = this.state;
+        event.preventDefault();
+        if (!watched) {
+            axios
+            .post('http://localhost:4001/movieRouter/tsCreate', {
+                
+            })
+            .then(res => {
+              console.log(res.data);
+            })
+            .catch(error => console.error(`didnt work fuck`));
+        }
+        this.setState({watched: true});
+    }
+
     render() {
+
+        var {userID, userName, firstName, lastName, locality, year, showAll} = this.state;
+
         const style = {
             height: this.props.size,
             width: this.props.size,
@@ -49,15 +72,27 @@ class User extends React.Component {
             backgroundColor: this.props.self ? '#b285f9' : '#f9aa41'
         }
 
-        return (
-            <div className="user">
-                <div style={style}></div>
-                <div>
-                    <p>{this.state.userName}</p>
-                </div>
-            </div>
-            
-        );
+        if (showAll) {
+            return (<div className="user">
+                        <div style={style}></div>
+                        <div>
+                            <p>{userName}</p>
+                            <br></br>
+                            <p>{firstName + " " + lastName}</p>
+                            <br></br>
+                            <p>{locality}</p>
+                            <br></br>
+                            <p>{year}</p>
+                        </div>
+                    </div>)
+        } else {
+            return (<div className="user">
+                        <div style={style}></div>
+                        <div>
+                            <p>{userName}</p>
+                        </div>
+                    </div>);
+        }
     }
 }
 

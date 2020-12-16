@@ -3,7 +3,6 @@ import Movie from '../component/Movie';
 import Show from '../component/Show';
 import axios from 'axios';
 import User from '../component/User';
-//import PropTypes from 'prop-types';
 
 class Search extends React.Component {
 
@@ -35,6 +34,7 @@ class Search extends React.Component {
                 })
             });
             
+
         // Search results can be one of: tv, movie, or person
         search_results.forEach(result => {
             if (result.media_type === 'tv' && result.poster_path !== null) {
@@ -52,6 +52,7 @@ class Search extends React.Component {
             movie_results: movie_results
         });
     }
+
 
     componentDidUpdate(prevProp) {
         if (prevProp.match.params.query !== this.props.match.params.query) {
@@ -71,6 +72,7 @@ class Search extends React.Component {
             .catch(this.handleErr);
         } 
     }
+
 
     handleInputChange(input){
         if (input !== this.state.query && input.length > 0) {
@@ -106,8 +108,6 @@ class Search extends React.Component {
         .catch(this.handleErr);
     }
 
-
-
     render() {
         var { isLoaded, user_results, tv_results, movie_results} = this.state;
         
@@ -131,9 +131,10 @@ class Search extends React.Component {
                         create a Movie Component */}
                         {user_results.length > 0 ?
                             user_results.map(user => 
-                                <User id={user.id} userName={user.userName} size={7}/>
+                                <User id={user.id} userName={user.userName} firstName={user.firstName} lastName={user.lastName} locality={user.locality} size={10} showAll={true}/>
                             ) : <p>No users :(</p> }
                         </div>
+
 
                         <p>Movies</p>
                         <div className="feature">

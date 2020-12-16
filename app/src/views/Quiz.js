@@ -24,7 +24,6 @@ class Quiz extends React.Component{
 
         this.createNewUser = this.createNewUser.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        // this.loginResults = this.loginResults.bind(this);
     }
 
     // color(){
@@ -152,13 +151,14 @@ class Quiz extends React.Component{
                             <option value="Med">Med</option>
                         </select>
                         <br></br>
-                        <br></br>
-                        <label for="year">Year<span>*</span></label>
-                        <select id="year" name="year" value={this.state.year} onChange={this.handleChange}>
-                            <option value="1">Freshman</option>
-                            <option value="2">Sophomore</option>
-                            <option value="3">Junior</option>
-                            <option value="4">Senior</option>
+                        
+                        <br></br>                 
+                        <label for="year">Year:</label>
+                        <select name="year" value={this.state.year} defaultValue="Freshman" onChange={this.handleChange}>
+                            <option value="Freshman">Freshman</option>
+                            <option value="Sophomore">Sophomore</option>
+                            <option value="Junior">Junior</option>
+                            <option value="Senior">Senior</option>
                         </select>
                         <br></br>
                         <br></br>
