@@ -75,6 +75,7 @@ class LatestMovies extends React.Component {
                         isLoaded: true,
                         trending_list: json.results
                     });
+                    console.log(json);
                 })
                 .catch(this.handleErr);
                 break;

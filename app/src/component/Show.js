@@ -19,7 +19,7 @@ class Show extends React.Component {
             overview: this.props.overview,
         };
 
-        // this.isWatched = this.isWatched.bind(this);
+        this.isWatched = this.isWatched.bind(this);
     }
 
     
@@ -41,17 +41,16 @@ class Show extends React.Component {
     }
 
     isWatched(event){
-        var {watched, title, id, backdrop_path, number_seasons, number_episodes, poster_path, overview, release_date} = this.state;
+        var {watched, title, id, backdrop_path, number_seasons, number_episodes, poster_path, overview} = this.state;
         event.preventDefault();
         if (!watched) {
             axios
-            .post('http://localhost:4001/movieRouter/twCreate', {
+            .post('http://localhost:4001/movieRouter/tsCreate', {
                 id: id,
                 title: title,
-                type: 'movie',
+                type: 'tv',
                 backdrop_path: backdrop_path,
                 poster_path: poster_path,
-                release_date: release_date,
                 overview: overview,
                 num_seasons: number_seasons,
                 num_episodes: number_episodes,
@@ -84,7 +83,7 @@ class Show extends React.Component {
         return (
             <div>
                 <div className="showbox">
-                    <button> + </button> 
+                    <button onClick={this.isWatched}> + </button> 
                     <img src={this.state.poster_path} alt=""/>
                 </div>
 
