@@ -49,6 +49,24 @@ knex
   });
 }
 
+exports.userSpecificSearch = async (req, res) => {
+// Get all books from database
+knex.select('*') // select all records
+  .where('id'," like" , `${req.body.query}%`)
+  .orwhere('firstName', 'like', `${req.body.query}%`)
+  .orwhere('lastName', 'like', `${req.body.query}%`)
+  .orwhere('userName', 'like', `${req.body.query}%`)
+  .from('userList')
+  .then(userData => {
+    // Send books extracted from database in response
+    res.json(userData);
+  })
+  .catch(err => {
+    // Send a error message in response
+    res.json({ message: `There was an error retrieving genres: ${err}` });
+  });
+}
+
 exports.getAnyAll = async (req, res) => {
   // Get all books from database
   knex
@@ -298,10 +316,10 @@ exports.getUser = async (req, res) => {
   knex
     .select('*') // select all records
     .from('userInfo') // from 'userInfo' table
-    .where('userId',req.body.userID)
+    .where('email', email)
     .then(userData => {
       // Send specified userInfo based on userId extracted from database in response
-      res.json(userData)
+      res.json(req);
     })
     .catch(err => {
       // Send a error message in response
@@ -348,16 +366,16 @@ knex('userInfo')
     'firstName': req.body.firstName,
     'lastName': req.body.lastName,
     'email': req.body.email,
-    'birthdayDate': req.body.birthdayDate,
     'userName': req.body.userName,
     'locality': req.body.locality,
     'year': req.body.year,
     'clubAffiliations':req.body.clubAffiliations,
     'watchedMovies': req.body.watchedMovies
   })
-  .then(() => {
+  .returning('id')
+  .then((id) => {
     // Send a success message in response
-    res.json({ message: `User ${req.body.firstName} created.` })
+    res.json({ id: id, message: `User ${req.body.firstName} created.` })
   })
   .catch(err => {
     // Send a error message in response
@@ -740,7 +758,4 @@ exports.trendingSouthCreate = async (req, res) => {
       res.json({ message: `There was an error retrieving events: ${err}` })
     })
 }
-
-
-
 

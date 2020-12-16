@@ -13,29 +13,25 @@ class Login extends React.Component {
     constructor(props) {
         super(props)
         this.state= {
-            isSignedIn: false
-
+            isSignedIn: false,
+            userID: null
         }
-        this.toApp.bind(this)
+        this.toApp = this.toApp.bind(this);
         // this.authorize.bind(this)
         // this.nextPath.bind(this)
     }
 
-    nextPath(){
+    // nextPath(){
 
-    }
+    // }
+
 
     toApp = (res) => {
         const id = res.tokenId;
         const { history } = this.props
         axios.post("http://localhost:4001/movieRouter/api/" + id)
             .then(res => {
-                console.log(res)
-                this.setState({
-                    isSignedIn: true
-                })
                 if (res.data.info.length == 0) {
-                    console.log("huh?")
                     history.push({
                         pathname: "/signup",
                         state: {
@@ -45,7 +41,7 @@ class Login extends React.Component {
                         }
                     })
                 } else {
-                    history.push("/home/" + res.data.firstName)
+                    history.push("/home/" + res.data.info[0].id);
                 }
             })           
         .catch(err => console.log(`Fail with err ${err}`))

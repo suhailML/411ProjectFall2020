@@ -1,5 +1,7 @@
+import { buildQueries } from '@testing-library/react';
+import axios from 'axios';
 import React from 'react';
-import { isThrowStatement } from 'typescript';
+import { isStringTextContainingNode, isThrowStatement } from 'typescript';
 
 class User extends React.Component {
 
@@ -14,6 +16,24 @@ class User extends React.Component {
         });
     }
 
+
+    componentDidMount() {
+        axios.post("http://localhost:4001/movieRouter/tableSpecificSearch", {
+                table: "userInfo",
+                column: "id",
+                value: this.props.userID
+            }) 
+            .then(response => {
+                var userInfo = response.data[0]
+                
+                this.setState({
+                    userName:  userInfo.userName,
+                    firstName: userInfo.firstName,
+                    lastName: userInfo.lastName
+                })
+            });
+    }
+
     render() {
         const style = {
             height: this.props.size,
@@ -23,14 +43,11 @@ class User extends React.Component {
             backgroundColor: this.props.self ? '#b285f9' : '#f9aa41'
         }
 
-        var {userID, userName, firstName, lastName} = this.state;
-        console.log(this.state);
-
         return (
             <div className="user">
                 <div style={style}></div>
                 <div>
-                    <p>{userName}</p>
+                    <p>{this.state.userName}</p>
                 </div>
             </div>
             

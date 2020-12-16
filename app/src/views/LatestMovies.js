@@ -36,8 +36,6 @@ class LatestMovies extends React.Component {
                       table: 'trendingEast'
                   }) 
                     .then(response => {
-                        console.log(response);
-                        console.log(response.data);
                         this.setState({
                             isLoaded: true,
                             trending_list: response.data
@@ -50,8 +48,6 @@ class LatestMovies extends React.Component {
                       table: 'trendingWest'
                   }) 
                     .then(response => {
-                        console.log(response);
-                        console.log(response.data);
                         this.setState({
                             isLoaded: true,
                             trending_list: response.data
@@ -64,8 +60,6 @@ class LatestMovies extends React.Component {
                       table: 'trendingSouth'
                   }) 
                     .then(response => {
-                        console.log(response);
-                        console.log(response.data);
                         this.setState({
                             isLoaded: true,
                             trending_list: response.data
@@ -148,7 +142,6 @@ class LatestMovies extends React.Component {
                             create a Movie Component */}
                             {trending_list.map(trending => 
                                 {
-                                    console.log(trending);
                                     if (trending.type === "tv" && trending.poster_path !== null) {
                                         return(<Show id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} num_seasons={trending.num_seasons} num_episodes={trending.num_episodes} overview={trending.overview}/>);
                                     
