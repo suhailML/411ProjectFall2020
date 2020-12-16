@@ -31,6 +31,7 @@ class Login extends React.Component {
         const { history } = this.props
         axios.post("http://localhost:4001/movieRouter/api/" + id)
             .then(res => {
+                auth.setAuthStatus(true)
                 if (res.data.info.length == 0) {
                     history.push({
                         pathname: "/signup",

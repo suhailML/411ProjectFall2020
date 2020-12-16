@@ -22,6 +22,10 @@ h1 {
   font-size: var(--big-header);
 }
 
+span {
+  color: $red;
+}
+
 article{
   width: var(--inner-width);
 
@@ -79,6 +83,10 @@ input {
 
 .submit:hover {
   background-color: $purple
+}
+
+.remind {
+  border-color: #cc0000;
 }
 
 .featurebox{
