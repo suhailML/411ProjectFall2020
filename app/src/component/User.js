@@ -25,12 +25,18 @@ class User extends React.Component {
             }) 
             .then(response => {
                 var userInfo = response.data[0]
-                
+                try
+                {
                 this.setState({
                     userName:  userInfo.userName,
                     firstName: userInfo.firstName,
                     lastName: userInfo.lastName
                 })
+                }
+                catch (err)
+                {
+                    console.log(err);
+                }
             });
     }
 
