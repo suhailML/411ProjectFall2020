@@ -1,6 +1,7 @@
 import React from 'react';
 import Movie from '../component/Movie';
 import Show from '../component/Show';
+import axios from 'axios';
 
 //TODO: modularize this
 //state is for data that can change
@@ -10,11 +11,13 @@ class LatestMovies extends React.Component {
         super(props);
         
         this.state = {
+            userid: this.props.userid,
             isLoaded: false,
             trending_list: []
         };
     }
 
+    
     handleErr(err) {
         console.warn(err);
         let resp = new Response(
@@ -28,26 +31,62 @@ class LatestMovies extends React.Component {
 
     componentDidMount() {
 
-        /*THIS IS NOT PRODUCTION SAFE CODE -- THE ONLY SAFE WAY TO HIDE API KEY IS 
-        TO CALL IT FROM A BACKEND SERVER; but since this local, it'll do*/
-        fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
-            .then(response => response.json())
-            .then(json => {
-                this.setState({
-                    isLoaded: true,
-                    trending_list: json.results
-                });
-            })
-            .catch(this.handleErr);
+        switch(this.props.type){
+            case "east":
+                axios.post("http://localhost:4001/movieRouter/all", {
+                      table: 'trendingEast'
+                  }) 
+                    .then(response => {
+                        this.setState({
+                            isLoaded: true,
+                            trending_list: response.data
+                        });
+                  });
+                  break;
+
+            case "west":
+                  axios.post("http://localhost:4001/movieRouter/all", {
+                      table: 'trendingWest'
+                  }) 
+                    .then(response => {
+                        this.setState({
+                            isLoaded: true,
+                            trending_list: response.data
+                        });
+                  });
+                  break;
+
+            case "south":
+                axios.post("http://localhost:4001/movieRouter/all", {
+                      table: 'trendingSouth'
+                  }) 
+                    .then(response => {
+                        this.setState({
+                            isLoaded: true,
+                            trending_list: response.data
+                        });
+                  });
+                  break;
+
+            default:
+                fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${process.env.REACT_APP_MOVIE_API_KEY}`)
+                .then(response => response.json())
+                .then(json => {
+                    this.setState({
+                        isLoaded: true,
+                        trending_list: json.results
+                    });
+                    console.log(json);
+                })
+                .catch(this.handleErr);
+                break;
+        }
     }
 
     getHeader(movielist_type) {
         switch(movielist_type){
             case "east":
                 return "Trending in East";
-
-            case "central":
-                return "Trending in Central";
 
             case "west":
                 return "Trending in West";
@@ -64,6 +103,7 @@ class LatestMovies extends React.Component {
     }
 
     render() {
+
         var { isLoaded, trending_list } = this.state;
 
         if( !isLoaded ) {
@@ -71,31 +111,58 @@ class LatestMovies extends React.Component {
                 <div className="feature">
                     loading...
                 </div>
-            )
+            );
             
         } else {
-            return (
-                <div className="featurebox">
-                    <p>{this.getHeader(this.props.type)}</p>
-                    <div className="feature">
-                        {/* once you get the trend movies as an array from compDidMount
-                        create a Movie Component */}
-                        {trending_list.map(trending => 
-                            {
-                                if (trending.media_type === "tv") {
-                                    return(<Show key={trending.id} show={trending}/>);
-                                } else {
-                                    return(<Movie key={trending.id} name={trending.title} movie={trending}/>);
+            if (this.props.type === "global") {
+                return (
+                    <div className="featurebox">
+                        <p>{this.getHeader(this.props.type)}</p>
+                        <div className="feature">
+                            {/* once you get the trend movies as an array from compDidMount
+                            create a Movie Component */}
+                            {trending_list.map(trending => 
+                                {
+                                    if (trending.media_type === "tv" && trending.poster_path !== null) {
+                                        return(<Show id={trending.id} title={trending.name} poster_path={"https://image.tmdb.org/t/p/w200"+ trending.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200" + trending.backdrop_path} overview={trending.overview}/>);
+                                    
+                                    } else if (trending.media_type === "movie" && trending.poster_path !== null) {
+                                        return(<Movie id={trending.id} title={trending.title} poster_path={"https://image.tmdb.org/t/p/w200" + trending.poster_path} backdrop_path={"https://image.tmdb.org/t/p/w200" + trending.backdrop_path} release_date={trending.release_date} overview={trending.overview}/>);
+                                    }
                                 }
-                            }
-                        )}
+                            )}
+                        </div>
                     </div>
-                </div>
-            )
+                );
+
+            } else {
+                return (
+                    <div className="featurebox">
+                        <p>{this.getHeader(this.props.type)}</p>
+                        <div className="feature">
+                            {/* once you get the trend movies as an array from compDidMount
+                            create a Movie Component */}
+                            {trending_list.map(trending => 
+                                {
+                                    if (trending.type === "tv" && trending.poster_path !== null) {
+                                        return(<Show id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} num_seasons={trending.num_seasons} num_episodes={trending.num_episodes} overview={trending.overview}/>);
+                                    
+                                    } else if (trending.type === "movie" && trending.poster_path !== null) {
+                                        return(<Movie userid={this.state.userid} id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} release_date={trending.release_date} overview={trending.overview}/>);
+                                    }
+                                }
+                            )}
+                        </div>
+                    </div>
+                );
+            }
+            
         }
         
     }
 
 }
 
-export default LatestMovies
+export default LatestMovies;
+
+

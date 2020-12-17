@@ -6,7 +6,7 @@ const cors = require('cors')
 const helmet = require('helmet')
 
 // Import routes
-const movieRouter = require('./routes/server-route')
+const movieRouter = require('./routes/server-route');
 
 // Set default port for express app
 const PORT = process.env.PORT || 4001

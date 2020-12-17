@@ -1,57 +1,47 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class Event extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
+            id: this.props.id,
             clubName: this.props.clubName,
-            title: this.props.title,
-            start_time: this.props.start_time/60, 
-            end_time: this.props.end_time,
+            mediaTitle: this.props.mediaTitle,
+            mediaID: this.props.mediaID,
+            date: this.props.date,
+            time: this.props.time,
+            rsvp: false
         };
+
+        this.attending = this.attending.bind(this);
     }
 
-    expand() {
-        console.log("expanded");
-    }
-    
-    rsvp() {
+    attending() {
         this.setState({
             rsvp: true,
         });
-        console.log("RSVPed to event");
+        console.log("rsvp:" + this.state.rsvp);
     }
     
     render() {
         return(
             <div>   
-                <div className="eventbox"> 
-                    <button onClick={() => this.expand }> Details </button>
-                    <button onClick={() => this.rsvp }> RSVP </button>
+                <div className="eventbox">
+                    <br></br>
                     {this.props.clubName}
-                    {this.props.title}
-                    {this.props.start_time}
-                    {this.props.end_time}
+                    <br></br>
+                    {this.props.mediaTitle}
+                    <br></br>
+                    {this.props.time}
+                    <br></br>
+                    {this.props.date}
+                    <br></br>
+                    {this.props.eventDescription}
                 </div>
             </div> 
         )   
     }
 }
 
-Event.propTypes = {
-    eventid: PropTypes.number,
-    clubName: PropTypes.string,
-    title: PropTypes.string,
-    start_time: PropTypes.number,
-    end_time: PropTypes.number,
-    rsvp: PropTypes.bool
-};
-
-Event.defaultProps = {
-    rsvp: false
-};   
-
-
-export default Event
+export default Event;

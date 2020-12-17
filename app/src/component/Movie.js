@@ -1,37 +1,57 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import axios from 'axios';
 
 // TODO: make width of text the same as trendbox
 // TODO: style for onclick changes on function return, not let
-
 
 class Movie extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            key: this.props.key,
             isLoaded: false,
             watched: false,
-            name: this.props.name,
-            id: this.props.movie.id,
-            poster: "",
-            runtime: 0,
-            info: [],
-            expand: false
+            id: this.props.id,
+            title: this.props.title,
+            backdrop_path: this.props.backdrop_path,
+            poster_path: this.props.poster_path,
+            overview: this.props.overview,
+            release_date: this.props.release_date
         };
-        this.expanded = this.expanded.bind(this)
+
+        this.isWatched = this.isWatched.bind(this);
     }
 
-/* example of stateless components -> components that are functions (functional),
-they take props in a param and then you can access the keys*/
-    expanded() {
-        this.setState((prevState) => {
-        console.log(prevState)
-        return ({
-            expand: !prevState.expand
-        })
-    })
+    isWatched(event){
+        console.log(this.props.userid);
+        var local = axios.post("http://localhost:4001/movieRouter/tableSpecificSearch", {
+            table: "userInfo",
+            column: "id",
+            value: this.props.userid
+        }) 
+        .then(response => {return response});
+        
+        console.log(local);
+
+        var {watched, title, id, backdrop_path, poster_path, overview, release_date} = this.state;
+        event.preventDefault();
+        if (!watched) {
+            axios
+            .post('http://localhost:4001/movieRouter/tsCreate', {
+                id: id,
+                title: title,
+                type: 'movie',
+                backdrop_path: backdrop_path,
+                poster_path: poster_path,
+                release_date: release_date,
+                overview: overview
+            })
+            .then(res => {
+              console.log(res.data);
+            })
+            .catch(error => console.error(`didnt work`));
+        }
+        this.setState({watched: true});
     }
 
     handleErr(err) {
@@ -45,50 +65,35 @@ they take props in a param and then you can access the keys*/
         return resp;
     }
 
-    componentDidMount() {
-        fetch(`https://api.themoviedb.org/3/movie/${this.state.id}?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&append_to_response=release_date,overview,poster_path,runtime`)
-                .then(response => response.json())
-                .then(results => {
-                    //console.log(results);
-                    this.setState({
-                        isLoaded: true,
-                        watched: false,
-                        poster: 'https://image.tmdb.org/t/p/w200' + results.poster_path,
-                        backdrop: 'https://image.tmdb.org/t/p/w200' + results.backdrop_path,
-                        runtime: results.runtime,
-                        release_date: results.release_date,
-                        info: results
-                    });
-                })
-                .catch(this.handleErr);
-    }
+    // componentDidMount() {
+    //     fetch(`https://api.themoviedb.org/3/movie/${this.state.id}?api_key=${process.env.REACT_APP_MOVIE_API_KEY}&append_to_response=release_date,overview,poster_path,runtime`)
+    //             .then(response => response.json())
+    //             .then(results => {
+    //                 //console.log(results);
+    //                 this.setState({
+    //                     isLoaded: true,
+    //                     watched: false,
+    //                     runtime: results.runtime,
+    //                     release_date: results.release_date,
+    //                     info: results
+    //                 });
+    //             })
+    //             .catch(this.handleErr);
+    // }
 
     render() {
-        let style =  this.state.expanded ? 
-        {
-            height: '10vw',
-            width: '10vw',
-            position: 'absolute'
-        } :
-        {
-            display: 'block'
-        }
-        return (
+        console.log(this.props.userid);
+        return(
             <div>
-                <div className="trend-moviebox" style={style}>
-                    <button onClick={this.expanded}> + </button>
-                    <img src={this.state.poster} alt=""/>
-                </div>
-                {this.state.name}
-                <br></br>
-                {`Runtime: ${Math.floor(this.state.runtime/60)} Hours  ${this.state.runtime%60} Minutes`}
-                <br></br>
-                {`Release Date: ${this.state.release_date}`}
+            <div className="trend-moviebox">
+                <button onClick={this.isWatched}> + </button>
+                <img src={this.state.poster_path} alt=""/>
             </div>
-        );
+            {this.state.title}
+            <br></br>
+            {`Release Date: ${this.state.release_date}`}
+        </div>)
     }
 }
-
-
-export default Movie
+export default Movie;
  

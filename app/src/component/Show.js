@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 // TODO: make width of text the same as trendbox
 
 class Show extends React.Component {
@@ -7,28 +8,28 @@ class Show extends React.Component {
         super(props);
 
         this.state = {
-            key: this.props.key,
             isLoaded: false,
             watched: false,
-            name: this.props.show.name,
-            id: this.props.show.id,
-            poster: "",
-            num_seasons: 0,
-            num_episodes: 0,
-            info: [],
-            expanded: false
+            title: this.props.title,
+            id: this.props.id,
+            backdrop_path: this.props.backdrop_path,
+            poster_path: this.props.poster_path,
+            num_seasons: PropTypes.Number,
+            num_episodes: PropTypes.Number,
+            overview: this.props.overview,
         };
+
+        this.isWatched = this.isWatched.bind(this);
     }
 
-    expand() {
-        this.setState({
-            expanded: !this.state.expanded
-        });
-        console.log(this.state.expanded);
-        console.log("expanded");
-    }
     
+    // isWatched - make call to db to indicate if movie has been watched or not
+    // isWatched(prevState) {
+    //     console.log("Show watched");
+    // }
+
     handleErr(err) {
+        console.warn(err);
         console.warn(err);
         let resp = new Response(
           JSON.stringify({
@@ -38,6 +39,31 @@ class Show extends React.Component {
         );
         return resp;
     }
+
+    isWatched(event){
+        var {watched, title, id, backdrop_path, number_seasons, number_episodes, poster_path, overview} = this.state;
+        event.preventDefault();
+        if (!watched) {
+            axios
+            .post('http://localhost:4001/movieRouter/tsCreate', {
+                id: id,
+                title: title,
+                type: 'tv',
+                backdrop_path: backdrop_path,
+                poster_path: poster_path,
+                overview: overview,
+                num_seasons: number_seasons,
+                num_episodes: number_episodes,
+            })
+            .then(res => {
+              console.log(res.data);
+              // Fetch all books to refresh
+              // the books on the bookshelf list
+            })
+            .catch(error => console.error(`didnt work fuck`));
+        }
+        this.setState({watched: true});
+    }
     
     
     componentDidMount() {
@@ -46,12 +72,8 @@ class Show extends React.Component {
                 .then(results => {
                     this.setState({
                         isLoaded: true,
-                        watched: false,
-                        poster: 'https://image.tmdb.org/t/p/w200' + results.poster_path,
-                        backdrop: 'https://image.tmdb.org/t/p/w200' + results.backdrop_path,
                         num_seasons: results.number_of_seasons,
-                        num_episodes: results.number_of_episodes,
-                        info: results
+                        num_episodes: results.number_of_episodes
                     });
                 })
                 .catch(this.handleErr);
@@ -61,11 +83,11 @@ class Show extends React.Component {
         return (
             <div>
                 <div className="showbox">
-                    <button onClick={this.expand.bind(this)}> + </button>
-                    <img src={this.state.poster} alt=""/>
+                    <button onClick={this.isWatched}> + </button> 
+                    <img src={this.state.poster_path} alt=""/>
                 </div>
 
-                {this.state.name}
+                {this.state.title}
                 <br></br>
                 {`Seasons: ${this.state.num_seasons}`}
                 <br></br>
@@ -75,4 +97,4 @@ class Show extends React.Component {
     }
 }
 
-export default Show
+export default Show;

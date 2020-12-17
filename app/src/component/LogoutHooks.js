@@ -1,13 +1,24 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useGoogleLogout } from 'react-google-login';
+import auth from './LoginC';
+import { Redirect } from 'react-router-dom';
 
 // const sourceFile = require("./Config")
 // var clientId = sourceFile.clientId;
 
+
+
 function LogoutHooks() {
+  const [ isLogin, setLogin ] = useState(false);
+
+
   const onLogoutSuccess = (res) => {
     console.log('Logged out Success');
-    alert('Logged out Successfully ✌');
+    auth.setAuthStatus(false);
+    console.log(auth.getAuthStatus())
+    !auth.getAuthStatus()&&setLogin(!isLogin)
+    // setLogin(!isLogin)
+
   };
 
   const onFailure = () => {
@@ -15,15 +26,15 @@ function LogoutHooks() {
   };
 
   const { signOut } = useGoogleLogout({
-    clientId,
+    clientId: process.env.REACT_APP_CLIENT_ID,
     onLogoutSuccess,
     onFailure,
-  });
+  })
 
   return (
     <button onClick={signOut} className="button">
-      <img src="icons/google.svg" alt="google login" className="icon"></img>
-
+      {isLogin&&<Redirect to="/"/>}
+      {/* <img src="icons/google.svg" alt="google login" className="icon"></img> */}
       <span className="buttonText">Sign out</span>
     </button>
   );
