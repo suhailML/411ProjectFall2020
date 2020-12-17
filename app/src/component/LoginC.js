@@ -36,6 +36,7 @@ export default {
   checkToken,
   getAuthStatus,
   getUserInfo,
-  getPath
+  getPath,
+  setAuthStatus
 
 }

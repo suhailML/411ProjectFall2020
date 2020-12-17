@@ -5,6 +5,8 @@ import LoginButton from '../component/LoginC';
 import { refreshTokenSetup } from '../utils/refreshToken';
 import GoogleLogin from 'react-google-login';
 import { buildQueries } from '@testing-library/react';
+import Auth from '../component/Auth';
+
 
 class Quiz extends React.Component{
     constructor(props) {
@@ -22,7 +24,6 @@ class Quiz extends React.Component{
 
         this.createNewUser = this.createNewUser.bind(this);
         this.handleChange = this.handleChange.bind(this);
-        // this.loginResults = this.loginResults.bind(this);
     }
 
     // color(){
@@ -45,11 +46,28 @@ class Quiz extends React.Component{
         this.prepoulate();
     }
 
+    checkForm() {
+        let err = false;
+        for (const prop in this.state) {
+            if ( this.state[prop] === '' ) {
+                let el = document.getElementById(prop);
+                el.classList.add('remind')
+                err = true
+            }
+        }
+        if (err) {
+            throw('incomplete items');
+        }
+
+    }
+
     async createNewUser(event) {
         var {firstName, lastName, userName, email, campusLocation, year} = this.state;
-      
         event.preventDefault();
-        axios
+
+        try {
+            this.checkForm()
+            axios
             .post('http://localhost:4001/movieRouter/uCreate', {
                 firstName: firstName,
                 lastName: lastName,
@@ -63,6 +81,11 @@ class Quiz extends React.Component{
                 this.props.history.push('/home/' + res.data.id[0]);
             })
             .catch(error => console.error(`could not do search`));
+
+        } catch(e) {
+            alert(e)
+        }
+        
     }
 
     handleChange(event){
@@ -103,24 +126,24 @@ class Quiz extends React.Component{
                         <div className="option" style={this.color()}><p>East</p></div>
                         <div className="option" style={this.color()}><p>South</p></div>
                         <div className="option" style={this.color()}><p>Medical Campus</p></div> */}
-                        <label for="firstName">First name:</label>
-                        <input type ="text" name="firstName" value={this.state.firstName} onChange={this.handleChange}/>
+                        <label for="firstName">First name<span>*</span></label>
+                        <input id="firstName" type ="text" name="firstName" value={this.state.firstName} onChange={this.handleChange}/>
                         <br></br>
                         <br></br>
-                        <label for="lastname">Last name:</label>
-                        <input type ="text" name="lastName" value={this.state.lastName}  onChange={this.handleChange}/>
+                        <label for="lastname">Last name<span>*</span></label>
+                        <input id="lastName" type="text" name="lastName" value={this.state.lastName}  onChange={this.handleChange}/>
                         <br></br>
                         <br></br>
-                        <label for="username">Username:</label>
-                        <input type ="text" name="userName" value={this.state.userName}  onChange={this.handleChange}/>
+                        <label for="username">Username<span>*</span></label>
+                        <input id="userName" type="text" name="userName" value={this.state.userName}  onChange={this.handleChange}/>
                         <br></br>
                         <br></br>
-                        <label for="email">Email:</label>
-                        <input type ="text" name="email" value={this.state.email}  onChange={this.handleChange}/>
+                        <label for="email">Email<span>*</span></label>
+                        <input id="email" type ="text" name="email" value={this.state.email}  onChange={this.handleChange}/>
                         <br></br>
                         <br></br>
-                        <label for="campuslocation">Campus Location:</label>
-                        <select name="campusLocation" value={this.state.campusLocation} defaultValue="West" onChange={this.handleChange}>
+                        <label for="campuslocation">Campus Location<span>*</span></label>
+                        <select id="campusLocation" name="campusLocation" value={this.state.campusLocation} defaultValue="West" onChange={this.handleChange}>
                             <option value="West">West</option>
                             <option value="East">East</option>
                             <option value="Central">Central</option>
@@ -128,13 +151,14 @@ class Quiz extends React.Component{
                             <option value="Med">Med</option>
                         </select>
                         <br></br>
-                        <br></br>
+                        
+                        <br></br>                 
                         <label for="year">Year:</label>
-                        <select name="year" value={this.state.year} defaultValue="West" onChange={this.handleChange}>
-                            <option value="1">Freshman</option>
-                            <option value="2">Sophomore</option>
-                            <option value="3">Junior</option>
-                            <option value="4">Senior</option>
+                        <select name="year" value={this.state.year} defaultValue="Freshman" onChange={this.handleChange}>
+                            <option value="Freshman">Freshman</option>
+                            <option value="Sophomore">Sophomore</option>
+                            <option value="Junior">Junior</option>
+                            <option value="Senior">Senior</option>
                         </select>
                         <br></br>
                         <br></br>

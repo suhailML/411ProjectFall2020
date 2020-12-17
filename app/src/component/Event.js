@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class Event extends React.Component {
     constructor(props) {
@@ -28,8 +27,7 @@ class Event extends React.Component {
     render() {
         return(
             <div>   
-                <div className="eventbox"> 
-                    <button onClick={() => this.attending }> RSVP </button>
+                <div className="eventbox">
                     <br></br>
                     {this.props.clubName}
                     <br></br>

@@ -6,9 +6,6 @@ import Search from './views/Search';
 import Sidebar from './component/Sidebar';
 import Auth from './component/Auth';
 import {useParams} from 'react-router-dom';
-import friends from './fakedata/friends';
-import Login from './component/LoginC';
-import Logout from './component/Logout';
 
 import Navbar from './views/Navbar';
 import BulletinBoard from './views/BulletinBoard';

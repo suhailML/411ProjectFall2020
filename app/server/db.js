@@ -439,16 +439,6 @@ knex.schema
           .catch((error) => {
             console.error(`There was an error setting up the database: ${error}`)
           })
-
-// Just for debugging purposes:
-// Log all data in "books" table
-knex.select('*').from('books')
-  .then(data => console.log('data:', data))
-  .catch(err => console.log(err))
-
-knex.select('*').from('events')
-  .then(data => console.log('data:', data))
-  .catch(err => console.log(err))
-
+          
 // Export the database
 module.exports = knex

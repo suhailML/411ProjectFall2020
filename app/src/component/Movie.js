@@ -40,8 +40,6 @@ class Movie extends React.Component {
             })
             .then(res => {
               console.log(res.data);
-              // Fetch all books to refresh
-              // the books on the bookshelf list
             })
             .catch(error => console.error(`didnt work fuck`));
         }

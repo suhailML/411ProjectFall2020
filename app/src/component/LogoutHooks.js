@@ -1,4 +1,3 @@
-import React from 'react';
 import { useGoogleLogout } from 'react-google-login';
 
 // const sourceFile = require("./Config")
@@ -12,7 +11,7 @@ function LogoutHooks() {
 
   const onFailure = () => {
     console.log('Handle failure cases');
-  };``
+  };
 
   const { signOut } = useGoogleLogout({
     clientId,
