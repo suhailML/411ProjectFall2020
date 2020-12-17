@@ -52,6 +52,7 @@ knex
     res.json({ message: `There was an error retrieving genres: ${err}` });
   });
 }
+
 exports.userSpecificSearch = async (req, res) => {
   // Get all books from database
   knex.select('*') // select all records
@@ -558,7 +559,7 @@ exports.eventsCreate = async (req, res) => {
 // Add new book to database
 knex("events")
   .insert({ // insert new record, a book
-    'clubName': req.body.clubName,
+    'club_name': req.body.clubName,
     'mediaTitle': req.body.mediaTitle,
     'mediaID': req.body.mediaID,
     'date': req.body.date,
