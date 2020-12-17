@@ -455,7 +455,7 @@ exports.friendCreate = async (req, res) => {
     })
     .then(() => {
       // Send a success message in response
-      res.json({ message: `User \'${req.body.userID}\' added \'${req.body.friendID}\' as friend.` })
+      res.json({ message: `User ${req.body.userID} added ${req.body.friendID} as friend.` })
     })
     .catch(err => {
       // Send a error message in response

@@ -19,7 +19,6 @@ class User extends React.Component {
 
 
     componentDidMount() {
-        console.log(this.props.userID)
         axios.post("http://localhost:4001/movieRouter/tableSpecificSearch", {
                 table: "userInfo",
                 column: "id",

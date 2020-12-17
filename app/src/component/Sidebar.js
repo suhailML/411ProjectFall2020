@@ -1,6 +1,8 @@
 import React from 'react';
 import User from './User';
 import axios from 'axios';
+import LogoutHooks from '../component/LogoutHooks';
+
 
 class Sidebar extends React.Component {
     constructor(props){
@@ -16,6 +18,29 @@ class Sidebar extends React.Component {
             locality: "",
             year: ""
         };
+
+        this.friends = [
+            {
+                id: 1,
+                username: 'suhailsolomon'
+            }, 
+            {
+                id: 2,
+                username: 'jarednuemann'
+            }, 
+            {
+                id: 3,
+                username: 'isrealsingh'
+            }, 
+            {
+                id: 4,
+                username: 'chinweoparji'
+            }, 
+            {
+                id: 5,
+                username: 'suhailmin'
+            }, 
+        ]
 
         this.expandlist = this.expandlist.bind(this);
         this.getFriends= this.getFriends.bind(this);
@@ -50,6 +75,7 @@ class Sidebar extends React.Component {
             .then(response => {
                 var userInfo = response.data[0];
                 
+                
                 this.setState({
                     userName:  userInfo.userName,
                     firstName: userInfo.firstName,
@@ -57,7 +83,8 @@ class Sidebar extends React.Component {
                     locality:  userInfo.locality,
                     year: userInfo.year
                 })
-            });
+            })
+
     }
 
     render() {
@@ -66,15 +93,15 @@ class Sidebar extends React.Component {
         const iconSize = 27;
 
         // this.getFriends();
-        const { friends } = this.state;
-        console.log(friends)
-        const allFriends = friends.map(friend => <User userName={friend.userName} size={iconSize} self={false}/>);
+
+        const allFriends = this.friends.map(friend => <User userName={friend.username} size={iconSize} self={false}/>);
         // //what to expand friendlist size to 
-        const heightFriendsList = {height: 'min(' + parseInt(this.state.friendExpand ? this.props.friends.length * (iconSize + 25) : (iconSize + 25)) + 'px, 40vh)'};
+        const heightFriendsList = {height: 'min(' + parseInt(this.state.friendExpand ? this.friends.length * (iconSize + 25) : (iconSize + 25)) + 'px, 40vh)'};
 
 
         return (
             <div className="sidebar">
+                <LogoutHooks/>
                 <h4> hi {this.state.firstName} </h4>
                 {/*style prop takes an object for inline styles in JSX*/}
                 <User userID={this.props.userID} size={33} self={true}/>
@@ -82,10 +109,10 @@ class Sidebar extends React.Component {
                 <h2> Friends</h2>
                 <hr></hr>
                 <div>
-                    {/* <div className={'friends' + (this.state.friendExpand ? '' : ' collapse' )} style={heightFriendsList}>
+                    <div className={'friends' + (this.state.friendExpand ? '' : ' collapse' )} style={heightFriendsList}>
                         {allFriends}
                     </div>
-                    <button onClick={this.expandlist}> click to {this.state.friendExpand ? 'collapse' : 'expand' }</button> */}
+                    <button onClick={this.expandlist}> click to {this.state.friendExpand ? 'collapse' : 'expand' }</button>
                 </div>
 
                 <h5>&gt;&gt; start a bulletin board chat or something</h5>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { Link, NavLink, useLocation, useParams, useRouteMatch } from 'react-router-dom';
-import LogoutHooks from '../component/LogoutHooks';
 
 
 const Navbar = () => {
@@ -21,8 +20,6 @@ const Navbar = () => {
               </Link>
             </div>
           </div>
-
-          <LogoutHooks/>
         </div>
       </nav>
   );

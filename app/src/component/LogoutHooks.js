@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-
 import { useGoogleLogout } from 'react-google-login';
-import auth from './LoginC'
+import auth from './LoginC';
 import { Redirect } from 'react-router-dom';
 
 // const sourceFile = require("./Config")
@@ -35,7 +34,7 @@ function LogoutHooks() {
   return (
     <button onClick={signOut} className="button">
       {isLogin&&<Redirect to="/"/>}
-      <img src="icons/google.svg" alt="google login" className="icon"></img>
+      {/* <img src="icons/google.svg" alt="google login" className="icon"></img> */}
       <span className="buttonText">Sign out</span>
     </button>
   );
