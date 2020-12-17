@@ -38,6 +38,7 @@ router.post('/api/:tokenid', movieRoutes.authorize)
 router.get('/eAll', movieRoutes.eventsAll);
 router.put('/eDelete', movieRoutes.eventsDelete);
 router.put('/eReset', movieRoutes.eventsReset);
+router.put('/eCreate', movieRoutes.eventsCreate); 
 
 //user
 router.get('/uAll', movieRoutes.usersAll);
