@@ -24,10 +24,10 @@ function App() {
         
         <Switch>
           <Route exact path={match.path}>
-            <LatestMovies type="global"/>
-            <LatestMovies type="west"/>
-            <LatestMovies type="east"/>
-            <LatestMovies type="south"/>
+            <LatestMovies type="global" userid={userid}/>
+            <LatestMovies type="west" userid={userid}/>
+            <LatestMovies type="east" userid={userid}/>
+            <LatestMovies type="south" userid={userid}/>
             <BulletinBoard/>
           </Route>
 

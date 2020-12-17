@@ -47,6 +47,7 @@ knex
     res.json({ message: `There was an error retrieving genres: ${err}` });
   });
 }
+
 exports.userSpecificSearch = async (req, res) => {
   // Get all books from database
   knex.select('*') // select all records

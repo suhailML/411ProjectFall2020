@@ -11,6 +11,7 @@ class LatestMovies extends React.Component {
         super(props);
         
         this.state = {
+            userid: this.props.userid,
             isLoaded: false,
             trending_list: []
         };
@@ -147,7 +148,7 @@ class LatestMovies extends React.Component {
                                         return(<Show id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} num_seasons={trending.num_seasons} num_episodes={trending.num_episodes} overview={trending.overview}/>);
                                     
                                     } else if (trending.type === "movie" && trending.poster_path !== null) {
-                                        return(<Movie id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} release_date={trending.release_date} overview={trending.overview}/>);
+                                        return(<Movie userid={this.state.userid} id={trending.id} title={trending.title} poster_path={trending.poster_path} backdrop_path={trending.backdrop_path} release_date={trending.release_date} overview={trending.overview}/>);
                                     }
                                 }
                             )}
