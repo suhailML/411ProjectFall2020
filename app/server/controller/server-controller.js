@@ -553,7 +553,7 @@ exports.eventsCreate = async (req, res) => {
 // Add new book to database
 knex("events")
   .insert({ // insert new record, a book
-    'clubName': req.body.clubName,
+    'club_name': req.body.clubName,
     'mediaTitle': req.body.mediaTitle,
     'mediaID': req.body.mediaID,
     'date': req.body.date,

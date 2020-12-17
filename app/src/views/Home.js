@@ -1,5 +1,4 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React from 'react';
 import Login from './Login.js';
 class Home extends React.Component{
     constructor(props) {

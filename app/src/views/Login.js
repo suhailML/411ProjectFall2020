@@ -22,7 +22,7 @@ class Login extends React.Component {
                 auth.setAuthStatus(true)
                 if (res.data.info.length == 0) {
                     history.push({
-                        pathname: "signup",
+                        pathname: "/signup",
                         state: {
                             firstName: res.data.firstName,
                             lastName: res.data.lastName,
