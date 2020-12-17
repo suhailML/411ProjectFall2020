@@ -1,0 +1,191 @@
+//https://coolors.co/fbfef9-141314-2e282a-cc0000-f9aa41-b285f9
+$grey: #1e1b1c; //background color
+$black: #141314; //elements atop background
+$white: #fbf3f9;
+$purple: #b285f9;
+$orange: #f9aa41;
+$red: #cc0000;
+
+//the opaque versions
+$rosso-corsa: hsla(0, 100%, 40%, 0.4); //red
+$yellow-orange: hsla(34, 94%, 62%, 0.4); //orange
+$lavender-floral: hsla(263, 91%, 75%, 0.4); //purple
+
+@import url('https://fonts.googleapis.com/css2?family=Chivo:wght@300;400;700&display=swap');
+$typeface: 'Chivo';
+
+body::-webkit-scrollbar {
+  display: none;
+}
+
+h1 {
+  font-size: var(--big-header);
+}
+
+span {
+  color: $red;
+}
+
+article{
+  width: var(--inner-width);
+
+}
+:root{
+  --app-padding: 10px;
+  --app-height: calc(100vh - var(--app-padding));
+  --inner-width: 65%;
+  --big-header: 3em;
+  --app-width: calc(92% - 1vw);
+}
+
+body {
+  background-color: $grey;
+  color: $white;
+}
+
+.App {
+  display: grid;
+  grid-template-columns: 80% 1fr;
+  grid-template-areas:
+               "navbar  sidebar"
+               "app sidebar";
+  background-color: $grey;
+  font-family: $typeface;
+  height: var(--app-height);
+  overflow: hidden;
+}
+
+.App.home {
+  align-items: center;
+  width: var(--app-width);
+  margin: 0 auto;
+}
+
+
+.nav {
+  grid-area: navbar;
+  width: var(--app-width);
+  margin: 0 auto;
+  padding: 20px 0 20px
+}
+
+.Quiz {
+  width: calc(var(--inner-width) / 2);
+  font-size: 1.2em;
+  margin: 0 auto;
+
+}
+
+input {
+  transform: 777ms;
+  font-size: 1.12em;
+}
+
+.submit:hover {
+  background-color: $purple
+}
+
+.remind {
+  border-color: #cc0000;
+}
+
+.featurebox{
+  width: var(--app-width);
+  margin: 0 auto;
+}
+//background boxes that hold movies
+$inner-space: 57px;
+.feature {
+  background-color: $black;
+  display: flex;
+  flex-direction: row;
+  padding: $inner-space $inner-space/2 $inner-space $inner-space;
+  overflow-x: scroll;
+}
+
+.feature::-webkit-scrollbar {
+  display: none;
+}
+
+@mixin moviebox ($color) {
+  background-color: $color;
+  padding: 12px 17px 12px;
+  margin-right: $inner-space;
+  border-radius: 3%;
+  color: $white;
+}
+
+.trend-moviebox { @include moviebox($lavender-floral);}
+
+.showbox {@include moviebox($yellow-orange);}
+
+.eventbox {@include moviebox($rosso-corsa);}
+
+@mixin buttondiv ($color, $width, $height) {
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color;
+  width: $width;
+  height: $height;
+  text-decoration: none;
+  padding: 3px;
+  border-radius: 4px;
+  color: $black;
+  transition: 777ms;
+}
+
+.button {@include buttondiv($orange, 7vw, 6vh)}
+.button:hover {
+  background-color: #cc0000;
+}
+
+.nonsense {@include buttondiv($purple, 90%, 90%)}
+.nonsense:hover {
+  border-radius: 100%;
+  background-color: $rosso-corsa;
+}
+.sidebar {
+  grid-area: sidebar;
+  background-color: $black;
+  padding: 30px;
+  overflow: hidden;
+}
+
+.friends {
+  transition: height 333ms ease-in-out;
+  overflow: auto;  
+}
+
+.friends.collapse {
+  overflow: hidden;
+}
+
+/*icon for a user*/
+.user {
+  display: flex;
+  align-items: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media only screen and (max-width: 300px) {
+  .App {
+
+    grid-template-columns: 1fr;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 50vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}

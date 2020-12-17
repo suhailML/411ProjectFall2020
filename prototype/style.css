@@ -1,16 +1,47 @@
 /* body {
     background-color: black;
-} */
+    display: block;
+}
+
+.nav {
+    overflow: hidden;
+    background-color: white;
+    position: fixed;
+    top:0;
+    width: 100%;
+    z-index: 1;
+}
+
+#main {
+    margin-top: 10%;
+    display: block;
+    height: 100%;
+}
 
 #trending-results {
     position: relative;
     width: 100%;
-    height: 200px;
+    min-height: 200px;
     overflow: visible;
     white-space:nowrap;
 }
 
 #trending-results .trending{
+    display: inline-block;
+    padding-right: 10px;
+    color: white;
+    text-align: center;
+}
+
+#search-results {
+    position: relative;
+    width: 100%;
+    min-height: 200px;
+    overflow: visible;
+    white-space:nowrap;
+}
+
+#search-results .result{
     display: inline-block;
     padding-right: 10px;
     color: white;
