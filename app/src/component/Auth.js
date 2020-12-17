@@ -12,25 +12,9 @@ const Auth = (InnerComponent) => {
         /* change auth to really check login status*/
         const auth = checkauth.getAuthStatus();
         console.log(auth)
-        return (auth ? <InnerComponent/> : <Redirect to="/login"/>);
+        return (auth ? <InnerComponent/> : <Redirect to="/"/>);
     }
     return authComponent;
 }
-
-// class Auth extends React.Component {
-//     constructor() {
-//         super()
-//         this.state= {
-//             auth: false
-//         }
-//     }
-
-//     render() {
-//         return(
-
-//         )
-//     }
-// }
-
 
 export default Auth;

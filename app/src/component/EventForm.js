@@ -26,7 +26,7 @@ class EventForm extends React.Component {
         event.preventDefault();
         axios
             .post('http://localhost:4001/movieRouter/eCreate', {
-                clubName: clubName,
+                club_name: clubName,
                 mediaTitle: mediaTitle,
                 mediaID: mediaID,
                 date: month + "/" + day  + "/" + year,
@@ -43,6 +43,7 @@ class EventForm extends React.Component {
 
     handleChange(event, prevState){
         this.setState({[event.target.name]: event.target.value});
+        console.log(this.state);
     }
 
     render() {

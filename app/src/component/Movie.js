@@ -1,6 +1,5 @@
 import React from 'react';
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
 
 // TODO: make width of text the same as trendbox
 // TODO: style for onclick changes on function return, not let
@@ -24,7 +23,16 @@ class Movie extends React.Component {
     }
 
     isWatched(event){
-        var url = 'http://localhost:4001/movieRouter/tsCreate';
+        console.log(this.props.userid);
+        var local = axios.post("http://localhost:4001/movieRouter/tableSpecificSearch", {
+            table: "userInfo",
+            column: "id",
+            value: this.props.userid
+        }) 
+        .then(response => {return response});
+        
+        console.log(local);
+
         var {watched, title, id, backdrop_path, poster_path, overview, release_date} = this.state;
         event.preventDefault();
         if (!watched) {
@@ -41,7 +49,7 @@ class Movie extends React.Component {
             .then(res => {
               console.log(res.data);
             })
-            .catch(error => console.error(`didnt work fuck`));
+            .catch(error => console.error(`didnt work`));
         }
         this.setState({watched: true});
     }
@@ -74,6 +82,7 @@ class Movie extends React.Component {
     // }
 
     render() {
+        console.log(this.props.userid);
         return(
             <div>
             <div className="trend-moviebox">

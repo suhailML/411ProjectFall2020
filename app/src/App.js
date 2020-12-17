@@ -6,8 +6,6 @@ import Search from './views/Search';
 import Sidebar from './component/Sidebar';
 import Auth from './component/Auth';
 import {useParams} from 'react-router-dom';
-import Login from './component/LoginC';
-import Logout from './component/Logout';
 
 import Navbar from './views/Navbar';
 import BulletinBoard from './views/BulletinBoard';
@@ -26,10 +24,10 @@ function App() {
         
         <Switch>
           <Route exact path={match.path}>
-            <LatestMovies type="global"/>
-            <LatestMovies type="west"/>
-            <LatestMovies type="east"/>
-            <LatestMovies type="south"/>
+            <LatestMovies type="global" userid={userid}/>
+            <LatestMovies type="west" userid={userid}/>
+            <LatestMovies type="east" userid={userid}/>
+            <LatestMovies type="south" userid={userid}/>
             <BulletinBoard/>
           </Route>
 
