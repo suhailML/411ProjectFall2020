@@ -1,13 +1,7 @@
-import LoginButton from '../component/LoginC.js';
 import { GoogleLogin } from 'react-google-login';
 import React from 'react';
-import { Redirect } from 'react-router-dom';
-
-import LogoutButton from '../component/Logout.js';
 import axios from 'axios';
 import auth from '../component/LoginC.js'
-
-
 
 class Login extends React.Component {
     constructor(props) {
@@ -19,16 +13,16 @@ class Login extends React.Component {
         this.toApp = this.toApp.bind(this);
     }
 
-
     toApp = (res) => {
         const id = res.tokenId;
-        const { history } = this.props
+        const { history } = this.props.props;
+        console.log(this.props.props);
         axios.post("http://localhost:4001/movieRouter/api/" + id)
             .then(res => {
                 auth.setAuthStatus(true)
                 if (res.data.info.length == 0) {
                     history.push({
-                        pathname: "/signup",
+                        pathname: "signup",
                         state: {
                             firstName: res.data.firstName,
                             lastName: res.data.lastName,
@@ -36,7 +30,7 @@ class Login extends React.Component {
                         }
                     })
                 } else {
-                    history.push("/home/" + res.data.info[0].id);
+                    history.push("home/" + res.data.info[0].id);
                 }
             })           
         .catch(err => console.log(`Fail with err ${err}`))
@@ -63,5 +57,4 @@ class Login extends React.Component {
         )
     }
 }
-
-export default Login
+export default Login;

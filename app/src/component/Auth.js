@@ -23,7 +23,7 @@ function Auth (InnerComponent) {
 
         render(){
             return (
-                this.state.auth ? <InnerComponent/> : <Redirect to='/login'/>
+                this.state.auth ? <InnerComponent/> : <Redirect to='/'/>
             );
         }
     }

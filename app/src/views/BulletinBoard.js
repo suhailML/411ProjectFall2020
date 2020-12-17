@@ -30,8 +30,6 @@ class BulletinBoard extends React.Component {
               this.setState({
                  events: res.data, 
               });
-              // Fetch all books to refresh
-              // the books on the bookshelf list
             })
             .catch(error => console.error(`could not do search`));
     }

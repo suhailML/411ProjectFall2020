@@ -8,10 +8,8 @@ import {
     useRouteMatch
   } from "react-router-dom";
 
-import App from './App'
-import Login from './views/Login';
+import App from './App';
 import Home from './views/Home';
-import Navbar from './views/Navbar'
 import Quiz from './views/Quiz';
 
 
@@ -19,8 +17,7 @@ import Quiz from './views/Quiz';
 export default(
     <Router>
         <Switch>
-            <Route exact path="/"> <Home/> </Route>
-            <Route path="/login" component={Login} />
+            <Route exact path="/" component={Home} ></Route>
             <Route path="/signup" component={Quiz}></Route>
             {/* protected route */}
             <Route path="/home/:userid"> <App/> </Route>

@@ -34,7 +34,7 @@ function LogoutHooks() {
 
   return (
     <button onClick={signOut} className="button">
-      {isLogin&&<Redirect to="/login"/>}
+      {isLogin&&<Redirect to="/"/>}
       <img src="icons/google.svg" alt="google login" className="icon"></img>
       <span className="buttonText">Sign out</span>
     </button>
