@@ -39,6 +39,7 @@ router.get('/eAll', movieRoutes.eventsAll);
 router.post('/eCreate', movieRoutes.eventsCreate);
 router.put('/eDelete', movieRoutes.eventsDelete);
 router.put('/eReset', movieRoutes.eventsReset);
+router.put('/eCreate', movieRoutes.eventsCreate); 
 
 //user
 router.get('/uAll', movieRoutes.usersAll);

@@ -637,7 +637,7 @@ exports.trendingWestAll = (req, res) => {
 exports.trendingWestCreate = async (req, res) => {
   knex("trendingWest")
     .insert({
-      'id': req.body.id,
+      'id': req.body.id, 
       'title': req.body.title,
       'type': req.body.type,
       'backdrop_path': req.body.backdrop_path,
@@ -649,8 +649,8 @@ exports.trendingWestCreate = async (req, res) => {
       'num_views': 1
     })
     .onConflict('id')
-    .merge({
-      num_views: 4
+    .update({
+      'num_views': knex.raw('num_views + 1')
     })
     .then(trendingWest => {
       // Send books extracted from database in response
@@ -701,8 +701,8 @@ exports.trendingEastCreate = async (req, res) => {
       'num_views': 1
     })
     .onConflict('id')
-    .merge({
-      num_views: 4
+    .update({
+      'num_views': knex.raw('num_views + 1')
     })
     .then(trendingEast => {
       // Send books extracted from database in response
@@ -748,8 +748,8 @@ exports.trendingSouthCreate = async (req, res) => {
       'num_views': 1
     })
     .onConflict('id')
-    .merge({
-      num_views: 4
+    .update({
+      'num_views': knex.raw('num_views + 1')
     })
     .then(trendingSouth => {
       // Send books extracted from database in response
