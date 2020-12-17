@@ -17,13 +17,7 @@ class Login extends React.Component {
             userID: null
         }
         this.toApp = this.toApp.bind(this);
-        // this.authorize.bind(this)
-        // this.nextPath.bind(this)
     }
-
-    // nextPath(){
-
-    // }
 
 
     toApp = (res) => {
@@ -46,33 +40,8 @@ class Login extends React.Component {
                 }
             })           
         .catch(err => console.log(`Fail with err ${err}`))
-        // console.log('id is ' + id)
-        // auth.checkToken(id, auth.getUserInfo)
-        // this.setState({
-        //     isSignedIn: true
-        // })
     }
 
-    // authorize(){
-    //     const { history } = this.props
-    //     const state  = auth.getUserInfo();
-    //     const { id } = auth.getUserInfo();
-    //     const path = auth.getPath();
-    //     console.log(state)
-    //     console.log(id)
-    //     console.log(path)
-
-    //     if (path === 'signup'){
-    //         history.push({
-    //             location: "/signup",
-    //             state: state
-    //         })
-    //     } else if (path=='home'){
-    //         history.push("/home/" + id)
-    //     } else {
-    //         console.log('stay here')
-    //     } 
-    // }
 
     responseGoogle(res){
         console.log(res + "not working ")
@@ -90,31 +59,9 @@ class Login extends React.Component {
             style={{ marginTop: '100px' }}
             isSignedIn={true}
             />
-
             </section>
-
-            
-
         )
     }
 }
-
-// const Loginfunc = () => {
-//     return(
-//         <div>
-//             <GoogleLogin
-//             clientId={process.env.REACT_APP_CLIENT_ID}
-//             buttonText="Login"
-//             onSuccess={check}
-//             onFailure={responseGoogle}
-//             cookiePolicy={'single_host_origin'}
-//             style={{ marginTop: '100px' }}
-//             isSignedIn={true}
-//             />
-//             <LoginButton/>
-//             <LogoutButton/>
-//         </div>
-//     )
-// }
 
 export default Login

@@ -62,11 +62,12 @@ class Sidebar extends React.Component {
 
         const iconSize = 27;
 
-        //Friend List
         // this.getFriends();
-        // const friends = this.state.friends.map(friend => <User userName={friend.userName} size={iconSize} self={false}/>);
+        const { friends } = this.state;
+        console.log(friends)
+        const allFriends = friends.map(friend => <User userName={friend.userName} size={iconSize} self={false}/>);
         // //what to expand friendlist size to 
-        // const heightFriendsList = {height: 'min(' + parseInt(this.state.friendExpand ? this.props.friends.length * (iconSize + 25) : (iconSize + 25)) + 'px, 40vh)'};
+        const heightFriendsList = {height: 'min(' + parseInt(this.state.friendExpand ? this.props.friends.length * (iconSize + 25) : (iconSize + 25)) + 'px, 40vh)'};
 
 
         return (
@@ -79,7 +80,7 @@ class Sidebar extends React.Component {
                 <hr></hr>
                 <div>
                     {/* <div className={'friends' + (this.state.friendExpand ? '' : ' collapse' )} style={heightFriendsList}>
-                        {friends}
+                        {allFriends}
                     </div>
                     <button onClick={this.expandlist}> click to {this.state.friendExpand ? 'collapse' : 'expand' }</button> */}
                 </div>

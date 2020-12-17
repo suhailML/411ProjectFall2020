@@ -8,11 +8,16 @@ console.log("IN THE SERVER CONT");
 
 exports.authorize = async (req, res) => {
   var data;
+  let today = new Date();
   axios.get("https://www.googleapis.com/oauth2/v3/tokeninfo?id_token=" + req.params.tokenid)
     .then(authdata => {
-      console.log(authdata.data)
-      if (authdata.data.email_verified === "true"){
+      // console.log(authdata.data)
+      // console.log(today.toLocaleDateString())
+      //rudimentary token check i believe
+      if (authdata.data.email_verified === "true" && today.toLocaleDateString() < authdata.data.exp){
          data = authdata.data
+      } else {
+        throw("not good token")
       }
       })
     .then(() => {
